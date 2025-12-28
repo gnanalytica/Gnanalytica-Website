@@ -1,11 +1,12 @@
+/**
+ * About section component - Editorial "Editor's Note" Design
+ *
+ * This section provides information about the company in a sophisticated
+ * editorial style, presented as a publisher's letter or editor's note.
+ */
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 
-/**
- * About section component for Gnanalytica.
- *
- * This section provides information about the company, team, and mission.
- */
 export default function AboutSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
@@ -16,18 +17,18 @@ export default function AboutSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
         delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }
     }
   };
 
@@ -105,135 +106,129 @@ export default function AboutSection() {
     <motion.section
       ref={ref}
       id="about"
-      className="py-20 bg-gradient-to-br from-white via-gray-50 to-blue-50"
+      className="py-20 bg-gradient-to-br from-indigo-100 via-violet-100 to-indigo-50 border-t-4 border-indigo-400"
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Editorial Section Header */}
         <motion.div
           className="text-center mb-16"
           variants={itemVariants}
         >
-          <motion.span
-            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-100 to-blue-100 text-green-800 rounded-full text-sm font-semibold mb-8 shadow-sm border border-green-200/50"
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(34, 197, 94, 0.3)" }}
-          >
-            <motion.span
-              className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mr-3"
-              animate={{ scale: [1, 1.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            About Gnanalytica
-          </motion.span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-gray-900 via-green-900 to-blue-900 bg-clip-text text-transparent mb-6 sm:mb-8">
+          <div className="mb-4 inline-block">
+            <span className="inline-block text-xs uppercase tracking-[0.2em] font-semibold text-editorial-muted border-b-2 border-editorial-ink pb-2">
+              About Gnanalytica
+            </span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-editorial-ink leading-tight mb-6">
             Who We Are
           </h2>
-          <p className="text-lg sm:text-xl leading-7 sm:leading-8 text-gray-700 max-w-3xl mx-auto font-medium px-4">
+          <p className="text-lg text-editorial-muted max-w-2xl mx-auto leading-relaxed">
             We're a team of passionate AI experts and business consultants dedicated to making artificial intelligence accessible and valuable for businesses of all sizes.
           </p>
         </motion.div>
 
-        {/* Tab Selection Buttons/Tiles */}
-        <div className="max-w-6xl mx-auto mb-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {/* Tab Selection - Editorial Style */}
+        <div className="max-w-6xl mx-auto mb-12">
+          <div className="flex flex-wrap justify-center gap-2 border-b border-editorial-border pb-4">
             {aboutTabs.map((tab, index) => (
               <motion.button
                 key={tab.id}
-                className={`relative bg-gradient-to-br from-white via-gray-50/50 to-blue-50/30 rounded-xl shadow-lg border border-gray-200/60 p-4 sm:p-6 hover:shadow-xl transition-all duration-300 cursor-pointer text-left ${
+                className={`px-4 py-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 border-b-2 ${
                   index === activeTab
-                    ? 'ring-2 ring-blue-500 shadow-xl bg-gradient-to-br from-blue-50 via-indigo-50/50 to-purple-50/30'
-                    : 'hover:scale-105'
+                    ? 'text-editorial-ink border-blue-500'
+                    : 'text-editorial-muted border-transparent hover:text-editorial-ink hover:border-editorial-border'
                 }`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -2 }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setActiveTab(index)}
               >
-                {/* Tab Header */}
-                <div className="flex flex-col items-center text-center">
-                  <h3 className="text-sm sm:text-base font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent leading-tight">{tab.title}</h3>
-                </div>
+                {tab.title}
               </motion.button>
             ))}
           </div>
         </div>
 
-        {/* Content Display Area */}
-        <div className="max-w-5xl mx-auto">
+        {/* Content Display - Editor's Note Style, Narrow Column */}
+        <div className="max-w-3xl mx-auto">
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-white via-gray-50/50 to-blue-50/30 rounded-2xl shadow-lg border border-gray-200/60 p-6 sm:p-8 lg:p-10"
+            transition={{ duration: 0.4 }}
+            className="border-t border-editorial-border pt-8"
           >
-            {/* Current Tab Header */}
-            <div className="text-center mb-8">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-4">
+            {/* Editor's Note Header */}
+            <div className="mb-8">
+              <h3 className="text-3xl sm:text-4xl font-serif font-bold text-editorial-ink mb-4 leading-tight">
                 {aboutTabs[activeTab].content.title}
               </h3>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto font-medium">
-                {aboutTabs[activeTab].content.description}
-              </p>
+              <div className="w-16 h-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 mb-6 rounded-full"></div>
             </div>
 
-            {/* Current Tab Content */}
-            {aboutTabs[activeTab].id === 'values' ? (
-              // Values Grid Layout
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {aboutTabs[activeTab].content.details.map((value, index) => (
-                  <motion.div
-                    key={value.title}
-                    className="text-center p-4 bg-white rounded-xl shadow-sm border border-gray-200/50 hover:shadow-md transition-all duration-300"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                  >
-                    <h4 className="font-bold mb-2 text-gray-900">{value.title}</h4>
-                    <p className="text-gray-600 text-sm">{value.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            ) : aboutTabs[activeTab].id === 'team' ? (
-              // Team Grid Layout
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {aboutTabs[activeTab].content.details.map((member, index) => (
-                  <motion.div
-                    key={member.name}
-                    className="bg-white rounded-xl shadow-lg border border-gray-200/60 p-6 text-center hover:shadow-xl transition-all duration-300"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                  >
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h4>
-                    <p className="text-blue-600 font-semibold mb-4">{member.role}</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">{member.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-            ) : (
-              // Mission/Vision List Layout
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {aboutTabs[activeTab].content.details.map((detail, index) => (
-                  <motion.div
-                    key={detail}
-                    className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-lg border border-blue-200/50 shadow-sm hover:shadow-md transition-all duration-300"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                  >
-                    <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex-shrink-0"></div>
-                    <span className="text-sm sm:text-base font-medium text-gray-800">{detail}</span>
-                  </motion.div>
-                ))}
-              </div>
-            )}
+            {/* Article Text - Narrow Reading Column */}
+            <div className="max-w-2xl">
+              <p className="text-base sm:text-lg text-editorial-ink leading-relaxed mb-8">
+                {aboutTabs[activeTab].content.description}
+              </p>
+
+              {/* Content Details */}
+              {aboutTabs[activeTab].id === 'values' ? (
+                // Values Grid Layout
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-editorial-border pt-8">
+                  {aboutTabs[activeTab].content.details.map((value, index) => (
+                    <motion.div
+                      key={value.title}
+                      className="border-l-2 border-editorial-border pl-4 hover:bg-gradient-to-r hover:from-blue-50 hover:via-cyan-50 hover:to-transparent transition-all duration-300 rounded-r-lg"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <h4 className="font-bold text-editorial-ink mb-2 font-serif text-lg">{value.title}</h4>
+                      <p className="text-sm text-editorial-muted leading-relaxed">{value.desc}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              ) : aboutTabs[activeTab].id === 'team' ? (
+                // Team Grid Layout
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 border-t border-editorial-border pt-8">
+                  {aboutTabs[activeTab].content.details.map((member, index) => (
+                    <motion.div
+                      key={member.name}
+                      className="border-2 border-editorial-border p-6 bg-gradient-to-br from-blue-50 via-cyan-50 to-purple-50 hover:from-blue-100 hover:via-cyan-100 hover:to-purple-100 transition-all duration-300 shadow-md hover:shadow-lg rounded-xl"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <h4 className="text-lg font-bold text-editorial-ink mb-2 font-serif">{member.name}</h4>
+                      <p className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent uppercase tracking-wider mb-3">{member.role}</p>
+                      <p className="text-sm text-editorial-muted leading-relaxed">{member.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                // Mission/Vision List Layout
+                <div className="space-y-4 border-t border-editorial-border pt-8">
+                  {aboutTabs[activeTab].content.details.map((detail, index) => (
+                    <motion.div
+                      key={detail}
+                      className="flex items-start gap-3 border-l-4 pl-4" style={{ borderLeftColor: '#06b6d4' }}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <span className="text-blue-500 font-bold mt-1">•</span>
+                      <span className="text-sm sm:text-base text-editorial-ink leading-relaxed">{detail}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </div>
           </motion.div>
         </div>
       </div>

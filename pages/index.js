@@ -1,14 +1,18 @@
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
-import NavBar from '../components/NavBar';
-import HeroSection from '../components/HeroSection';
-import FeatureSection from '../components/FeatureSection';
-import ProcessSection from '../components/ProcessSection';
-import CaseStudiesSection from '../components/CaseStudiesSection';
-import AboutSection from '../components/AboutSection';
-import SchedulingSection from '../components/SchedulingSection';
-import SectionDivider from '../components/SectionDivider';
+import ModernNavBar from '../components/ModernNavBar';
+import ModernHeroSection from '../components/ModernHeroSection';
+import ModernFeatureSection from '../components/ModernFeatureSection';
+import ModernProcessSection from '../components/ModernProcessSection';
+import ModernCaseStudiesSection from '../components/ModernCaseStudiesSection';
+import ModernAboutSection from '../components/ModernAboutSection';
+import ModernSchedulingSection from '../components/ModernSchedulingSection';
+import ModernSectionDivider from '../components/ModernSectionDivider';
 import Footer from '../components/Footer';
+import FloatingActionButton from '../components/FloatingActionButton';
+import InfiniteScroll from '../components/InfiniteScroll';
+import ScrollProgress from '../components/ScrollProgress';
+import StatsInfographic from '../components/StatsInfographic';
+import SmoothGradientBackground from '../components/SmoothGradientBackground';
 
 
 /**
@@ -28,22 +32,27 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="bg-gradient-to-br from-blue-50 via-white to-red-50 min-h-screen">
-        <NavBar />
-        <main className="pt-16 sm:pt-20">
-          <HeroSection />
-          <SectionDivider />
-          <FeatureSection />
-          <SectionDivider />
-          <ProcessSection />
-          <SectionDivider />
-          <CaseStudiesSection />
-          <SectionDivider />
-          <AboutSection />
-          <SectionDivider />
-          <SchedulingSection />
+      <div className="min-h-screen text-editorial-ink relative overflow-hidden">
+        <SmoothGradientBackground />
+        <ScrollProgress />
+        <ModernNavBar />
+        <main className="pt-16 sm:pt-20 relative z-10">
+          <ModernHeroSection />
+          <ModernSectionDivider />
+          <StatsInfographic />
+          <ModernSectionDivider />
+          <ModernFeatureSection />
+          <ModernSectionDivider />
+          <ModernProcessSection />
+          <ModernSectionDivider />
+          <ModernCaseStudiesSection />
+          <ModernSectionDivider />
+          <ModernAboutSection />
+          <ModernSectionDivider />
+          <ModernSchedulingSection />
         </main>
         <Footer />
+        <FloatingActionButton />
       </div>
     </>
   );

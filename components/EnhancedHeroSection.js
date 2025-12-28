@@ -1,12 +1,21 @@
 /**
- * Hero section component for Gnanalytica - Editorial "Cover Story" Design
- *
- * This section introduces Gnanalytica with a sophisticated editorial layout
- * that treats the content as a premium magazine cover story.
+ * Enhanced Hero Section with floating elements, scroll effects, and animations
  */
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import FloatingElements from './FloatingElements';
+import Chip from './Chip';
 
-export default function HeroSection() {
+export default function EnhancedHeroSection() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,7 +34,7 @@ export default function HeroSection() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.1, 0.25, 1] // easeOut for crisp feel
+        ease: [0.25, 0.1, 0.25, 1]
       }
     },
   };
@@ -42,9 +51,43 @@ export default function HeroSection() {
     },
   };
 
+  const chips = ['AI Consulting', 'Enterprise Solutions', 'Cost-Effective', 'Netherlands Based'];
+
   return (
-    <div className="relative isolate px-4 pt-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl py-16 sm:py-20 md:py-24 lg:py-32">
+    <div ref={ref} className="relative isolate px-4 pt-20 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-sky-50 via-blue-50 to-cyan-50">
+      {/* Decorative shapes */}
+      <div className="absolute top-20 right-20 w-64 h-64 bg-blue-200/40 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-cyan-200/40 rounded-full blur-3xl pointer-events-none" />
+      <FloatingElements />
+
+      {/* Floating decorative elements */}
+      <motion.div
+        className="absolute top-20 right-10 w-32 h-32 border-2 border-editorial-secondary/20 rounded-full"
+        animate={{
+          rotate: 360,
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          rotate: { duration: 20, repeat: Infinity, ease: 'linear' },
+          scale: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+        }}
+      />
+      <motion.div
+        className="absolute bottom-20 left-10 w-24 h-24 border-2 border-editorial-accent/20 rounded-full"
+        animate={{
+          rotate: -360,
+          scale: [1, 1.3, 1],
+        }}
+        transition={{
+          rotate: { duration: 15, repeat: Infinity, ease: 'linear' },
+          scale: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
+        }}
+      />
+
+      <motion.div
+        style={{ y, opacity }}
+        className="mx-auto max-w-7xl py-16 sm:py-20 md:py-24 lg:py-32 relative z-10"
+      >
         <motion.div
           className="max-w-4xl"
           variants={containerVariants}
@@ -74,7 +117,7 @@ export default function HeroSection() {
               Make Your Business{' '}
             </motion.span>
             <motion.span
-              className="text-editorial-highlight"
+              className="text-editorial-secondary"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
@@ -82,6 +125,21 @@ export default function HeroSection() {
               AI-Ready
             </motion.span>
           </motion.h1>
+
+          {/* Chips */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap gap-3 mb-12"
+          >
+            {chips.map((chip, index) => (
+              <Chip
+                key={chip}
+                label={chip}
+                variant={index === 0 ? 'highlight' : 'outline'}
+                size="md"
+              />
+            ))}
+          </motion.div>
 
           {/* Subheadline - Editorial Style */}
           <motion.div
@@ -96,14 +154,14 @@ export default function HeroSection() {
           {/* Gnanalytica Name Explanation - Editorial Badge */}
           <motion.div
             variants={itemVariants}
-            className="mb-12 inline-flex items-center gap-3 px-4 py-2 border-2 border-editorial-ink bg-editorial-white"
+            className="mb-12 inline-flex items-center gap-3 px-4 py-2 border-2 border-editorial-ink bg-editorial-white hover:border-editorial-secondary transition-colors duration-300"
           >
             <span className="text-sm font-bold text-editorial-ink uppercase tracking-wider">Gnana</span>
             <span className="text-editorial-muted">(Sanskrit: wisdom)</span>
             <span className="text-editorial-muted">+</span>
             <span className="text-sm font-bold text-editorial-ink uppercase tracking-wider">Analytics</span>
             <span className="text-editorial-muted">=</span>
-            <span className="text-sm font-bold text-editorial-highlight uppercase tracking-wider">Wisdom-Driven AI</span>
+            <span className="text-sm font-bold text-editorial-secondary uppercase tracking-wider">Wisdom-Driven AI</span>
           </motion.div>
 
           {/* Main Article Text - Narrow Column */}
@@ -111,7 +169,7 @@ export default function HeroSection() {
             variants={itemVariants}
             className="max-w-2xl mb-12"
           >
-            <div className="border-l-4 border-editorial-highlight pl-6">
+            <div className="border-l-4 border-gradient-to-b from-blue-500 to-cyan-500 pl-6" style={{ borderLeftColor: '#06b6d4' }}>
               <p className="text-base sm:text-lg text-editorial-ink leading-relaxed">
                 Whether you're a startup, mid-size company, or established business in any industry, we make AI accessible and affordable. No massive IT teams required, no enterprise-level budgets needed. We work directly with you to transform your operations, delight your customers, and future-proof your business with personalized AI solutions that actually work.
               </p>
@@ -133,15 +191,21 @@ export default function HeroSection() {
                   });
                 }
               }}
-              className="btn-touch bg-editorial-ink text-editorial-paper font-semibold px-8 py-4 border-2 border-editorial-ink hover:bg-editorial-highlight hover:text-editorial-ink hover:border-editorial-highlight transition-all duration-200 uppercase tracking-wider text-sm"
-              whileHover={{ scale: 1.02 }}
+              className="btn-touch bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 text-white font-semibold px-8 py-4 border-2 border-transparent hover:from-purple-500 hover:via-pink-500 hover:to-indigo-500 hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 uppercase tracking-wider text-sm relative overflow-hidden group"
+              whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
-              Schedule a Discovery Call
+              <motion.span
+                className="absolute inset-0 bg-editorial-secondary opacity-0 group-hover:opacity-20"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: '100%' }}
+                transition={{ duration: 0.6 }}
+              />
+              <span className="relative z-10">Schedule a Discovery Call</span>
             </motion.button>
             <motion.a
               href="#features"
-              className="btn-touch flex items-center gap-2 font-medium text-editorial-ink hover:text-editorial-highlight transition-colors duration-200 uppercase tracking-wider text-sm border-b-2 border-transparent hover:border-editorial-highlight pb-1"
+              className="btn-touch flex items-center gap-2 font-medium text-editorial-ink hover:text-blue-600 transition-colors duration-200 uppercase tracking-wider text-sm border-b-2 border-transparent hover:border-blue-500 pb-1"
               whileHover={{ x: 4 }}
             >
               Explore Solutions
@@ -166,10 +230,11 @@ export default function HeroSection() {
             ].map((benefit, index) => (
               <motion.div
                 key={benefit.title}
-                className="border-l-2 border-editorial-border pl-6"
+                className="border-l-2 border-editorial-border pl-6 hover:border-editorial-secondary transition-colors duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
+                whileHover={{ x: 4 }}
               >
                 <h4 className="text-lg font-bold text-editorial-ink mb-2 font-serif">
                   {benefit.title}
@@ -181,7 +246,8 @@ export default function HeroSection() {
             ))}
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   )
 }
+

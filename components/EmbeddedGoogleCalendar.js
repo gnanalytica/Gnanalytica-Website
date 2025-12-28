@@ -1,5 +1,5 @@
 export default function EmbeddedGoogleCalendar({
-  calendarEmbedUrl = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0nA86q3NqqjxhRy0mvvWg1-0EYZlzMdtAWtIvmBY8y3Tl9UX4U-1CPWY7vOu80h-S0d5PRYNqR?gv=true",
+  calendarEmbedUrl = "https://calendar.google.com/appointments/schedules/AcZssZ20kzIhtACNpQCMPvERahaZmkUOfe47XP2Oz72YUXE4Uj21gSvyKju1bKWtj7mjr14xA-jqzt1-",
   timezone = null // Optional: pass a specific timezone like 'America/New_York'
 }) {
   // Build the final URL with timezone if provided
@@ -8,9 +8,9 @@ export default function EmbeddedGoogleCalendar({
     : calendarEmbedUrl;
   if (!calendarEmbedUrl || calendarEmbedUrl.includes("YOUR_CALENDAR_ID")) {
     return (
-      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 text-center">
-        <h3 className="font-semibold text-yellow-800 mb-2">Setup Required</h3>
-        <p className="text-yellow-700 text-sm mb-4">
+      <div className="bg-editorial-paper border-2 border-editorial-border p-6 text-center">
+        <h3 className="font-semibold text-editorial-ink mb-2 font-serif">Setup Required</h3>
+        <p className="text-sm text-editorial-muted">
           Replace the calendar URL in the code with your Google Calendar embed URL.
         </p>
       </div>
@@ -18,16 +18,16 @@ export default function EmbeddedGoogleCalendar({
   }
 
   return (
-    <div className="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4">
+    <div className="bg-editorial-paper border-2 border-editorial-border p-3 sm:p-4">
       <div className="mb-3 sm:mb-4">
-        <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Available Time Slots</h3>
-        <p className="text-xs sm:text-sm text-gray-600">
-          Select a time that works best for you. Google Calendar will automatically detect your timezone and show times accordingly.
+        <h3 className="font-semibold text-editorial-ink mb-1 sm:mb-2 text-sm sm:text-base font-serif">Available Time Slots</h3>
+        <p className="text-xs sm:text-sm text-editorial-muted">
+          Select a time that works best for you.
         </p>
       </div>
 
       <div className="w-full">
-        <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <div className="bg-editorial-white border-2 border-editorial-border overflow-hidden">
           {/* Accessibility notice for screen readers */}
           <div className="sr-only">
             <p>This is a Google Calendar booking form. You can use the form below to schedule an appointment. All form fields are properly labeled for accessibility.</p>
@@ -67,25 +67,10 @@ export default function EmbeddedGoogleCalendar({
         </div>
       </div>
 
-      <div className="mt-3 sm:mt-4 text-center">
-        <p className="text-xs text-gray-500 mb-3">
+      <div className="mt-3 sm:mt-4 text-center border-t border-editorial-border pt-4">
+        <p className="text-xs text-editorial-muted uppercase tracking-wider">
           Powered by Google Calendar • Secure booking process
         </p>
-
-        {/* Mobile-friendly alternative */}
-        <div className="sm:hidden">
-          <p className="text-xs text-gray-600 mb-3">
-            Having trouble with the calendar above?
-          </p>
-          <a
-            href={finalCalendarUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
-          >
-            Open Calendar in New Tab
-          </a>
-        </div>
       </div>
     </div>
   );

@@ -19,34 +19,72 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter', 'Roboto', ...defaultTheme.fontFamily.sans],
+        serif: ['Playfair Display', 'Georgia', ...defaultTheme.fontFamily.serif],
+        display: ['Playfair Display', 'Georgia', ...defaultTheme.fontFamily.serif],
+        elegant: ['Playfair Display', 'Georgia', 'serif'],
+      },
+      letterSpacing: {
+        'tighter': '-0.05em',
+        'tight': '-0.025em',
+        'normal': '0',
+        'wide': '0.025em',
+        'wider': '0.05em',
+        'widest': '0.1em',
+        'luxury': '0.15em',
+      },
+      boxShadow: {
+        'premium': '0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05)',
+        'premium-lg': '0 10px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
+        'premium-xl': '0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1)',
+        'corporate': '0 4px 20px rgba(30, 58, 138, 0.2)',
+        'corporate-lg': '0 10px 40px rgba(30, 58, 138, 0.3)',
       },
       colors: {
+        // Corporate Premium Elite Theme - Sophisticated Professional Palette
+        editorial: {
+          paper: '#fafafa', // Soft white base
+          white: '#ffffff', // Pure white
+          ink: '#0a0a0a', // Deep black text
+          charcoal: '#2d2d2d', // Rich charcoal
+          highlight: '#1e40af', // Corporate blue
+          accent: '#3b82f6', // Royal blue
+          border: '#e5e5e5', // Subtle borders
+          muted: '#6b6b6b', // Muted text
+          // Corporate premium color palette
+          primary: '#1e3a8a', // Deep corporate blue
+          secondary: '#2563eb', // Professional blue
+          tertiary: '#1e40af', // Royal blue
+          slate: '#475569', // Corporate slate
+          steel: '#64748b', // Steel gray
+          platinum: '#e5e4e2', // Platinum
+        },
         primary: {
-          DEFAULT: '#4f46e5', // indigo-600
-          dark: '#4338ca', // indigo-700
-          light: '#6366f1', // indigo-500
+          DEFAULT: '#3b82f6', // Professional blue
+          dark: '#2563eb',
+          light: '#60a5fa',
         },
         secondary: {
-          DEFAULT: '#0ea5e9', // sky-500
-          dark: '#0284c7', // sky-600
-          light: '#38bdf8', // sky-400
+          DEFAULT: '#06b6d4', // Teal/cyan
+          dark: '#0891b2',
+          light: '#22d3ee',
         },
         accent: {
-          DEFAULT: '#f97316', // orange-500
-          dark: '#ea580c', // orange-600
+          DEFAULT: '#8b5cf6', // Purple
+          dark: '#7c3aed',
+          light: '#a78bfa',
         },
         neutral: {
-          50: '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cbd5e1',
-          400: '#94a3b8',
-          500: '#64748b',
-          600: '#475569',
-          700: '#334155',
-          800: '#1e293b',
-          900: '#0f172a',
+          50: '#FDFBF7',
+          100: '#F9F7F3',
+          200: '#E5E5E5',
+          300: '#D0D0D0',
+          400: '#9B9B9B',
+          500: '#6B6B6B',
+          600: '#4A4A4A',
+          700: '#2D2D2D',
+          800: '#1A1A1A',
+          900: '#0F0F0F',
         }
       },
       backgroundImage: {

@@ -1,174 +1,139 @@
+/**
+ * Case Studies section component - Editorial Design
+ *
+ * This section showcases examples of AI solutions in a sophisticated
+ * editorial layout matching the overall design aesthetic.
+ */
 import { motion } from 'framer-motion';
 
-/**
- * Case Studies section component for Gnanalytica.
- *
- * This section showcases examples of AI solutions and dashboards
- * built for clients, with a coming soon placeholder.
- */
 export default function CaseStudiesSection() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
         delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }
     }
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.5, ease: "easeOut" }
+  const caseStudies = [
+    {
+      title: "E-commerce Analytics Dashboard",
+      description: "Advanced AI-powered analytics platform that can track customer behavior, optimize conversion rates, and reduce customer acquisition costs through intelligent insights.",
+      category: "Analytics"
+    },
+    {
+      title: "Customer Service Automation",
+      description: "Intelligent chatbot system that can handle customer inquiries automatically, provide instant responses, and escalate complex issues to human agents when needed.",
+      category: "Automation"
+    },
+    {
+      title: "Predictive Sales Analytics",
+      description: "Machine learning model that can predict sales trends, forecast demand, and help optimize inventory and pricing strategies based on historical data and market patterns.",
+      category: "Predictive Analytics"
     }
-  };
+  ];
 
   return (
     <motion.section
       id="case-studies"
-      className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50"
+      className="py-20 bg-gradient-to-br from-amber-100 via-orange-100 to-amber-50 border-t-4 border-amber-400 relative overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-20 w-80 h-80 bg-amber-200/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl" />
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Editorial Section Header */}
         <motion.div
           className="text-center mb-16"
           variants={itemVariants}
         >
-          <motion.span
-            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800 rounded-full text-sm font-semibold mb-8 shadow-sm border border-purple-200/50"
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(147, 51, 234, 0.3)" }}
-          >
-            <motion.span
-              className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mr-3"
-              animate={{ scale: [1, 1.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            Case Studies & Examples
-          </motion.span>
-          <h2 className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-gray-900 via-purple-900 to-pink-900 bg-clip-text text-transparent sm:text-6xl mb-8">
+          <div className="mb-4 inline-block">
+            <span className="inline-block text-xs uppercase tracking-[0.2em] font-semibold text-editorial-muted border-b-2 border-editorial-ink pb-2">
+              Case Studies & Examples
+            </span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-editorial-ink leading-tight mb-6">
             What We Can Build
           </h2>
-          <p className="text-xl leading-8 text-gray-700 max-w-3xl mx-auto font-medium">
+          <p className="text-lg text-editorial-muted max-w-2xl mx-auto leading-relaxed">
             Explore examples of AI solutions and dashboards we can create to transform your business operations and drive growth.
           </p>
         </motion.div>
 
-        {/* Coming Soon Cards */}
+        {/* Case Studies Grid - Editorial Newspaper Style */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-editorial-border"
           variants={containerVariants}
         >
-          {/* Case Study 1 */}
-          <motion.div
-            className="group relative bg-white rounded-3xl shadow-xl border border-gray-200/60 p-8 hover:shadow-2xl transition-all duration-500 overflow-hidden"
-            variants={cardVariants}
-            whileHover={{ y: -8, scale: 1.02 }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative z-10">
-              <h3 className="text-xl font-bold text-gray-900 mb-3">E-commerce Analytics Dashboard</h3>
-              <p className="text-gray-600 mb-6">
-                Advanced AI-powered analytics platform that can track customer behavior, optimize conversion rates, and reduce customer acquisition costs through intelligent insights.
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-                  Coming Soon
+          {caseStudies.map((study, index) => (
+            <motion.div
+              key={study.title}
+              className={`p-8 border-b border-r border-editorial-border bg-white hover:bg-gradient-to-br hover:from-blue-50 hover:via-cyan-50 hover:to-purple-50 transition-all duration-300 group shadow-sm hover:shadow-lg rounded-lg ${
+                index % 3 === 2 ? 'md:border-r-0' : ''
+              }`}
+              variants={itemVariants}
+              whileHover={{ y: -4, scale: 1.02 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              {/* Category Badge */}
+              <div className="mb-4">
+                <span className="inline-block text-xs uppercase tracking-wider font-semibold text-white bg-gradient-to-r from-blue-500 to-cyan-500 border-2 border-transparent px-3 py-1 rounded-full shadow-md">
+                  {study.category}
                 </span>
-                <motion.div
-                  className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  <span className="text-white text-sm">→</span>
-                </motion.div>
               </div>
-            </div>
-          </motion.div>
 
-          {/* Case Study 2 */}
-          <motion.div
-            className="group relative bg-white rounded-3xl shadow-xl border border-gray-200/60 p-8 hover:shadow-2xl transition-all duration-500 overflow-hidden"
-            variants={cardVariants}
-            whileHover={{ y: -8, scale: 1.02 }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative z-10">
-              <div className="text-4xl mb-4">🤖</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Customer Service Automation</h3>
-              <p className="text-gray-600 mb-6">
-                Intelligent chatbot system that can handle customer inquiries automatically, provide instant responses, and escalate complex issues to human agents when needed.
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
-                  Coming Soon
-                </span>
-                <motion.div
-                  className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  <span className="text-white text-sm">→</span>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
+              {/* Title */}
+              <h3 className="text-xl font-serif font-bold text-editorial-ink mb-4 leading-tight">
+                {study.title}
+              </h3>
 
-          {/* Case Study 3 */}
-          <motion.div
-            className="group relative bg-white rounded-3xl shadow-xl border border-gray-200/60 p-8 hover:shadow-2xl transition-all duration-500 overflow-hidden"
-            variants={cardVariants}
-            whileHover={{ y: -8, scale: 1.02 }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-pink-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative z-10">
-              <div className="text-4xl mb-4">📈</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Predictive Sales Analytics</h3>
-              <p className="text-gray-600 mb-6">
-                Machine learning model that can predict sales trends, forecast demand, and help optimize inventory and pricing strategies based on historical data and market patterns.
+              {/* Description */}
+              <p className="text-sm text-editorial-muted leading-relaxed mb-6">
+                {study.description}
               </p>
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+
+              {/* Coming Soon Badge */}
+              <div className="border-t border-editorial-border pt-4">
+                <span className="text-xs font-semibold text-editorial-muted uppercase tracking-wider">
                   Coming Soon
                 </span>
-                <motion.div
-                  className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  <span className="text-white text-sm">→</span>
-                </motion.div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </motion.div>
 
-        {/* Call to Action */}
+        {/* Call to Action - Editorial Style */}
         <motion.div
-          className="text-center mt-16"
+          className="text-center mt-16 border-t border-editorial-border pt-12"
           variants={itemVariants}
         >
-          <motion.div
-            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-gray-100 to-gray-200 rounded-2xl border border-gray-300"
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
-          >
-            <div className="text-left">
-              <p className="text-gray-800 font-semibold">More examples coming soon!</p>
-              <p className="text-gray-600 text-sm">We're working on showcasing more AI solutions and dashboards we can build for your business.</p>
-            </div>
-          </motion.div>
+          <p className="text-sm text-editorial-muted uppercase tracking-wider mb-2">
+            More examples coming soon
+          </p>
+          <p className="text-base text-editorial-ink leading-relaxed max-w-2xl mx-auto">
+            We're working on showcasing more AI solutions and dashboards we can build for your business.
+          </p>
         </motion.div>
       </div>
     </motion.section>

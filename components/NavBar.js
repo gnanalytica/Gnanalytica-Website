@@ -25,30 +25,25 @@ export default function NavBar() {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white'
+        isScrolled
+          ? 'bg-white/95 backdrop-blur-md border-b border-editorial-border shadow-lg'
+          : 'bg-white/80 backdrop-blur-sm border-b border-editorial-border'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-3 sm:p-4 md:p-6 lg:px-8" aria-label="Global">
-        {/* Logo Section */}
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-4" aria-label="Global">
+        {/* Logo Section - Editorial Masthead Style */}
         <motion.div
           className="flex-shrink-0"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
         >
           <a href="#" className="-m-1.5 p-1.5 flex items-center">
             <span className="sr-only">Gnanalytica</span>
-            <motion.img
-              className="h-7 w-auto sm:h-8 md:h-10 lg:h-12"
-              src="/images/logos/gnanalytica-logo.png"
-              alt=""
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            />
-            <span className="ml-2 sm:ml-3 lg:ml-4 text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-red-600">Gnanalytica</span>
+            <span className="text-lg sm:text-xl md:text-2xl font-bold text-editorial-ink font-serif tracking-tight">Gnanalytica</span>
           </a>
         </motion.div>
 
@@ -64,86 +59,60 @@ export default function NavBar() {
           </button>
         </div>
 
-        {/* Desktop Navigation - Centered with Tiles */}
+        {/* Desktop Navigation - Minimal Editorial Style */}
         <motion.div
-          className="hidden lg:flex lg:flex-1 lg:justify-center"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          className="hidden lg:flex lg:flex-1 lg:justify-end"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
         >
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-8">
             {navigation.map((item, index) => (
               <motion.a
                 key={item.name}
                 href={item.href}
-                className="group relative px-4 py-2 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200/50 hover:border-blue-300/50 hover:bg-blue-50/50 transition-all duration-300 shadow-sm hover:shadow-md"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                whileHover={{ y: -2, scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="text-sm font-medium text-editorial-ink hover:text-blue-600 transition-colors duration-200 uppercase tracking-wider"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
+                whileHover={{ y: -1 }}
               >
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm group-hover:scale-110 transition-transform duration-200">
-                    {item.icon}
-                  </span>
-                  <span className="text-sm font-semibold text-gray-700 group-hover:text-blue-600 transition-colors duration-200">
-                    {item.name}
-                  </span>
-                </div>
-                {/* Hover effect overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {item.name}
               </motion.a>
             ))}
+            <motion.button
+              onClick={() => {
+                const schedulingSection = document.getElementById('scheduling');
+                if (schedulingSection) {
+                  schedulingSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                }
+              }}
+              className="btn-touch bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 text-white font-semibold px-6 py-2 border-2 border-transparent hover:from-purple-500 hover:via-pink-500 hover:to-indigo-500 hover:shadow-xl hover:shadow-purple-500/50 transition-all duration-300 uppercase tracking-wider text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.5 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Schedule Call
+            </motion.button>
           </div>
-        </motion.div>
-
-        {/* CTA Button - Right Aligned */}
-        <motion.div
-          className="hidden lg:flex lg:flex-shrink-0"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <motion.button
-            onClick={() => {
-              const schedulingSection = document.getElementById('scheduling');
-              if (schedulingSection) {
-                schedulingSection.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'start'
-                });
-              }
-            }}
-            className="btn-touch group relative bg-gradient-to-r from-blue-600 to-red-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <div className="flex items-center space-x-2">
-              <span>Schedule a Discovery Call</span>
-            </div>
-            {/* Animated background effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 rounded-xl" />
-          </motion.button>
         </motion.div>
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
-        <div className="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 shadow-2xl">
-          <div className="flex items-center justify-between">
+        <div className="fixed inset-0 z-50 bg-editorial-ink/30 backdrop-blur-sm" />
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-editorial-paper px-6 py-6 sm:max-w-sm border-l border-editorial-border">
+          <div className="flex items-center justify-between border-b border-editorial-border pb-4">
             <a href="#" className="-m-1.5 p-1.5 flex items-center">
               <span className="sr-only">Gnanalytica</span>
-              <img
-                className="h-8 w-auto"
-                src="/images/logos/gnanalytica-logo.png"
-                alt=""
-              />
-              <span className="ml-2 text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-red-600">Gnanalytica</span>
+              <span className="text-xl font-bold text-editorial-ink font-serif tracking-tight">Gnanalytica</span>
             </a>
             <button
               type="button"
-              className="btn-touch rounded-md text-gray-700 hover:bg-gray-100 active:bg-gray-200 transition-colors duration-200"
+              className="btn-touch text-editorial-ink hover:text-editorial-muted transition-colors duration-200"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
@@ -151,25 +120,19 @@ export default function NavBar() {
             </button>
           </div>
           <div className="mt-8 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10">
-              <div className="space-y-3 py-6">
+            <div className="-my-6 divide-y divide-editorial-border">
+              <div className="space-y-2 py-6">
                 {navigation.map((item, index) => (
                   <motion.a
                     key={item.name}
                     href={item.href}
-                    className="btn-touch group flex items-center space-x-4 -mx-3 rounded-xl text-lg font-semibold leading-7 text-gray-900 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 active:bg-gray-100 transition-all duration-200"
+                    className="btn-touch block text-base font-medium text-editorial-ink hover:text-blue-600 uppercase tracking-wider transition-colors duration-200 py-3"
                     onClick={() => setMobileMenuOpen(false)}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ x: 4 }}
+                    transition={{ delay: index * 0.05 }}
                   >
-                    <span className="text-2xl group-hover:scale-110 transition-transform duration-200">
-                      {item.icon}
-                    </span>
-                    <span className="group-hover:text-blue-600 transition-colors duration-200">
-                      {item.name}
-                    </span>
+                    {item.name}
                   </motion.a>
                 ))}
               </div>
@@ -185,11 +148,11 @@ export default function NavBar() {
                       });
                     }
                   }}
-                  className="btn-touch flex items-center justify-center space-x-3 -mx-3 rounded-xl text-lg font-semibold bg-gradient-to-r from-blue-600 to-red-600 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+                  className="btn-touch w-full bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 text-white font-semibold py-3 border-2 border-transparent hover:from-purple-500 hover:via-pink-500 hover:to-indigo-500 hover:shadow-xl hover:shadow-purple-500/50 transition-all duration-300 uppercase tracking-wider text-sm"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span>Schedule a Discovery Call</span>
+                  Schedule Call
                 </motion.button>
               </div>
             </div>

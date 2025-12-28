@@ -1,3 +1,9 @@
+/**
+ * Scheduling section component - Editorial Design
+ *
+ * This section provides the scheduling interface in a sophisticated
+ * editorial layout matching the overall design aesthetic.
+ */
 import { motion } from 'framer-motion';
 import EmbeddedGoogleCalendar from './EmbeddedGoogleCalendar';
 
@@ -8,18 +14,18 @@ export default function SchedulingSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
         delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }
     }
   };
 
@@ -27,27 +33,33 @@ export default function SchedulingSection() {
     <>
       <motion.section
         id="scheduling"
-        className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100"
+        className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-rose-100 via-pink-100 to-rose-50 border-t-4 border-rose-400"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={containerVariants}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Editorial Section Header */}
           <motion.div
             className="text-center mb-8 sm:mb-12"
             variants={itemVariants}
           >
-            <h2 id="scheduling-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">
+            <div className="mb-4 inline-block">
+              <span className="inline-block text-xs uppercase tracking-[0.2em] font-semibold text-editorial-muted border-b-2 border-editorial-ink pb-2">
+                Schedule Your Discovery Call
+              </span>
+            </div>
+            <h2 id="scheduling-heading" className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-editorial-ink mb-4 leading-tight">
               Schedule Your Discovery Call
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+            <p className="text-base sm:text-lg text-editorial-muted max-w-2xl mx-auto leading-relaxed">
               Get a complimentary 30-minute AI strategy session with our experts.
             </p>
           </motion.div>
 
           <motion.div
-            className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-visible max-w-5xl mx-auto"
+            className="border-2 border-editorial-border bg-editorial-paper max-w-5xl mx-auto"
             variants={itemVariants}
             role="region"
             aria-labelledby="scheduling-heading"
@@ -57,18 +69,18 @@ export default function SchedulingSection() {
                 <EmbeddedGoogleCalendar />
               </div>
 
-              <div className="mt-4 sm:mt-6 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span>Complimentary</span>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-xs text-editorial-muted border-t border-editorial-border pt-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
+                  <span className="uppercase tracking-wider">Complimentary</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span>No commitment</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-editorial-ink"></div>
+                  <span className="uppercase tracking-wider">No commitment</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span>Google Calendar integration</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-editorial-muted"></div>
+                  <span className="uppercase tracking-wider">Google Calendar integration</span>
                 </div>
               </div>
             </div>
