@@ -94,6 +94,16 @@ export default function Footer() {
                   Schedule a Call
                 </a>
               </li>
+              <li>
+                <a href="/privacy-policy" className="text-sm text-gray-300 hover:text-editorial-primary transition-colors duration-200 uppercase tracking-wider">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="/terms-and-conditions" className="text-sm text-gray-300 hover:text-editorial-primary transition-colors duration-200 uppercase tracking-wider">
+                  Terms & Conditions
+                </a>
+              </li>
             </ul>
           </motion.div>
 
