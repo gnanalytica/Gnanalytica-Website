@@ -3,12 +3,17 @@
  */
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { Dialog } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Dialog, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon, UserCircleIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { Fragment } from 'react';
 
 export default function ModernNavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,7 +86,77 @@ export default function ModernNavBar() {
           </a>
 
           {/* CTA Button - Desktop Only */}
-          <div className="hidden lg:flex">
+          <div className="hidden lg:flex lg:items-center lg:gap-4">
+            {status === 'loading' ? (
+              <div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse" />
+            ) : session ? (
+              // User Menu
+              <Menu as="div" className="relative">
+                <Menu.Button className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100/50 transition-colors">
+                  <div className="w-10 h-10 bg-gradient-to-br from-editorial-primary to-editorial-secondary rounded-full flex items-center justify-center text-white font-semibold shadow-premium">
+                    {session.user?.name?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                  <div className="text-left hidden xl:block">
+                    <p className="text-sm font-semibold text-editorial-ink">{session.user?.name}</p>
+                    <p className="text-xs text-editorial-muted capitalize">{session.user?.role}</p>
+                  </div>
+                </Menu.Button>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-xl bg-white shadow-premium-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden">
+                    <div className="px-4 py-3 bg-gradient-to-r from-editorial-primary/10 to-editorial-secondary/10">
+                      <p className="text-sm font-semibold text-editorial-ink">{session.user?.name}</p>
+                      <p className="text-xs text-editorial-muted">{session.user?.email}</p>
+                    </div>
+                    <div className="py-1">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => router.push('/portal')}
+                            className={`${
+                              active ? 'bg-gray-100' : ''
+                            } flex w-full items-center px-4 py-2 text-sm text-editorial-charcoal`}
+                          >
+                            <UserCircleIcon className="mr-3 h-5 w-5" />
+                            My Portal
+                          </button>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => signOut({ callbackUrl: '/' })}
+                            className={`${
+                              active ? 'bg-gray-100' : ''
+                            } flex w-full items-center px-4 py-2 text-sm text-red-600`}
+                          >
+                            <ArrowRightOnRectangleIcon className="mr-3 h-5 w-5" />
+                            Sign Out
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            ) : (
+              // Login Button
+              <motion.button
+                onClick={() => signIn()}
+                className="px-6 py-2.5 bg-white/90 text-editorial-primary font-semibold rounded-lg shadow-premium hover:shadow-premium-lg transition-all duration-300 border border-editorial-primary/20 tracking-wide"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Login
+              </motion.button>
+            )}
             <motion.button
               onClick={() => {
                 const schedulingSection = document.getElementById('scheduling');
@@ -138,7 +213,49 @@ export default function ModernNavBar() {
                   </a>
                 ))}
               </div>
-              <div className="py-6">
+              <div className="py-6 space-y-3">
+                {session ? (
+                  <>
+                    <div className="px-3 py-3 bg-gradient-to-r from-editorial-primary/10 to-editorial-secondary/10 rounded-lg mb-3">
+                      <p className="text-sm font-semibold text-editorial-ink">{session.user?.name}</p>
+                      <p className="text-xs text-editorial-muted capitalize">{session.user?.role}</p>
+                    </div>
+                    <motion.button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        router.push('/portal');
+                      }}
+                      className="w-full px-6 py-3 bg-white text-editorial-primary font-semibold rounded-lg shadow-premium border border-editorial-primary/20 tracking-wide"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      My Portal
+                    </motion.button>
+                    <motion.button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        signOut({ callbackUrl: '/' });
+                      }}
+                      className="w-full px-6 py-3 bg-white text-red-600 font-semibold rounded-lg shadow-premium border border-red-200 tracking-wide"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      Sign Out
+                    </motion.button>
+                  </>
+                ) : (
+                  <motion.button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      signIn();
+                    }}
+                    className="w-full px-6 py-3 bg-white text-editorial-primary font-semibold rounded-lg shadow-premium border border-editorial-primary/20 tracking-wide"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Login
+                  </motion.button>
+                )}
                 <motion.button
                   onClick={() => {
                     setMobileMenuOpen(false);
