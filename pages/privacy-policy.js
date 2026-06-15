@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-import ModernNavBar from '../components/ModernNavBar';
-import Footer from '../components/Footer';
-import SmoothGradientBackground from '../components/SmoothGradientBackground';
+import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 
 export default function PrivacyPolicy() {
   const containerVariants = {
@@ -63,9 +62,8 @@ export default function PrivacyPolicy() {
         <link rel="canonical" href="https://gnanalytica.com/privacy-policy" />
       </Head>
 
-      <div className="min-h-screen text-editorial-ink relative overflow-hidden">
-        <SmoothGradientBackground />
-        <ModernNavBar />
+      <div className="min-h-screen bg-canvas text-ink relative overflow-hidden">
+        <SiteNav />
 
         <main className="pt-16 sm:pt-20 relative z-10">
           {/* Header */}
@@ -457,7 +455,7 @@ export default function PrivacyPolicy() {
           </motion.section>
         </main>
 
-        <Footer />
+        <SiteFooter />
       </div>
     </>
   );

@@ -1,107 +1,110 @@
 /**
- * Tailwind CSS configuration.
+ * Tailwind CSS configuration — Gnanalytica product-family theme.
  *
- * This file defines the paths to all of the template files in the project
- * so Tailwind can purge unused styles in production. It also extends the
- * default theme with custom colors that match Gnanalytica's brand.
+ * A warm editorial light base with dark accent bands. Display = Instrument Serif,
+ * body = Inter, eyebrow labels = JetBrains Mono. Per-product accent colours are
+ * defined in lib/products.js and applied via inline styles (kept out of Tailwind
+ * so the JIT purge never strips dynamic product gradients).
  */
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     screens: {
-      'xs': '475px',
+      xs: '475px',
       ...defaultTheme.screens,
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'Roboto', ...defaultTheme.fontFamily.sans],
-        serif: ['Playfair Display', 'Georgia', ...defaultTheme.fontFamily.serif],
-        display: ['Playfair Display', 'Georgia', ...defaultTheme.fontFamily.serif],
-        elegant: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        display: ['Instrument Serif', 'Georgia', 'serif'],
+        serif: ['Instrument Serif', 'Georgia', 'serif'],
+        mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
       },
       letterSpacing: {
-        'tighter': '-0.05em',
-        'tight': '-0.025em',
-        'normal': '0',
-        'wide': '0.025em',
-        'wider': '0.05em',
-        'widest': '0.1em',
-        'luxury': '0.15em',
-      },
-      boxShadow: {
-        'premium': '0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05)',
-        'premium-lg': '0 10px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
-        'premium-xl': '0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1)',
-        'corporate': '0 4px 20px rgba(30, 58, 138, 0.2)',
-        'corporate-lg': '0 10px 40px rgba(30, 58, 138, 0.3)',
+        tightish: '-0.015em',
+        eyebrow: '0.18em',
+        kicker: '0.14em',
       },
       colors: {
-        // Corporate Premium Elite Theme - Sophisticated Professional Palette
+        // Warm editorial light base
+        canvas: {
+          DEFAULT: '#faf7f1', // hsl(38 24% 97%)
+          soft: '#f1ece2',    // hsl(36 22% 94%)
+          card: '#fdfbf7',    // hsl(40 30% 99%)
+        },
+        ink: {
+          DEFAULT: '#211f1b', // hsl(30 8% 12%)
+          muted: '#726c63',   // hsl(30 6% 42%)
+          line: '#ddd5c9',    // hsl(36 14% 84%)
+        },
+        // Dark accent band
+        night: {
+          DEFAULT: '#0b0d14',
+          soft: '#12141d',
+          ink: '#f5f6fa',
+          muted: '#a3a9bf',
+        },
+        // Gnanalytica's own neutral brand accent (nav, logo, generic CTAs)
+        brand: {
+          DEFAULT: '#4f46e5',
+          light: '#6366f1',
+          dark: '#4338ca',
+        },
+        // Legacy aliases remapped onto the new palette so older pages
+        // (privacy / terms) keep rendering coherently.
         editorial: {
-          paper: '#fafafa', // Soft white base
-          white: '#ffffff', // Pure white
-          ink: '#0a0a0a', // Deep black text
-          charcoal: '#2d2d2d', // Rich charcoal
-          highlight: '#1e40af', // Corporate blue
-          accent: '#3b82f6', // Royal blue
-          border: '#e5e5e5', // Subtle borders
-          muted: '#6b6b6b', // Muted text
-          // Corporate premium color palette
-          primary: '#1e3a8a', // Deep corporate blue
-          secondary: '#2563eb', // Professional blue
-          tertiary: '#1e40af', // Royal blue
-          slate: '#475569', // Corporate slate
-          steel: '#64748b', // Steel gray
-          platinum: '#e5e4e2', // Platinum
+          paper: '#faf7f1',
+          white: '#ffffff',
+          ink: '#211f1b',
+          charcoal: '#3a3630',
+          highlight: '#4f46e5',
+          accent: '#6366f1',
+          border: '#ddd5c9',
+          muted: '#726c63',
+          primary: '#4f46e5',
+          secondary: '#6366f1',
         },
-        primary: {
-          DEFAULT: '#3b82f6', // Professional blue
-          dark: '#2563eb',
-          light: '#60a5fa',
+      },
+      boxShadow: {
+        soft: '0 1px 2px hsl(30 8% 12% / 0.04), 0 1px 3px hsl(30 8% 12% / 0.04)',
+        lift: '0 8px 24px -8px hsl(30 8% 12% / 0.12), 0 2px 6px -2px hsl(30 8% 12% / 0.06)',
+        liftlg: '0 18px 50px -12px hsl(30 8% 12% / 0.18), 0 4px 12px -4px hsl(30 8% 12% / 0.08)',
+      },
+      borderRadius: {
+        xl: '0.875rem',
+        '2xl': '1.125rem',
+      },
+      maxWidth: {
+        '7xl': '80rem',
+      },
+      keyframes: {
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(14px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        secondary: {
-          DEFAULT: '#06b6d4', // Teal/cyan
-          dark: '#0891b2',
-          light: '#22d3ee',
+        'float-slow': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-14px)' },
         },
-        accent: {
-          DEFAULT: '#8b5cf6', // Purple
-          dark: '#7c3aed',
-          light: '#a78bfa',
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
-        neutral: {
-          50: '#FDFBF7',
-          100: '#F9F7F3',
-          200: '#E5E5E5',
-          300: '#D0D0D0',
-          400: '#9B9B9B',
-          500: '#6B6B6B',
-          600: '#4A4A4A',
-          700: '#2D2D2D',
-          800: '#1A1A1A',
-          900: '#0F0F0F',
-        }
+        'pulse-soft': {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '0.5', transform: 'scale(0.9)' },
+        },
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-      spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-      },
-      minHeight: {
-        '44': '44px',
-        '48': '48px',
-      },
-      minWidth: {
-        '44': '44px',
-        '48': '48px',
+      animation: {
+        'fade-up': 'fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'float-slow': 'float-slow 8s ease-in-out infinite',
+        marquee: 'marquee 36s linear infinite',
+        'pulse-soft': 'pulse-soft 2.4s ease-in-out infinite',
       },
     },
   },
