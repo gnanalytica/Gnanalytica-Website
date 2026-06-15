@@ -1,117 +1,105 @@
 /**
- * Products showcase for the Gnanalytica homepage.
+ * ProductsShowcase — the four Gnanalytica products, each in its own accent.
  *
- * Presents the three products (Valytica, Standup, Learn) as themed, animated
- * cards that route to their dedicated pages at /valytica, /standup, /learn.
+ * Responsive grid (1 → 2 → 4 across). Cards link to the dedicated product page;
+ * the accent CTA opens the live product. Driven entirely by lib/products.js.
  */
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRightIcon, ArrowUpRightIcon } from '@heroicons/react/24/outline';
+import { ArrowUpRightIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { products } from '../lib/products';
-import { getIcon } from './products/icons';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { delay: i * 0.07, duration: 0.55, ease: [0.16, 1, 0.3, 1] },
   }),
 };
 
+function ProductCard({ product, index }) {
+  const { theme } = product;
+  return (
+    <motion.div
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-ink-line bg-canvas-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      custom={index}
+      variants={fadeUp}
+    >
+      <span className="absolute inset-x-0 top-0 h-1" style={{ backgroundImage: theme.gradient }} />
+      <div className="flex flex-1 flex-col p-6">
+        <div className="mb-5 flex items-center gap-3">
+          <span
+            className="grid h-11 w-11 place-items-center rounded-xl text-base font-semibold text-white shadow-soft"
+            style={{ backgroundImage: theme.gradient }}
+          >
+            {product.name.charAt(0)}
+          </span>
+          <div>
+            <h3 className="text-lg font-semibold leading-tight tracking-tight text-ink" style={{ fontFamily: 'Inter, sans-serif' }}>
+              {product.name}
+            </h3>
+            <p className="eyebrow mt-1" style={{ color: theme.primary }}>
+              {product.category}
+            </p>
+          </div>
+        </div>
+
+        <p className="font-display text-xl leading-snug text-ink">{product.tagline}</p>
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">{product.summary}</p>
+
+        <div className="mt-6 flex items-center justify-between border-t border-ink-line pt-4">
+          <Link
+            href={`/${product.slug}`}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors"
+            style={{ color: theme.primary }}
+          >
+            Learn more
+            <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+          <a
+            href={product.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-xs font-medium text-ink-muted transition-colors hover:text-ink"
+          >
+            {product.cta}
+            <ArrowUpRightIcon className="h-3.5 w-3.5" />
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function ProductsShowcase() {
   return (
-    <section id="products" className="relative py-24 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Heading */}
+    <section id="products" className="relative py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="mx-auto mb-14 max-w-2xl text-center"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.5 }}
           variants={fadeUp}
         >
-          <p className="text-sm font-semibold uppercase tracking-luxury text-editorial-primary mb-4">Our Products</p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-editorial-ink leading-[1.1] tracking-tight" style={{ fontFamily: 'Playfair Display, serif' }}>
-            Software we build, run and stand behind
+          <p className="eyebrow mb-4 text-ink-muted">Our products</p>
+          <h2 className="font-display text-4xl tracking-tightish text-ink sm:text-5xl">
+            Four products, one philosophy
           </h2>
-          <p className="mt-6 text-lg sm:text-xl text-editorial-charcoal font-light leading-relaxed tracking-wide">
-            Three focused products, each born from the same belief: AI should quietly do the heavy lifting while people keep the judgement.
+          <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+            Each tool replaces a tangle of spreadsheets and busywork with one focused flow — and
+            keeps a human in control of every decision.
           </p>
         </motion.div>
 
-        {/* Product cards */}
-        <div className="grid lg:grid-cols-3 gap-7">
-          {products.map((product, i) => {
-            const Icon = getIcon(product.features[0].icon);
-            return (
-              <motion.div
-                key={product.slug}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={fadeUp}
-                custom={i}
-              >
-                <motion.div
-                  className="group relative h-full bg-white rounded-2xl border border-gray-200/70 shadow-premium hover:shadow-premium-xl transition-all duration-500 overflow-hidden flex flex-col"
-                  whileHover={{ y: -6 }}
-                >
-                  {/* Stretched link makes the whole card navigate to the product page */}
-                  <Link href={`/${product.slug}`} className="absolute inset-0 z-10" aria-label={`Explore ${product.name}`} />
-
-                  {/* Themed top band */}
-                  <div className="relative h-32 overflow-hidden" style={{ backgroundImage: product.theme.gradient }}>
-                    <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 80% 0%, rgba(255,255,255,0.7) 0%, transparent 50%)' }} />
-                    <motion.div
-                      className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/10"
-                      animate={{ scale: [1, 1.25, 1] }}
-                      transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: i * 0.6 }}
-                    />
-                    {product.comingSoon && (
-                      <span className="absolute top-4 right-4 inline-flex items-center rounded-full bg-white/25 backdrop-blur-md border border-white/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
-                        Coming soon
-                      </span>
-                    )}
-                    <div className="absolute bottom-4 left-6 flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                      <span className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: 'Playfair Display, serif' }}>
-                        {product.name}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Body */}
-                  <div className="flex flex-col flex-1 p-7">
-                    <span className="text-xs font-semibold uppercase tracking-luxury mb-3" style={{ color: product.theme.primary }}>
-                      {product.category}
-                    </span>
-                    <h3 className="text-lg font-bold text-editorial-ink mb-3 leading-snug tracking-tight" style={{ fontFamily: 'Playfair Display, serif' }}>
-                      {product.tagline}
-                    </h3>
-                    <p className="text-editorial-charcoal font-light leading-relaxed text-sm flex-1">{product.summary}</p>
-
-                    <div className="mt-6 flex items-center justify-between pt-5 border-t border-gray-100">
-                      <span className="inline-flex items-center gap-1.5 text-sm font-semibold group-hover:gap-2.5 transition-all" style={{ color: product.theme.primary }}>
-                        Explore {product.name}
-                        <ArrowRightIcon className="w-4 h-4" />
-                      </span>
-                      <a
-                        href={product.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="relative z-20 inline-flex items-center gap-1 text-xs font-medium text-editorial-muted hover:text-editorial-ink transition-colors"
-                      >
-                        {product.comingSoon ? 'Waitlist' : 'Live'} <ArrowUpRightIcon className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {products.map((product, i) => (
+            <ProductCard key={product.slug} product={product} index={i} />
+          ))}
         </div>
       </div>
     </section>

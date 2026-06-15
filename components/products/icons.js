@@ -15,6 +15,12 @@ import {
   ChartBarIcon,
   RocketLaunchIcon,
   SparklesIcon,
+  ShareIcon,
+  LinkIcon,
+  ChatBubbleLeftRightIcon,
+  HeartIcon,
+  ArrowTrendingUpIcon,
+  EyeIcon,
 } from '@heroicons/react/24/outline';
 
 export const iconMap = {
@@ -29,6 +35,12 @@ export const iconMap = {
   book: BookOpenIcon,
   chart: ChartBarIcon,
   rocket: RocketLaunchIcon,
+  graph: ShareIcon,
+  link: LinkIcon,
+  chat: ChatBubbleLeftRightIcon,
+  heart: HeartIcon,
+  trend: ArrowTrendingUpIcon,
+  eye: EyeIcon,
 };
 
 export const getIcon = (key) => iconMap[key] || SparklesIcon;

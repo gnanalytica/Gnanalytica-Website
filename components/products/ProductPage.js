@@ -1,236 +1,173 @@
 /**
  * Reusable, data-driven product landing page.
  *
- * Renders a themed, motion-rich page for any product defined in
- * lib/products.js. All product-specific colour comes from the theme object via
- * inline styles/gradients so a single template serves every product.
+ * Renders a themed page for any product defined in lib/products.js, in the
+ * unified Gnanalytica system (warm editorial base, Instrument Serif display,
+ * shared nav/footer). All product-specific colour comes from the theme object
+ * via inline styles so a single template serves every product.
  */
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import { ArrowUpRightIcon, ArrowRightIcon, SparklesIcon } from '@heroicons/react/24/outline';
-import ProductNav from './ProductNav';
-import Footer from '../Footer';
+import { motion } from 'framer-motion';
+import { ArrowUpRightIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
+import SiteNav from '../SiteNav';
+import SiteFooter from '../SiteFooter';
 import { getIcon } from './icons';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.08, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { delay: i * 0.08, duration: 0.55, ease: [0.16, 1, 0.3, 1] },
   }),
 };
 
 export default function ProductPage({ product }) {
   const { theme, hero } = product;
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const orbY = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <div className="min-h-screen text-editorial-ink relative overflow-hidden bg-editorial-paper">
-      <ProductNav product={product} />
+    <div className="min-h-screen bg-canvas text-ink">
+      <SiteNav />
 
-      <main className="pt-16 sm:pt-20 relative z-10">
+      <main>
         {/* ───────────────────────── Hero ───────────────────────── */}
-        <section ref={heroRef} className="relative min-h-[88vh] flex items-center overflow-hidden">
-          {/* Themed animated background */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute inset-0" style={{ background: `radial-gradient(60% 60% at 80% 0%, ${theme.soft} 0%, transparent 60%)` }} />
-            <motion.div
-              className="absolute -top-24 right-0 w-[34rem] h-[34rem] rounded-full blur-3xl"
-              style={{ y: orbY, background: theme.gradient, opacity: 0.18 }}
-              animate={{ scale: [1, 1.15, 1], x: [0, 40, 0] }}
-              transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+        <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
+          <div className="pointer-events-none absolute inset-0">
+            <div
+              className="absolute inset-0"
+              style={{ background: `radial-gradient(60% 55% at 80% 0%, ${theme.soft} 0%, transparent 60%)` }}
             />
             <motion.div
-              className="absolute bottom-0 -left-24 w-[26rem] h-[26rem] rounded-full blur-3xl"
-              style={{ background: theme.gradient, opacity: 0.12 }}
-              animate={{ scale: [1, 1.25, 1], y: [0, -40, 0] }}
-              transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute -top-24 right-0 h-[32rem] w-[32rem] rounded-full blur-3xl"
+              style={{ background: theme.gradient, opacity: 0.16 }}
+              animate={{ scale: [1, 1.12, 1], x: [0, 36, 0] }}
+              transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
             />
           </div>
 
-          <motion.div style={{ opacity: heroOpacity }} className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-            <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-              {/* Copy */}
-              <div className="lg:col-span-7">
-                <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-xl border shadow-premium mb-7" style={{ borderColor: `${theme.accent}33` }}>
-                  <SparklesIcon className="w-4 h-4" style={{ color: theme.primary }} />
-                  <span className="text-xs font-semibold tracking-wide" style={{ color: theme.primary }}>{hero.badge}</span>
-                </motion.div>
+          <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+            <div className="lg:col-span-7">
+              <motion.p className="eyebrow mb-5" style={{ color: theme.primary }} initial="hidden" animate="visible" custom={0} variants={fadeUp}>
+                {hero.kicker || product.category}
+              </motion.p>
 
-                <motion.h1
-                  initial="hidden"
-                  animate="visible"
-                  variants={fadeUp}
-                  custom={1}
-                  className="text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-editorial-ink"
-                  style={{ fontFamily: 'Playfair Display, serif' }}
-                >
-                  {hero.title}{' '}
-                  <span className="block mt-2 bg-clip-text text-transparent" style={{ backgroundImage: theme.textGradient }}>
-                    {hero.highlight}
-                  </span>
-                </motion.h1>
-
-                <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={2} className="mt-7 text-lg sm:text-xl text-editorial-charcoal leading-relaxed max-w-2xl font-light tracking-wide">
-                  {hero.subtitle}
-                </motion.p>
-
-                <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={3} className="mt-9 flex flex-col sm:flex-row gap-4">
-                  <motion.a
-                    href={hero.ctaPrimary.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center justify-center gap-2 px-9 py-4 text-white font-semibold rounded-lg shadow-premium-lg transition-all duration-300 tracking-wide"
-                    style={{ backgroundImage: theme.gradient }}
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {hero.ctaPrimary.label}
-                    <ArrowUpRightIcon className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </motion.a>
-                  <motion.a
-                    href={hero.ctaSecondary.href}
-                    className="inline-flex items-center justify-center gap-2 px-9 py-4 bg-white/95 backdrop-blur-md text-editorial-ink font-semibold rounded-lg border-2 transition-all duration-300 shadow-premium hover:shadow-premium-lg tracking-wide"
-                    style={{ borderColor: `${theme.accent}40` }}
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {hero.ctaSecondary.label}
-                  </motion.a>
-                </motion.div>
-
-                {hero.principle && (
-                  <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={4} className="mt-8 text-sm font-medium tracking-wide flex items-center gap-2" style={{ color: theme.primary }}>
-                    <span className="inline-block w-8 h-px" style={{ background: theme.primary }} />
-                    {hero.principle}
-                  </motion.p>
-                )}
-              </div>
-
-              {/* Floating product mock */}
-              <motion.div
-                className="lg:col-span-5 hidden lg:block"
-                initial={{ opacity: 0, scale: 0.92, y: 30 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+              <motion.h1
+                className="font-display text-4xl leading-[1.05] tracking-tightish text-ink sm:text-6xl lg:text-7xl"
+                initial="hidden"
+                animate="visible"
+                custom={1}
+                variants={fadeUp}
               >
-                <div className="relative">
-                  <motion.div
-                    className="rounded-2xl p-1 shadow-premium-xl"
-                    style={{ backgroundImage: theme.gradient }}
-                    animate={{ y: [0, -12, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                  >
-                    <div className="rounded-xl bg-white p-6 space-y-4">
-                      <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-                        <span className="text-sm font-bold" style={{ color: theme.primary }}>{product.name}</span>
-                        <div className="flex gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                        </div>
-                      </div>
-                      {product.features.slice(0, 3).map((f, i) => {
-                        const Icon = getIcon(f.icon);
-                        return (
-                          <motion.div
-                            key={f.title}
-                            className="flex items-center gap-3 rounded-lg p-3"
-                            style={{ background: theme.soft }}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.6 + i * 0.15, duration: 0.5 }}
-                          >
-                            <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundImage: theme.gradient }}>
-                              <Icon className="w-5 h-5 text-white" />
-                            </div>
-                            <div className="flex-1">
-                              <div className="h-2.5 rounded-full w-3/4 mb-1.5" style={{ background: `${theme.accent}55` }} />
-                              <div className="h-2 rounded-full w-1/2" style={{ background: `${theme.accent}30` }} />
-                            </div>
-                          </motion.div>
-                        );
-                      })}
-                    </div>
-                  </motion.div>
+                {hero.title}{' '}
+                <span className="block bg-clip-text text-transparent" style={{ backgroundImage: theme.textGradient }}>
+                  {hero.highlight}
+                </span>
+              </motion.h1>
 
-                  <motion.div
-                    className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-premium-xl border border-gray-100"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1, duration: 0.6 }}
-                    whileHover={{ scale: 1.05, rotate: -2 }}
-                  >
-                    <div className="text-2xl font-bold tracking-tight" style={{ color: theme.primary, fontFamily: 'Playfair Display, serif' }}>
-                      {product.stats[0].value}
-                    </div>
-                    <div className="text-xs text-editorial-muted tracking-wide">{product.stats[0].label}</div>
-                  </motion.div>
-                </div>
+              <motion.p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl" initial="hidden" animate="visible" custom={2} variants={fadeUp}>
+                {hero.subtitle}
+              </motion.p>
+
+              <motion.div className="mt-9 flex flex-col gap-3 sm:flex-row" initial="hidden" animate="visible" custom={3} variants={fadeUp}>
+                <a
+                  href={hero.ctaPrimary.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold text-white shadow-lift transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+                  style={{ backgroundImage: theme.gradient }}
+                >
+                  {hero.ctaPrimary.label}
+                  <ArrowUpRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+                <a
+                  href={hero.ctaSecondary.href}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-ink-line bg-canvas-card px-7 py-3.5 text-sm font-semibold text-ink shadow-soft transition-all hover:shadow-lift"
+                >
+                  {hero.ctaSecondary.label}
+                </a>
               </motion.div>
+
+              {hero.principle && (
+                <motion.p className="mt-8 flex items-center gap-2 text-sm font-medium" style={{ color: theme.primary }} initial="hidden" animate="visible" custom={4} variants={fadeUp}>
+                  <span className="inline-block h-px w-8" style={{ background: theme.primary }} />
+                  {hero.principle}
+                </motion.p>
+              )}
             </div>
-          </motion.div>
+
+            {/* product preview card */}
+            <motion.div
+              className="hidden lg:col-span-5 lg:block"
+              initial={{ opacity: 0, scale: 0.94, y: 24 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="rounded-2xl p-1 shadow-liftlg animate-float-slow" style={{ backgroundImage: theme.gradient }}>
+                <div className="space-y-3 rounded-xl bg-canvas-card p-6">
+                  <div className="flex items-center justify-between border-b border-ink-line pb-3">
+                    <span className="text-sm font-semibold" style={{ color: theme.primary }}>{product.name}</span>
+                    <div className="flex gap-1.5">
+                      <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+                    </div>
+                  </div>
+                  {product.features.slice(0, 3).map((f) => {
+                    const Icon = getIcon(f.icon);
+                    return (
+                      <div key={f.title} className="flex items-center gap-3 rounded-lg p-3" style={{ background: theme.soft }}>
+                        <span className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg" style={{ backgroundImage: theme.gradient }}>
+                          <Icon className="h-5 w-5 text-white" />
+                        </span>
+                        <span className="text-sm font-medium text-ink">{f.title}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </section>
 
-        {/* ───────────────────────── Stats strip ───────────────────────── */}
-        <section className="relative py-14 border-y border-gray-200/60 bg-white/60 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-              {product.stats.map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  className="text-center"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.5 }}
-                  variants={fadeUp}
-                  custom={i}
-                >
-                  <div className="text-3xl sm:text-4xl font-bold tracking-tight mb-1" style={{ color: theme.primary, fontFamily: 'Playfair Display, serif' }}>
-                    {s.value}
-                  </div>
-                  <div className="text-sm text-editorial-muted tracking-wide">{s.label}</div>
-                </motion.div>
-              ))}
-            </div>
+        {/* ───────────────────────── Stats ───────────────────────── */}
+        <section className="border-y border-ink-line bg-canvas-soft py-12">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
+            {product.stats.map((s, i) => (
+              <motion.div key={s.label} className="text-center" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} custom={i} variants={fadeUp}>
+                <div className="font-display text-3xl tracking-tightish sm:text-4xl" style={{ color: theme.primary }}>{s.value}</div>
+                <div className="mt-1 text-sm text-ink-muted">{s.label}</div>
+              </motion.div>
+            ))}
           </div>
         </section>
 
         {/* ───────────────────────── Features ───────────────────────── */}
-        <section id="features" className="relative py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div className="text-center max-w-2xl mx-auto mb-16" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }} variants={fadeUp}>
-              <p className="text-sm font-semibold uppercase tracking-luxury mb-4" style={{ color: theme.accent }}>{product.category}</p>
-              <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-editorial-ink" style={{ fontFamily: 'Playfair Display, serif' }}>
-                Everything in one focused flow
-              </h2>
-              <p className="mt-5 text-lg text-editorial-charcoal font-light leading-relaxed">{product.summary}</p>
+        <section id="features" className="py-20 sm:py-28">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <motion.div className="mx-auto mb-14 max-w-2xl text-center" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }} variants={fadeUp}>
+              <p className="eyebrow mb-4" style={{ color: theme.primary }}>{product.category}</p>
+              <h2 className="font-display text-4xl tracking-tightish text-ink sm:text-5xl">Everything in one focused flow</h2>
+              <p className="mt-5 text-lg leading-relaxed text-ink-muted">{product.summary}</p>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid gap-6 sm:grid-cols-2">
               {product.features.map((f, i) => {
                 const Icon = getIcon(f.icon);
                 return (
                   <motion.div
                     key={f.title}
-                    className="group relative bg-white rounded-2xl p-8 border border-gray-200/70 shadow-premium hover:shadow-premium-xl transition-all duration-500 overflow-hidden"
+                    className="group relative overflow-hidden rounded-2xl border border-ink-line bg-canvas-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.3 }}
-                    variants={fadeUp}
                     custom={i}
-                    whileHover={{ y: -4 }}
+                    variants={fadeUp}
                   >
-                    <div className="absolute inset-x-0 top-0 h-1 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" style={{ backgroundImage: theme.gradient }} />
-                    <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 shadow-premium group-hover:scale-110 transition-transform duration-500" style={{ backgroundImage: theme.gradient }}>
-                      <Icon className="w-7 h-7 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 tracking-tight text-editorial-ink" style={{ fontFamily: 'Playfair Display, serif' }}>{f.title}</h3>
-                    <p className="text-editorial-charcoal font-light leading-relaxed">{f.description}</p>
+                    <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" style={{ backgroundImage: theme.gradient }} />
+                    <span className="grid h-12 w-12 place-items-center rounded-xl shadow-soft" style={{ backgroundImage: theme.gradient }}>
+                      <Icon className="h-6 w-6 text-white" />
+                    </span>
+                    <h3 className="mt-5 text-lg font-semibold tracking-tight text-ink">{f.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">{f.description}</p>
                   </motion.div>
                 );
               })}
@@ -239,72 +176,60 @@ export default function ProductPage({ product }) {
         </section>
 
         {/* ───────────────────────── How it works ───────────────────────── */}
-        <section id="how-it-works" className="relative py-24" style={{ background: theme.soft }}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div className="text-center max-w-2xl mx-auto mb-16" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }} variants={fadeUp}>
-              <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-editorial-ink" style={{ fontFamily: 'Playfair Display, serif' }}>
-                How it works
-              </h2>
-              {hero.principle && <p className="mt-4 text-lg font-medium" style={{ color: theme.primary }}>{hero.principle}</p>}
+        <section id="how-it-works" className="py-20 sm:py-28" style={{ background: theme.soft }}>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <motion.div className="mx-auto mb-14 max-w-2xl text-center" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }} variants={fadeUp}>
+              <p className="eyebrow mb-4" style={{ color: theme.primary }}>How it works</p>
+              <h2 className="font-display text-4xl tracking-tightish text-ink sm:text-5xl">{hero.principle || 'How it works'}</h2>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {product.steps.map((step, i) => (
-                <motion.div
-                  key={step.title}
-                  className="relative bg-white rounded-2xl p-7 border border-gray-200/70 shadow-premium"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  variants={fadeUp}
-                  custom={i}
-                >
-                  <div className="text-5xl font-bold mb-4 leading-none" style={{ color: `${theme.accent}40`, fontFamily: 'Playfair Display, serif' }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 tracking-tight text-editorial-ink">{step.title}</h3>
-                  <p className="text-sm text-editorial-charcoal font-light leading-relaxed">{step.description}</p>
+                <motion.div key={step.title} className="relative rounded-2xl border border-ink-line bg-canvas-card p-6 shadow-soft" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} custom={i} variants={fadeUp}>
+                  <span className="font-display text-5xl leading-none" style={{ color: `${theme.accent}55` }}>{String(i + 1).padStart(2, '0')}</span>
+                  <h3 className="mt-4 text-base font-semibold tracking-tight text-ink">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">{step.description}</p>
                   {i < product.steps.length - 1 && (
-                    <ArrowRightIcon className="hidden lg:block absolute top-1/2 -right-3 w-6 h-6" style={{ color: `${theme.accent}80` }} />
+                    <ArrowRightIcon className="absolute top-7 -right-3 hidden h-6 w-6 lg:block" style={{ color: `${theme.accent}99` }} />
                   )}
                 </motion.div>
               ))}
             </div>
+
+            {product.note && (
+              <p className="mx-auto mt-10 max-w-2xl text-center text-xs leading-relaxed text-ink-muted">{product.note}</p>
+            )}
           </div>
         </section>
 
         {/* ───────────────────────── Closing CTA ───────────────────────── */}
-        <section className="relative py-28 overflow-hidden">
+        <section className="relative overflow-hidden py-24">
           <div className="absolute inset-0" style={{ backgroundImage: theme.gradient }} />
           <div className="absolute inset-0 opacity-20" style={{ background: 'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6) 0%, transparent 40%)' }} />
           <motion.div
-            className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white"
+            className="relative z-10 mx-auto max-w-3xl px-4 text-center text-white sm:px-6 lg:px-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.4 }}
             variants={fadeUp}
           >
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight mb-5" style={{ fontFamily: 'Playfair Display, serif' }}>
-              {product.closing.title}
-            </h2>
-            <p className="text-lg sm:text-xl text-white/90 font-light leading-relaxed mb-10">{product.closing.subtitle}</p>
-            <motion.a
+            <h2 className="font-display text-4xl tracking-tightish sm:text-5xl">{product.closing.title}</h2>
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/90">{product.closing.subtitle}</p>
+            <a
               href={product.closing.cta.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-10 py-4 bg-white font-semibold rounded-lg shadow-premium-xl transition-all duration-300 tracking-wide"
+              className="mt-9 inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-semibold shadow-liftlg transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
               style={{ color: theme.primary }}
-              whileHover={{ scale: 1.04, y: -2 }}
-              whileTap={{ scale: 0.98 }}
             >
               {product.closing.cta.label}
-              <ArrowUpRightIcon className="w-5 h-5" />
-            </motion.a>
+              <ArrowUpRightIcon className="h-4 w-4" />
+            </a>
           </motion.div>
         </section>
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
