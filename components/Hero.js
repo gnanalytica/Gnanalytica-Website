@@ -35,7 +35,7 @@ export default function Hero() {
         <motion.div style={{ y: contentY, opacity: contentOpacity }} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <motion.p className="eyebrow mb-6 text-night-muted" initial="hidden" animate="visible" custom={0} variants={fadeUp}>
-              Wisdom-driven AI · Hyderabad &amp; Eindhoven
+              Four products · One AI studio
             </motion.p>
 
             <motion.h1
