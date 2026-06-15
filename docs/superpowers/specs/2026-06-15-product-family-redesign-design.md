@@ -7,19 +7,20 @@
 ## Goal
 
 Redesign the Gnanalytica marketing site so it reads as the parent brand of a coherent
-product family — Valytica, Standup, and Learn — matching the shared editorial design DNA
-of those three product apps, and refresh each product's on-site content from its actual
+product family — Valytica, Standup, Learn, and Healthytica — matching the shared editorial
+design DNA of those product apps, and refresh each product's on-site content from its actual
 repo.
 
 ## Source material
 
-Three product repos in the parent folder were analyzed for design + messaging:
+Four product repos in the parent folder were analyzed for design + messaging:
 
 | Product | Repo | Serif | Body | Accent | Mode |
 |---|---|---|---|---|---|
 | Valytica | `../valytica` | Instrument Serif | Geist/Inter | trust-blue `#3b82f6` | light/dark |
 | Standup | `../Standup-AI` | Instrument Serif | Inter | indigo→violet `#6366F1`→`#A855F7` + cyan `#22D3EE` | dark |
 | Learn | `../ai-workshop` | Fraunces | Inter Tight | terracotta `hsl(12 65% 48%)` | warm light/dark |
+| Healthytica | `../Healthytica` | Instrument Serif | Inter | teal→leaf `#2492ab`→`#2fa84f` | dark/light |
 
 **Shared family DNA** (the unifying basis):
 - Serif display headlines + Inter-family body + **mono uppercase eyebrow labels at `0.18em` tracking**
@@ -34,7 +35,7 @@ Three product repos in the parent folder were analyzed for design + messaging:
 2. **Display font:** **Instrument Serif** (matches Valytica + Standup). Inter for body, JetBrains Mono for eyebrows.
 3. **Positioning:** Products **+ consulting** ("what we do" / AI-readiness retained).
 4. **Scope:** Full design-layer rebuild. **Keep** Next.js 14 pages-router + Tailwind 3 (no framework migration). Build a fresh, cohesive component set; delete dead duplicate components.
-5. **Products:** Refresh all three from their repos. Standup stays **coming soon**. Learn = the `ai-workshop` repo.
+5. **Products:** **Four** products, all refreshed from their repos and all shown as **Live** (no "coming soon"): Valytica, Standup, Learn (= `ai-workshop`), Healthytica (= `Healthytica`).
 
 ## Design language / tokens
 
@@ -49,6 +50,7 @@ Implemented via `tailwind.config.js` theme extension + CSS variables in `styles/
   - Valytica: primary `#2563eb`, accent `#3b82f6`, soft `#eff6ff`
   - Standup: gradient `#6366F1`→`#A855F7`, live-cyan `#22D3EE`, soft `#f5f3ff`
   - Learn: terracotta primary `hsl(12 65% 48%)` (`#c9502e`), accent `hsl(14 70% 60%)`, soft `hsl(36 30% 95%)`
+  - Healthytica: teal→leaf gradient `#2492ab`→`#2fa84f`, accent `#2492ab`, soft `#ecfdf5`
 
 ### Typography
 - Display: **Instrument Serif** (400), `tracking-tight`, `leading-[1.05]` for hero.
@@ -73,7 +75,7 @@ Implemented via `tailwind.config.js` theme extension + CSS variables in `styles/
 1. **Nav** — wordmark, Products dropdown (3), About, Contact, primary CTA.
 2. **Hero** (dark accent band) — Instrument Serif headline "Wisdom-driven AI products & consulting", sub, dual CTA, animated mesh backdrop.
 3. **Positioning strip** — eyebrow row: "Built in Hyderabad · Data in India".
-4. **Products showcase** — 3 large cards, each in its own accent, tagline + one-line "what it does" + status badge (Standup = "Coming soon"), link → product page.
+4. **Products showcase** — 4 cards (responsive grid: 1-col mobile → 2×2 → 4-up on wide), each in its own accent, tagline + one-line "what it does", link → product page. All Live (no status badges).
 5. **What we do** — consulting / AI-readiness pillars.
 6. **Process** — editorial 4-step "how we work".
 7. **About** — Gnanalytica wisdom-driven thesis.
@@ -81,9 +83,10 @@ Implemented via `tailwind.config.js` theme extension + CSS variables in `styles/
 9. **Footer** — products, company, contact, "Made in India".
 
 ### Product pages (`pages/[product].js`)
-Keep the dynamic `[product].js` + `lib/products.js` pattern. Restyle to the new system;
-each page adopts its **own product accent**. Sections: hero → stats → features → how-it-works
-(steps) → closing CTA. (Privacy / Terms pages restyled to new tokens, content unchanged.)
+Keep the dynamic `[product].js` + `lib/products.js` pattern, now driving **four** slugs
+(`valytica`, `standup`, `learn`, `healthytica`). Restyle to the new system; each page adopts its
+**own product accent**. Sections: hero → stats → features → how-it-works (steps) → closing CTA.
+(Privacy / Terms pages restyled to new tokens, content unchanged.)
 
 ## Component plan
 
@@ -106,12 +109,21 @@ against `grep` of imports during implementation — only remove what nothing imp
 Keep: "Valuation reports in minutes, not days"; AI field extraction; state portal checks
 (TS/AP/KA); mobile site evidence; IBA-aligned reports; DPDP / AWS Mumbai data residency.
 
-### Standup (coming soon — substantive refresh)
-Reframe from "meeting memory" to the **real** product: **"Live meeting intelligence."**
-An autonomous bot that joins Google Meet, produces live transcripts, extracts action items
-into **Linear tickets**, builds a **knowledge graph** across meetings, and syncs to **Slack**.
-Tagline candidate: "Live meeting intelligence." Features: Live transcript & capture · Action
-items → Linear · Knowledge graph across meetings · Slack sync. Status badge: **Coming soon**.
+### Standup (LIVE — substantive refresh)
+Reframe from "meeting memory" to the **real** product (confirmed against freshly-pulled repo;
+README status = Production, `standup.gnanalytica.com`): **"Live meeting intelligence."**
+An autonomous bot (Recall.ai) that joins your Google Meet, captures the conversation, and every
+~30s feeds it to Gemini 2.5 Flash to extract a living **knowledge graph**, structured summaries,
+and proposed **action items** — which wait in a **human-reviewed queue** before becoming
+**Linear** tickets — then posts a **Slack** digest, all streaming to a dashboard.
+Tagline: "Live meeting intelligence." Features:
+- **Autonomous Meet bot** — joins your call and captures every utterance, no note-taker needed.
+- **Live knowledge graph** — entities, decisions and relationships stream onto a graph as people talk.
+- **Action items → Linear** — proposed items wait for human confirm/ignore before a ticket is created.
+- **Summaries + Slack** — a canonical summary and Block Kit digest posted the moment a meeting ends.
+
+Steps: Bot joins the Meet → Live transcript & graph → Review action items (confirm → Linear) →
+Summary posts to Slack. Status: **Live**, CTA "Open Standup" → `standup.gnanalytica.com`.
 Accent: indigo→violet + cyan.
 
 ### Learn (refresh from ai-workshop)
@@ -121,18 +133,34 @@ and admins. No spreadsheets, no scattered links."
 Features: Daily curriculum (30 MDX-authored days) · Pods + faculty · Grading + analytics ·
 Built for outcomes (capstone).
 Steps: Enroll → Daily labs → Pod reviews → Capstone demo day.
-**Accent corrected amber → terracotta** (`hsl(12 65% 48%)`).
+**Accent corrected amber → terracotta** (`hsl(12 65% 48%)`). Status: **Live**, CTA "Enroll".
+
+### Healthytica (LIVE — new fourth product)
+From `../Healthytica`. Category: Health Intelligence. Tagline: **"Your biomarkers, over time."**
+(kicker: "AI-assisted longitudinal biomarker intelligence"). What it does: turns your lab reports
+into clear, longitudinal, preventive insights — tracking how biomarkers change over time with
+explainable AI, no medical jargon. Features:
+- **Longitudinal trends** — see how each biomarker improves, stabilizes or worsens across every report, not just one snapshot.
+- **Explainable flags** — transparent, rule-based findings with the clinical evidence behind them; no black-box scores.
+- **LLM report ingestion** — drop in a PDF and values are extracted, normalised onto a common scale, and aligned to your history.
+- **Preventive & personalised** — insights weigh your age, sex, lifestyle and family history to surface what's worth a doctor conversation.
+
+Steps: Set your profile → Upload a report → Review extracted values → Track trends & insights.
+Includes a "not a medical device" disclaimer line. Status: **Live**, CTA "Try Healthytica" →
+`healthytica.gnanalytica.com`. Accent: teal→leaf (`#2492ab`→`#2fa84f`).
 
 ## Out of scope
 - No framework/router migration (stays Next 14 pages + Tailwind 3).
 - No backend, CMS, or form-submission changes.
-- No new product or page beyond the existing routes.
+- Adds a new `/healthytica` route (fourth product) via the existing dynamic pattern; no other new pages.
 - Privacy/Terms copy unchanged (visual restyle only).
 
 ## Success criteria
-- Homepage + 3 product pages render in the new unified theme (Instrument Serif + Inter + mono
-  eyebrows, warm light base, dark accent bands, per-product accents).
-- Each product card/page carries its correct accent; Standup shows "Coming soon".
-- Standup and Learn copy reflect their real repos; Learn accent is terracotta.
+- Homepage + **4** product pages (`/valytica`, `/standup`, `/learn`, `/healthytica`) render in the
+  new unified theme (Instrument Serif + Inter + mono eyebrows, warm light base, dark accent bands,
+  per-product accents).
+- Each product card/page carries its correct accent; all four shown as Live (no "coming soon").
+- Standup, Learn and Healthytica copy reflect their real repos; Learn accent is terracotta,
+  Healthytica accent is teal→leaf.
 - Dead duplicate components removed; `next build` passes with no broken imports.
 - Responsive (mobile-first) and `prefers-reduced-motion` respected.
