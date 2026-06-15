@@ -49,6 +49,11 @@ export default function ProductNav({ product }) {
           <span className="text-lg font-bold tracking-tight" style={{ color: theme.primary, fontFamily: 'Playfair Display, serif' }}>
             {product.name}
           </span>
+          {product.comingSoon && (
+            <span className="hidden sm:inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider" style={{ background: theme.soft, color: theme.primary }}>
+              Coming soon
+            </span>
+          )}
         </div>
 
         {/* Desktop links */}
@@ -69,7 +74,7 @@ export default function ProductNav({ product }) {
             whileHover={{ scale: 1.04, y: -1 }}
             whileTap={{ scale: 0.97 }}
           >
-            Open App
+            {product.comingSoon ? 'Join the waitlist' : 'Open App'}
             <ArrowUpRightIcon className="w-4 h-4" />
           </motion.a>
         </div>
@@ -125,7 +130,7 @@ export default function ProductNav({ product }) {
                   className="flex w-full items-center justify-center gap-1.5 px-8 py-3 text-white font-semibold rounded-lg shadow-premium-lg tracking-wide"
                   style={{ backgroundImage: theme.gradient }}
                 >
-                  Open App <ArrowUpRightIcon className="w-4 h-4" />
+                  {product.comingSoon ? 'Join the waitlist' : 'Open App'} <ArrowUpRightIcon className="w-4 h-4" />
                 </a>
               </div>
             </div>

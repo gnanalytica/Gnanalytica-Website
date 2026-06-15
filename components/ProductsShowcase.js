@@ -68,6 +68,11 @@ export default function ProductsShowcase() {
                       animate={{ scale: [1, 1.25, 1] }}
                       transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: i * 0.6 }}
                     />
+                    {product.comingSoon && (
+                      <span className="absolute top-4 right-4 inline-flex items-center rounded-full bg-white/25 backdrop-blur-md border border-white/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
+                        Coming soon
+                      </span>
+                    )}
                     <div className="absolute bottom-4 left-6 flex items-center gap-3">
                       <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
                         <Icon className="w-6 h-6 text-white" />
@@ -99,7 +104,7 @@ export default function ProductsShowcase() {
                         rel="noopener noreferrer"
                         className="relative z-20 inline-flex items-center gap-1 text-xs font-medium text-editorial-muted hover:text-editorial-ink transition-colors"
                       >
-                        Live <ArrowUpRightIcon className="w-3.5 h-3.5" />
+                        {product.comingSoon ? 'Waitlist' : 'Live'} <ArrowUpRightIcon className="w-3.5 h-3.5" />
                       </a>
                     </div>
                   </div>
