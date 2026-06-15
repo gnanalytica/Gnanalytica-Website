@@ -106,7 +106,7 @@ export default function SiteFooter() {
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs">&copy; {year} Gnanalytica. All rights reserved.</p>
-          <p className="text-xs">Wisdom-driven AI · Made between Hyderabad &amp; Eindhoven</p>
+          <p className="text-xs">Wisdom-driven AI products &amp; consulting</p>
         </div>
       </div>
     </footer>
