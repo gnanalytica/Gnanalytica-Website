@@ -10,6 +10,8 @@ import { motion } from 'framer-motion';
 import { ArrowUpRightIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import SiteNav from '../SiteNav';
 import SiteFooter from '../SiteFooter';
+import Magnetic from '../Magnetic';
+import CountUp from '../CountUp';
 import { getIcon } from './icons';
 
 const fadeUp = {
@@ -58,7 +60,7 @@ export default function ProductPage({ product }) {
                 variants={fadeUp}
               >
                 {hero.title}{' '}
-                <span className="block bg-clip-text text-transparent" style={{ backgroundImage: theme.textGradient }}>
+                <span className="gradient-text block" style={{ backgroundImage: theme.textGradient }}>
                   {hero.highlight}
                 </span>
               </motion.h1>
@@ -68,22 +70,28 @@ export default function ProductPage({ product }) {
               </motion.p>
 
               <motion.div className="mt-9 flex flex-col gap-3 sm:flex-row" initial="hidden" animate="visible" custom={3} variants={fadeUp}>
-                <a
-                  href={hero.ctaPrimary.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold text-white shadow-lift transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
-                  style={{ backgroundImage: theme.gradient }}
-                >
-                  {hero.ctaPrimary.label}
-                  <ArrowUpRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-                <a
-                  href={hero.ctaSecondary.href}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-ink-line bg-canvas-card px-7 py-3.5 text-sm font-semibold text-ink shadow-soft transition-all hover:shadow-lift"
-                >
-                  {hero.ctaSecondary.label}
-                </a>
+                <Magnetic strength={0.45}>
+                  <a
+                    href={hero.ctaPrimary.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="sheen-host group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-7 py-3.5 text-sm font-semibold text-white shadow-lift"
+                    style={{ backgroundImage: theme.gradient }}
+                  >
+                    <span className="relative z-10 inline-flex items-center gap-2">
+                      {hero.ctaPrimary.label}
+                      <ArrowUpRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </span>
+                  </a>
+                </Magnetic>
+                <Magnetic strength={0.3}>
+                  <a
+                    href={hero.ctaSecondary.href}
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-ink-line bg-canvas-card px-7 py-3.5 text-sm font-semibold text-ink shadow-soft transition-all hover:shadow-lift"
+                  >
+                    {hero.ctaSecondary.label}
+                  </a>
+                </Magnetic>
               </motion.div>
 
               {hero.principle && (
@@ -133,7 +141,9 @@ export default function ProductPage({ product }) {
           <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
             {product.stats.map((s, i) => (
               <motion.div key={s.label} className="text-center" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} custom={i} variants={fadeUp}>
-                <div className="font-display text-3xl tracking-tightish sm:text-4xl" style={{ color: theme.primary }}>{s.value}</div>
+                <div className="font-display text-3xl tracking-tightish sm:text-4xl" style={{ color: theme.primary }}>
+                  <CountUp value={s.value} />
+                </div>
                 <div className="mt-1 text-sm text-ink-muted">{s.label}</div>
               </motion.div>
             ))}

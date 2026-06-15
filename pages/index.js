@@ -31,7 +31,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen bg-canvas text-ink">
-        <SiteNav />
+        <SiteNav heroOnDark />
         <main>
           <Hero />
           <ProductsShowcase />

@@ -73,14 +73,14 @@ export default function WhatWeDo() {
           {pillars.map((pillar, i) => (
             <motion.div
               key={pillar.title}
-              className="rounded-2xl border border-ink-line bg-canvas-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+              className="group rounded-2xl border border-ink-line bg-canvas-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               custom={i}
               variants={fadeUp}
             >
-              <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand/10 text-brand">
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand/10 text-brand transition-all duration-300 group-hover:scale-110 group-hover:bg-brand group-hover:text-white">
                 <pillar.icon className="h-6 w-6" />
               </span>
               <h3 className="mt-5 text-lg font-semibold tracking-tight text-ink">{pillar.title}</h3>

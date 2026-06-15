@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowUpRightIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { products } from '../lib/products';
+import TiltCard from './TiltCard';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -22,15 +23,19 @@ function ProductCard({ product, index }) {
   const { theme } = product;
   return (
     <motion.div
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-ink-line bg-canvas-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+      className="h-full"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       custom={index}
       variants={fadeUp}
     >
-      <span className="absolute inset-x-0 top-0 h-1" style={{ backgroundImage: theme.gradient }} />
-      <div className="flex flex-1 flex-col p-6">
+      <TiltCard
+        glow={theme.glow}
+        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ink-line bg-canvas-card shadow-soft transition-shadow duration-300 hover:shadow-lift"
+      >
+        <span className="absolute inset-x-0 top-0 z-20 h-1" style={{ backgroundImage: theme.gradient }} />
+        <div className="relative z-20 flex flex-1 flex-col p-6">
         <div className="mb-5 flex items-center gap-3">
           <span
             className="grid h-11 w-11 place-items-center rounded-xl text-base font-semibold text-white shadow-soft"
@@ -70,7 +75,8 @@ function ProductCard({ product, index }) {
             <ArrowUpRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
-      </div>
+        </div>
+      </TiltCard>
     </motion.div>
   );
 }
