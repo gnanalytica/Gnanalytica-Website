@@ -1,16 +1,18 @@
 /**
- * SiteNav — primary navigation, shared by the homepage and product pages.
+ * SiteNav — adaptive primary navigation, shared by the homepage and product pages.
  *
- * A light editorial glass bar: gradient brand mark + Gnanalytica wordmark, a
- * Products dropdown driven by lib/products.js, section links, and a primary
- * "Book a call" CTA. Becomes more opaque on scroll.
+ * At the top of the page it is transparent; pass `heroOnDark` when the hero
+ * behind it is a dark band so the links render light. On scroll it morphs into a
+ * frosted, contained light pill with dark links. Nav links get a gradient
+ * underline on hover and the CTA is a magnetic, animated-gradient button.
  */
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Dialog } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon, ChevronDownIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { products } from '../lib/products';
+import Magnetic from './Magnetic';
 
 const sectionLinks = [
   { name: 'Services', href: '/#services' },
@@ -18,45 +20,70 @@ const sectionLinks = [
   { name: 'About', href: '/#about' },
 ];
 
-function BrandMark() {
+function BrandMark({ light }) {
   return (
-    <Link href="/" className="flex items-center gap-2.5 group">
+    <Link href="/" className="group flex items-center gap-2.5">
       <span
         className="grid h-8 w-8 place-items-center rounded-md text-white shadow-soft transition-transform duration-300 group-hover:scale-105"
         style={{ backgroundImage: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 60%, #a855f7 100%)' }}
       >
         <span className="font-display text-[18px] leading-none">G</span>
       </span>
-      <span className="text-[17px] font-semibold tracking-tight text-ink">Gnanalytica</span>
+      <span className={`text-[17px] font-semibold tracking-tight transition-colors ${light ? 'text-white' : 'text-ink'}`}>
+        Gnanalytica
+      </span>
     </Link>
   );
 }
 
-export default function SiteNav() {
+// A nav link with a gradient underline that wipes in on hover.
+function NavLink({ href, children, light, onClick }) {
+  return (
+    <a
+      href={href}
+      onClick={onClick}
+      className={`group relative text-sm font-medium transition-colors ${
+        light ? 'text-white/80 hover:text-white' : 'text-ink-muted hover:text-ink'
+      }`}
+    >
+      {children}
+      <span
+        className="absolute -bottom-1.5 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100"
+        style={{ backgroundImage: 'linear-gradient(90deg, #6366f1, #a855f7)' }}
+      />
+    </a>
+  );
+}
+
+export default function SiteNav({ heroOnDark = false }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Links are light only when at the top over a dark hero.
+  const light = heroOnDark && !scrolled;
+
   return (
-    <motion.header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'border-b border-ink-line/70 bg-canvas/85 backdrop-blur-xl shadow-soft'
-          : 'border-b border-transparent bg-canvas/40 backdrop-blur-md'
-      }`}
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8" aria-label="Global">
-        <BrandMark />
+    <header className="fixed inset-x-0 top-0 z-50">
+      <motion.nav
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+        className={`mx-auto flex items-center justify-between transition-all duration-500 ease-out ${
+          scrolled
+            ? 'mt-3 max-w-5xl rounded-full border border-ink-line/70 bg-canvas/80 px-4 py-2.5 shadow-lift backdrop-blur-xl sm:px-5'
+            : 'mt-0 max-w-7xl rounded-none border border-transparent px-4 py-4 sm:px-6 lg:px-8'
+        }`}
+        aria-label="Global"
+      >
+        <BrandMark light={light} />
 
         <div className="hidden items-center gap-8 lg:flex">
           <div
@@ -64,9 +91,13 @@ export default function SiteNav() {
             onMouseEnter={() => setProductsOpen(true)}
             onMouseLeave={() => setProductsOpen(false)}
           >
-            <button className="flex items-center gap-1 text-sm font-medium text-ink-muted transition-colors hover:text-ink">
+            <button className={`group relative flex items-center gap-1 text-sm font-medium transition-colors ${light ? 'text-white/80 hover:text-white' : 'text-ink-muted hover:text-ink'}`}>
               Products
               <ChevronDownIcon className={`h-4 w-4 transition-transform duration-300 ${productsOpen ? 'rotate-180' : ''}`} />
+              <span
+                className="absolute -bottom-1.5 left-0 h-0.5 w-[calc(100%-1.25rem)] origin-left scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100"
+                style={{ backgroundImage: 'linear-gradient(90deg, #6366f1, #a855f7)' }}
+              />
             </button>
             <AnimatePresence>
               {productsOpen && (
@@ -82,10 +113,10 @@ export default function SiteNav() {
                       <Link
                         key={product.slug}
                         href={`/${product.slug}`}
-                        className="flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-canvas-soft"
+                        className="group/item flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-canvas-soft"
                       >
                         <span
-                          className="mt-0.5 grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg text-sm font-semibold text-white"
+                          className="mt-0.5 grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg text-sm font-semibold text-white transition-transform duration-300 group-hover/item:scale-105"
                           style={{ backgroundImage: product.theme.gradient }}
                         >
                           {product.name.charAt(0)}
@@ -103,35 +134,41 @@ export default function SiteNav() {
           </div>
 
           {sectionLinks.map((item) => (
-            <a key={item.name} href={item.href} className="text-sm font-medium text-ink-muted transition-colors hover:text-ink">
+            <NavLink key={item.name} href={item.href} light={light}>
               {item.name}
-            </a>
+            </NavLink>
           ))}
         </div>
 
         <div className="flex items-center gap-3">
-          <a
-            href="/#contact"
-            className="hidden rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-all duration-200 hover:bg-brand-dark active:scale-[0.98] sm:inline-flex"
-          >
-            Book a call
-          </a>
+          <Magnetic strength={0.5} className="hidden sm:inline-flex">
+            <a
+              href="/#contact"
+              className="sheen-host relative inline-flex items-center gap-1.5 overflow-hidden rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-shadow duration-200 hover:shadow-lift"
+              style={{ backgroundImage: 'linear-gradient(110deg, #4f46e5, #6366f1, #a855f7, #4f46e5)', backgroundSize: '220% 220%' }}
+            >
+              <span className="relative z-10 inline-flex items-center gap-1.5">
+                Book a call
+                <ArrowRightIcon className="h-4 w-4" />
+              </span>
+            </a>
+          </Magnetic>
           <button
             type="button"
-            className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-ink-muted hover:text-ink lg:hidden"
+            className={`-m-2 inline-flex items-center justify-center rounded-md p-2 transition-colors lg:hidden ${light ? 'text-white/90 hover:text-white' : 'text-ink-muted hover:text-ink'}`}
             onClick={() => setMobileOpen(true)}
           >
             <span className="sr-only">Open menu</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       <Dialog as="div" className="lg:hidden" open={mobileOpen} onClose={setMobileOpen}>
-        <div className="fixed inset-0 z-50 bg-ink/20" />
+        <div className="fixed inset-0 z-50 bg-ink/30 backdrop-blur-sm" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-canvas px-6 py-6 sm:max-w-sm sm:border-l sm:border-ink-line">
           <div className="flex items-center justify-between">
-            <BrandMark />
+            <BrandMark light={false} />
             <button type="button" className="-m-2 rounded-md p-2 text-ink-muted" onClick={() => setMobileOpen(false)}>
               <span className="sr-only">Close menu</span>
               <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -176,7 +213,8 @@ export default function SiteNav() {
               <a
                 href="/#contact"
                 onClick={() => setMobileOpen(false)}
-                className="block w-full rounded-lg bg-brand px-6 py-3 text-center text-sm font-semibold text-white shadow-soft"
+                className="block w-full rounded-full px-6 py-3 text-center text-sm font-semibold text-white shadow-soft"
+                style={{ backgroundImage: 'linear-gradient(110deg, #4f46e5, #6366f1, #a855f7)' }}
               >
                 Book a call
               </a>
@@ -184,6 +222,6 @@ export default function SiteNav() {
           </div>
         </Dialog.Panel>
       </Dialog>
-    </motion.header>
+    </header>
   );
 }

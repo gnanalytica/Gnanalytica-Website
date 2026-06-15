@@ -67,6 +67,31 @@ body {
     -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
     mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
   }
+
+  /* Self-animating gradient text — pair with an inline backgroundImage */
+  .gradient-text {
+    background-size: 220% 220%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-pan 6s ease-in-out infinite;
+  }
+
+  /* Sweeping sheen highlight for buttons; host must be relative + overflow-hidden */
+  .sheen-host::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 35%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+    transform: translateX(-120%) skewX(-12deg);
+    pointer-events: none;
+  }
+  .sheen-host:hover::after {
+    animation: sheen 0.9s ease-out;
+  }
 }
 
 /* Responsive images */

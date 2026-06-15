@@ -99,12 +99,42 @@ module.exports = {
           '0%, 100%': { opacity: '1', transform: 'scale(1)' },
           '50%': { opacity: '0.5', transform: 'scale(0.9)' },
         },
+        // Pans a 200%-wide gradient for animated text and CTAs
+        'gradient-pan': {
+          '0%, 100%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+        },
+        // Sweeps a highlight across a button/badge
+        sheen: {
+          '0%': { transform: 'translateX(-120%) skewX(-12deg)' },
+          '60%, 100%': { transform: 'translateX(220%) skewX(-12deg)' },
+        },
+        // Slow drift for dark-band mesh layers
+        'mesh-drift': {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0) scale(1)' },
+          '33%': { transform: 'translate3d(3%, -2%, 0) scale(1.06)' },
+          '66%': { transform: 'translate3d(-2%, 3%, 0) scale(1.03)' },
+        },
+        'glow-pulse': {
+          '0%, 100%': { opacity: '0.35' },
+          '50%': { opacity: '0.75' },
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         'fade-up': 'fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both',
         'float-slow': 'float-slow 8s ease-in-out infinite',
         marquee: 'marquee 36s linear infinite',
         'pulse-soft': 'pulse-soft 2.4s ease-in-out infinite',
+        'gradient-pan': 'gradient-pan 6s ease-in-out infinite',
+        sheen: 'sheen 2.6s ease-in-out infinite',
+        'mesh-drift': 'mesh-drift 22s ease-in-out infinite',
+        'mesh-drift-slow': 'mesh-drift 32s ease-in-out infinite',
+        'glow-pulse': 'glow-pulse 5s ease-in-out infinite',
+        'spin-slow': 'spin-slow 28s linear infinite',
       },
     },
   },
