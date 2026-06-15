@@ -5,7 +5,9 @@
  * editorial layout matching the overall design aesthetic.
  */
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { products } from '../lib/products';
 
 export default function Footer() {
   const containerVariants = {
@@ -45,7 +47,7 @@ export default function Footer() {
         variants={containerVariants}
       >
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 border-b border-editorial-muted/20 pb-12">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 border-b border-editorial-muted/20 pb-12">
           {/* Company Info */}
           <motion.div className="sm:col-span-2 lg:col-span-2" variants={itemVariants}>
                 <div className="mb-6">
@@ -57,22 +59,31 @@ export default function Footer() {
               Making your business AI-ready with enterprise-grade solutions at a fraction of traditional costs.
               We provide the personal attention and dedication that big firms simply can't.
             </p>
-            <motion.button
-              onClick={() => {
-                const schedulingSection = document.getElementById('scheduling');
-                if (schedulingSection) {
-                  schedulingSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                  });
-                }
-              }}
+            <motion.a
+              href="/#scheduling"
               className="inline-flex items-center bg-gradient-to-r from-editorial-primary via-editorial-secondary to-editorial-primary text-white font-semibold px-6 py-3 rounded-lg border border-white/20 shadow-premium-lg hover:shadow-premium-xl transition-all duration-500 uppercase tracking-wider text-sm"
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
               Schedule a Discovery Call
-            </motion.button>
+            </motion.a>
+          </motion.div>
+
+          {/* Products */}
+          <motion.div variants={itemVariants}>
+            <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Products</h3>
+            <ul className="space-y-3">
+              {products.map((product) => (
+                <li key={product.slug}>
+                  <Link
+                    href={`/${product.slug}`}
+                    className="text-sm text-gray-300 hover:text-editorial-primary transition-colors duration-200 uppercase tracking-wider"
+                  >
+                    {product.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </motion.div>
 
           {/* Quick Links */}
@@ -80,17 +91,17 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Quick Links</h3>
                 <ul className="space-y-3">
                   <li>
-                <a href="#features" className="text-sm text-gray-300 hover:text-editorial-primary transition-colors duration-200 uppercase tracking-wider">
+                <a href="/#features" className="text-sm text-gray-300 hover:text-editorial-primary transition-colors duration-200 uppercase tracking-wider">
                   Our Services
                 </a>
               </li>
               <li>
-                <a href="#process" className="text-sm text-gray-300 hover:text-editorial-primary transition-colors duration-200 uppercase tracking-wider">
+                <a href="/#process" className="text-sm text-gray-300 hover:text-editorial-primary transition-colors duration-200 uppercase tracking-wider">
                   Our Process
                 </a>
               </li>
               <li>
-                <a href="#scheduling" className="text-sm text-gray-300 hover:text-editorial-primary transition-colors duration-200 uppercase tracking-wider">
+                <a href="/#scheduling" className="text-sm text-gray-300 hover:text-editorial-primary transition-colors duration-200 uppercase tracking-wider">
                   Schedule a Call
                 </a>
               </li>

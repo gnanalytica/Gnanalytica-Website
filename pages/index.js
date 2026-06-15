@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import ModernNavBar from '../components/ModernNavBar';
 import ModernHeroSection from '../components/ModernHeroSection';
+import ProductsShowcase from '../components/ProductsShowcase';
 import ModernFeatureSection from '../components/ModernFeatureSection';
 import ModernProcessSection from '../components/ModernProcessSection';
 import ModernCaseStudiesSection from '../components/ModernCaseStudiesSection';
@@ -24,10 +25,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Gnanalytica - Make Your Business AI-Ready</title>
+        <title>Gnanalytica - Wisdom-Driven AI Products & Consulting</title>
         <meta
           name="description"
-          content="Transform your business with AI. We identify technology gaps, provide expert AI consulting, and implement solutions that make your company AI-ready. From automation to Agentic AI frameworks."
+          content="Gnanalytica builds wisdom-driven AI products — Valytica for valuation, Standup for meeting memory, and Learn for AI workshops — and helps businesses become AI-ready."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
         <link rel="icon" href="/favicon.ico" />
@@ -38,6 +39,8 @@ export default function Home() {
         <ModernNavBar />
         <main className="pt-16 sm:pt-20 relative z-10">
           <ModernHeroSection />
+          <ModernSectionDivider />
+          <ProductsShowcase />
           <ModernSectionDivider />
           <StatsInfographic />
           <ModernSectionDivider />

@@ -109,8 +109,8 @@ export default function ModernHeroSection() {
               transition={{ delay: 0.5, duration: 0.6 }}
               className="text-lg sm:text-xl lg:text-2xl text-editorial-charcoal leading-relaxed max-w-2xl font-light tracking-wide"
             >
-              Transform your business with enterprise-grade AI solutions at a fraction of traditional costs.
-              No massive IT teams required.
+              We build wisdom-driven AI products — Valytica, Standup and Learn — and bring that same
+              enterprise-grade expertise to making your business AI-ready. No massive IT teams required.
             </motion.p>
 
             {/* Feature Pills - Enhanced Design */}
@@ -163,16 +163,16 @@ export default function ModernHeroSection() {
 
               <motion.button
                 onClick={() => {
-                  const featuresSection = document.getElementById('features');
-                  if (featuresSection) {
-                    featuresSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  const productsSection = document.getElementById('products');
+                  if (productsSection) {
+                    productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }
                 }}
                 className="px-10 py-5 bg-white/95 backdrop-blur-md text-editorial-ink font-semibold rounded-lg border-2 border-gray-200/80 hover:border-editorial-primary/50 hover:bg-white transition-all duration-500 shadow-premium hover:shadow-premium-lg"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Explore Solutions
+                Explore Products
               </motion.button>
             </motion.div>
           </motion.div>

@@ -1,13 +1,16 @@
 /**
  * Modern Navigation Bar - Glassmorphism Design
  */
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Dialog } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon, ChevronDownIcon, ArrowUpRightIcon } from '@heroicons/react/24/outline';
+import { products } from '../lib/products';
 
 export default function ModernNavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -19,10 +22,9 @@ export default function ModernNavBar() {
   }, []);
 
   const navItems = [
-    { name: 'Services', href: '#features' },
-    { name: 'Process', href: '#process' },
-    { name: 'Case Studies', href: '#case-studies' },
-    { name: 'About', href: '#about' },
+    { name: 'Services', href: '/#features' },
+    { name: 'Process', href: '/#process' },
+    { name: 'About', href: '/#about' },
   ];
 
   return (
@@ -50,7 +52,51 @@ export default function ModernNavBar() {
         </div>
 
         {/* Desktop Navigation - Center */}
-        <div className="hidden lg:flex lg:flex-1 lg:justify-center lg:gap-x-8">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-center lg:items-center lg:gap-x-8">
+          {/* Products dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setProductsOpen(true)}
+            onMouseLeave={() => setProductsOpen(false)}
+          >
+            <button className="flex items-center gap-1 text-sm font-medium text-editorial-charcoal hover:text-editorial-primary transition-colors duration-300 tracking-wide">
+              Products
+              <ChevronDownIcon className={`w-4 h-4 transition-transform duration-300 ${productsOpen ? 'rotate-180' : ''}`} />
+            </button>
+            <AnimatePresence>
+              {productsOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-80"
+                >
+                  <div className="bg-white/95 backdrop-blur-xl rounded-2xl border border-gray-200/80 shadow-premium-xl p-2">
+                    {products.map((product) => (
+                      <Link
+                        key={product.slug}
+                        href={`/${product.slug}`}
+                        className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group/item"
+                      >
+                        <span
+                          className="mt-0.5 w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-white text-sm font-bold"
+                          style={{ backgroundImage: product.theme.gradient, fontFamily: 'Playfair Display, serif' }}
+                        >
+                          {product.name.charAt(0)}
+                        </span>
+                        <span className="flex-1 min-w-0">
+                          <span className="block text-sm font-semibold text-editorial-ink">{product.name}</span>
+                          <span className="block text-xs text-editorial-muted leading-snug">{product.tagline}</span>
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           {navItems.map((item) => (
             <motion.a
               key={item.name}
@@ -126,6 +172,28 @@ export default function ModernNavBar() {
           </div>
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
+              <div className="py-6">
+                <p className="px-3 text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Products</p>
+                {products.map((product) => (
+                  <Link
+                    key={product.slug}
+                    href={`/${product.slug}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="-mx-3 flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-gray-50"
+                  >
+                    <span
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
+                      style={{ backgroundImage: product.theme.gradient, fontFamily: 'Playfair Display, serif' }}
+                    >
+                      {product.name.charAt(0)}
+                    </span>
+                    <span>
+                      <span className="block text-base font-semibold text-gray-900 leading-tight">{product.name}</span>
+                      <span className="block text-xs text-gray-500">{product.category}</span>
+                    </span>
+                  </Link>
+                ))}
+              </div>
               <div className="space-y-2 py-6">
                 {navItems.map((item) => (
                   <a
