@@ -21,7 +21,8 @@ export default function WireFrame({ className = '', accent = '#FFC700' }) {
     camera.position.z = 5.2;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // 1.5× is indistinguishable for a chunky wireframe but ~45% fewer pixels than 2×
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     mount.appendChild(renderer.domElement);
 
     // Flat accent fill + ink wireframe = printed diagram look
@@ -61,18 +62,36 @@ export default function WireFrame({ className = '', accent = '#FFC700' }) {
 
     let raf;
     const tick = () => {
-      if (!still) {
-        group.rotation.y += 0.004;
-        group.rotation.x += 0.0016;
-        group.rotation.y += (target.x - group.rotation.y * 0.05) * 0.004;
-        group.rotation.x += (target.y - group.rotation.x * 0.05) * 0.004;
-      }
+      group.rotation.y += 0.004;
+      group.rotation.x += 0.0016;
+      group.rotation.y += (target.x - group.rotation.y * 0.05) * 0.004;
+      group.rotation.x += (target.y - group.rotation.x * 0.05) * 0.004;
       renderer.render(scene, camera);
       raf = requestAnimationFrame(tick);
     };
-    tick();
+
+    // Reduced motion: render one static frame, no loop at all.
+    // Otherwise only run the render loop while the canvas is on/near screen —
+    // scrolled past the hero, the GPU does nothing.
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (still) {
+            renderer.render(scene, camera);
+          } else if (!raf) {
+            tick();
+          }
+        } else {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      },
+      { rootMargin: '150px' }
+    );
+    io.observe(mount);
 
     return () => {
+      io.disconnect();
       cancelAnimationFrame(raf);
       if (!still) window.removeEventListener('pointermove', onPointer);
       ro.disconnect();
