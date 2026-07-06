@@ -1,96 +1,148 @@
 /**
- * Gnanalytica global styles.
+ * Gnanalytica global styles — neobrutalist theme.
  *
- * Unified product-family theme: a warm editorial light base with dark accent
- * bands. Display type is Instrument Serif (matching Valytica & Standup), body is
- * Inter, and eyebrow/kicker labels are JetBrains Mono. Per-product accent colours
- * live in lib/products.js and are applied via inline styles.
+ * Cream paper canvas, hard black borders and offset print shadows. Display type
+ * is Archivo Black (chunky, uppercase), body is Space Grotesk, labels are
+ * JetBrains Mono. Smooth scrolling is handled by Lenis (see SmoothScroll), so
+ * native scroll-behavior stays "auto" to avoid fighting it.
  */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --canvas: 38 24% 97%;
-  --canvas-soft: 36 22% 94%;
-  --card: 40 30% 99%;
-  --ink: 30 8% 12%;
-  --ink-muted: 30 6% 42%;
-  --line: 36 14% 84%;
-  --brand: 243 75% 59%;
+  --paper: #f7f1e5;
+  --paper-deep: #efe6d2;
+  --card: #fffcf5;
+  --ink: #121212;
+  --ink-muted: #4e4a43;
+  --acid: #ffc700;
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis drives smooth scrolling; native smooth would double-ease anchors */
+  scroll-behavior: auto;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   font-weight: 400;
-  color: hsl(var(--ink));
-  background-color: hsl(var(--canvas));
+  color: var(--ink);
+  background-color: var(--paper);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: 'ss01', 'cv11';
   min-height: 100vh;
 }
 
 @layer base {
   h1, h2, h3, h4 {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: 'Archivo Black', 'Space Grotesk', sans-serif;
     font-weight: 400;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: var(--acid);
+    color: var(--ink);
   }
 }
 
 @layer components {
-  /* JetBrains Mono uppercase eyebrow — the shared family label treatment */
+  /* JetBrains Mono uppercase eyebrow — shared label treatment */
   .eyebrow {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
     font-size: 11px;
     line-height: 1;
     text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-weight: 500;
+    letter-spacing: 0.16em;
+    font-weight: 600;
   }
 
-  /* Soft dotted-grid texture used inside dark accent bands */
-  .grid-fade {
-    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-    background-size: 22px 22px;
-    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+  /* Bordered mono tag/pill — the sticker label */
+  .neo-tag {
+    @apply eyebrow inline-flex items-center gap-2 border-2 border-ink bg-paper-card px-3 py-2 shadow-neo-sm;
   }
 
-  /* Self-animating gradient text — pair with an inline backgroundImage */
-  .gradient-text {
-    background-size: 220% 220%;
-    -webkit-background-clip: text;
-    background-clip: text;
+  /* Core bordered card */
+  .neo-card {
+    @apply border-2 border-ink bg-paper-card shadow-neo;
+  }
+
+  /* Press-down button: lifts on hover, stamps flat on press */
+  .btn-neo {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-ink font-bold uppercase tracking-wide shadow-neo transition-[transform,box-shadow] duration-150;
+  }
+  .btn-neo:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 #121212;
+  }
+  .btn-neo:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 0 #121212;
+  }
+
+  /* Card hover lift — same physics as the button */
+  .neo-hover {
+    @apply transition-[transform,box-shadow] duration-150;
+  }
+  .neo-hover:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 0 #121212;
+  }
+
+  /* Yellow marker highlight behind key words */
+  .marker {
+    background-image: linear-gradient(0deg, var(--acid) 0%, var(--acid) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 42%;
+    background-position: 0 78%;
+  }
+
+  /* Outlined display text (hollow numbers, ghost headlines) */
+  .text-stroke {
+    -webkit-text-stroke: 2px #121212;
     color: transparent;
-    animation: gradient-pan 6s ease-in-out infinite;
+  }
+  .text-stroke-paper {
+    -webkit-text-stroke: 2px #f7f1e5;
+    color: transparent;
   }
 
-  /* Sweeping sheen highlight for buttons; host must be relative + overflow-hidden */
-  .sheen-host::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 35%;
-    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
-    transform: translateX(-120%) skewX(-12deg);
-    pointer-events: none;
+  /* Diagonal hazard stripes for accents/dividers */
+  .stripes {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      #121212 0,
+      #121212 10px,
+      transparent 10px,
+      transparent 20px
+    );
   }
-  .sheen-host:hover::after {
-    animation: sheen 0.9s ease-out;
+
+  /* Flat halftone dot texture for section backdrops */
+  .dots-ink {
+    background-image: radial-gradient(circle, rgba(18, 18, 18, 0.16) 1.5px, transparent 1.5px);
+    background-size: 18px 18px;
+  }
+  .dots-paper {
+    background-image: radial-gradient(circle, rgba(247, 241, 229, 0.18) 1.5px, transparent 1.5px);
+    background-size: 18px 18px;
   }
 }
 

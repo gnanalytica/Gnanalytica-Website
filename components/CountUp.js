@@ -2,11 +2,13 @@
  * CountUp — animates the numeric part of a stat value when it scrolls into view.
  *
  * Stat values are free-form strings ("30 Days", "3 States", "100%", "Minutes").
- * If a number is present it counts up from zero, preserving any prefix/suffix;
- * otherwise the text renders as-is. Reduced-motion users see the final value.
+ * If a number is present it counts up from zero with anime.js, preserving any
+ * prefix/suffix; otherwise the text renders as-is. Reduced-motion users see the
+ * final value immediately.
  */
 import { useEffect, useRef, useState } from 'react';
-import { useInView, animate } from 'framer-motion';
+import { animate } from 'animejs';
+import { prefersReducedMotion } from '../lib/gsapClient';
 
 const parse = (value) => {
   const m = String(value).match(/^(\D*)(\d[\d,]*\.?\d*)(.*)$/s);
@@ -16,27 +18,44 @@ const parse = (value) => {
 
 export default function CountUp({ value, className = '' }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
   const parsed = parse(value);
-  const [display, setDisplay] = useState(parsed ? `${parsed.pre}0${parsed.post}` : value);
+  const [display, setDisplay] = useState(value);
 
   useEffect(() => {
-    if (!parsed || !inView) return;
+    const el = ref.current;
+    if (!el || !parsed || prefersReducedMotion()) return undefined;
+
+    setDisplay(`${parsed.pre}0${parsed.post}`);
     const decimals = parsed.raw.includes('.') ? 1 : 0;
-    const controls = animate(0, parsed.num, {
-      duration: 1.3,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => {
-        const n = decimals ? v.toFixed(decimals) : Math.round(v).toLocaleString();
-        setDisplay(`${parsed.pre}${n}${parsed.post}`);
+    let anim;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        const counter = { n: 0 };
+        anim = animate(counter, {
+          n: parsed.num,
+          duration: 1300,
+          ease: 'outExpo',
+          onUpdate: () => {
+            const v = decimals ? counter.n.toFixed(decimals) : Math.round(counter.n).toLocaleString();
+            setDisplay(`${parsed.pre}${v}${parsed.post}`);
+          },
+        });
       },
-    });
-    return () => controls.stop();
-  }, [inView, parsed, value]);
+      { threshold: 0.6 }
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      if (anim) anim.pause();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
     <span ref={ref} className={className}>
-      {parsed ? display : value}
+      {display}
     </span>
   );
 }

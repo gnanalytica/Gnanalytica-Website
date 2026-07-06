@@ -1,127 +1,132 @@
 /**
- * Hero — homepage hero rendered inside a dark accent band.
+ * Hero — neobrutalist homepage hero on cream paper.
  *
- * Instrument Serif headline with an animated gradient highlight, mono eyebrow,
- * magnetic dual CTAs, a teaser grid of the four products, and a slow marquee of
- * product taglines. Content parallaxes gently as the band scrolls away.
+ * A WebGL dither field (Paper Shaders) textures the backdrop, an Archivo Black
+ * headline slides in word by word (GSAP), "AI" sits in a slapped-on acid
+ * sticker, and a Three.js wireframe icosahedron tumbles beside the product
+ * chips. A bordered tagline marquee closes the band.
  */
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import DarkBand from './DarkBand';
+import dynamic from 'next/dynamic';
+import { ArrowRightIcon, ArrowDownIcon } from '@heroicons/react/24/outline';
+import SplitText from './ui/SplitText';
+import Reveal from './ui/Reveal';
+import PopIn from './ui/PopIn';
+import Starburst from './ui/Starburst';
+import Marquee from './ui/Marquee';
 import Magnetic from './Magnetic';
 import { products } from '../lib/products';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
+const DitherBackdrop = dynamic(() => import('./effects/DitherBackdrop'), { ssr: false });
+const WireFrame = dynamic(() => import('./effects/WireFrame'), { ssr: false });
 
 export default function Hero() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '34%']);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  const marqueeItems = products.concat(products);
-
   return (
-    <DarkBand className="pt-32 pb-16 sm:pt-40 sm:pb-20" >
-      <div ref={ref}>
-        <motion.div style={{ y: contentY, opacity: contentOpacity }} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <motion.p className="eyebrow mb-6 text-night-muted" initial="hidden" animate="visible" custom={0} variants={fadeUp}>
-              Four products · One AI studio
-            </motion.p>
+    <section className="relative overflow-hidden border-b-3 border-ink bg-paper pt-28 sm:pt-36">
+      {/* WebGL dithered texture, faded so type stays king */}
+      <DitherBackdrop colorBack="#F7F1E5" colorFront="#DDD1B6" shape="warp" speed={0.25} size={2.5} className="opacity-70" />
 
-            <motion.h1
-              className="font-display text-5xl leading-[1.05] tracking-tightish text-night-ink sm:text-6xl lg:text-7xl"
-              initial="hidden"
-              animate="visible"
-              custom={1}
-              variants={fadeUp}
-            >
-              Wisdom-driven AI{' '}
-              <span
-                className="gradient-text"
-                style={{ backgroundImage: 'linear-gradient(120deg, #818cf8 0%, #c084fc 35%, #22d3ee 70%, #818cf8 100%)' }}
-              >
-                products &amp; consulting
-              </span>
-            </motion.h1>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-14 sm:px-6 sm:pb-16 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <Reveal delay={0.05}>
+              <p className="neo-tag rotate-[-1deg] bg-bubble">
+                <Starburst size={16} fill="#121212" stroke="#121212" />
+                Four products · One AI studio
+              </p>
+            </Reveal>
 
-            <motion.p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-night-muted sm:text-xl" initial="hidden" animate="visible" custom={2} variants={fadeUp}>
-              We build focused AI products — for valuation, meetings, learning and health — and help
-              businesses become genuinely AI-ready. Real tools in production, not slideware.
-            </motion.p>
-
-            <motion.div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" initial="hidden" animate="visible" custom={3} variants={fadeUp}>
-              <Magnetic strength={0.45}>
-                <a
-                  href="#products"
-                  className="sheen-host group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-night shadow-liftlg"
-                >
-                  <span className="relative z-10 inline-flex items-center gap-2">
-                    Explore products
-                    <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            <h1 className="mt-7 font-display text-[2.6rem] uppercase leading-[0.98] tracking-tight text-ink xs:text-5xl sm:text-6xl lg:text-7xl">
+              <SplitText text="Wisdom-driven" delay={0.15} as="span" className="block" />
+              <span className="mt-1 block">
+                <PopIn as="span" className="mr-3 inline-block align-baseline" rotate={-2} delay={550}>
+                  <span className="inline-block border-3 border-ink bg-acid px-3 pb-1 pt-2 shadow-neo sm:px-4">
+                    AI
                   </span>
-                </a>
-              </Magnetic>
-              <Magnetic strength={0.35}>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-night-ink backdrop-blur transition-colors hover:bg-white/10"
-                >
-                  Book a call
-                </a>
-              </Magnetic>
-            </motion.div>
-          </div>
-
-          {/* product teaser row */}
-          <motion.div
-            className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4"
-            initial="hidden"
-            animate="visible"
-            custom={4}
-            variants={fadeUp}
-          >
-            {products.map((p) => (
-              <a
-                key={p.slug}
-                href={`/${p.slug}`}
-                className="group flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/10"
-              >
-                <span className="h-2.5 w-2.5 flex-shrink-0 rounded-full transition-transform duration-300 group-hover:scale-125" style={{ backgroundImage: p.theme.gradient }} />
-                <span className="min-w-0">
-                  <span className="block truncate text-sm font-semibold text-night-ink">{p.name}</span>
-                  <span className="block truncate text-[11px] text-night-muted">{p.category}</span>
-                </span>
-              </a>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* tagline marquee */}
-        <div className="relative mt-16 flex overflow-hidden border-y border-white/10 py-4">
-          <div className="flex shrink-0 animate-marquee items-center gap-10 pr-10 no-scrollbar">
-            {marqueeItems.map((p, i) => (
-              <span key={`${p.slug}-${i}`} className="flex items-center gap-3 whitespace-nowrap text-sm text-night-muted">
-                <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundImage: p.theme.gradient }} />
-                <span className="font-medium text-night-ink/90">{p.name}</span>
-                <span className="text-night-muted">{p.tagline}</span>
+                </PopIn>
+                <SplitText text="products" delay={0.35} as="span" className="inline" />
               </span>
-            ))}
+              <SplitText text="& consulting" delay={0.5} as="span" className="block text-stroke" />
+            </h1>
+
+            <Reveal delay={0.55} className="mt-7 max-w-2xl">
+              <p className="text-lg font-medium leading-relaxed text-ink-muted sm:text-xl">
+                We build focused AI products — for <span className="marker font-bold text-ink">valuation</span>,{' '}
+                <span className="marker font-bold text-ink">meetings</span>,{' '}
+                <span className="marker font-bold text-ink">learning</span> and{' '}
+                <span className="marker font-bold text-ink">health</span> — and help businesses become genuinely
+                AI-ready. Real tools in production, not slideware.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.7} className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <Magnetic strength={0.3}>
+                <a href="#products" className="btn-neo bg-ink px-7 py-4 text-sm text-paper">
+                  Explore products
+                  <ArrowDownIcon className="h-4 w-4 stroke-[3]" />
+                </a>
+              </Magnetic>
+              <Magnetic strength={0.3}>
+                <a href="#contact" className="btn-neo bg-paper-card px-7 py-4 text-sm text-ink">
+                  Book a call
+                  <ArrowRightIcon className="h-4 w-4 stroke-[3]" />
+                </a>
+              </Magnetic>
+            </Reveal>
           </div>
-          {/* edge fades */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-night to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-night to-transparent" />
+
+          {/* Three.js wireframe + product chips */}
+          <div className="lg:col-span-4">
+            <div className="relative mx-auto hidden aspect-square max-w-xs lg:block">
+              <WireFrame className="absolute inset-0" accent="#FFC700" />
+              <PopIn className="absolute -right-2 top-2" rotate={8} delay={800}>
+                <Starburst size={72} fill="#FF90E8" spin>
+                  <span className="font-display text-[10px] uppercase">Live</span>
+                </Starburst>
+              </PopIn>
+              <PopIn className="absolute -left-4 bottom-6" rotate={-6} delay={950}>
+                <span className="neo-tag bg-limey">est. gnana = wisdom</span>
+              </PopIn>
+            </div>
+
+            <div className="mt-8 grid grid-cols-2 gap-3 lg:mt-6">
+              {products.map((p, i) => (
+                <Reveal key={p.slug} delay={0.8 + i * 0.08}>
+                  <a
+                    href={`/${p.slug}`}
+                    className="neo-hover flex items-center gap-2.5 border-2 border-ink bg-paper-card px-3.5 py-3 shadow-neo-sm"
+                  >
+                    <span
+                      className="h-3.5 w-3.5 flex-shrink-0 border-2 border-ink"
+                      style={{ background: p.theme.primary }}
+                    />
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm font-bold uppercase tracking-wide text-ink">
+                        {p.name}
+                      </span>
+                      <span className="block truncate font-mono text-[10px] uppercase tracking-wider text-ink-muted">
+                        {p.category}
+                      </span>
+                    </span>
+                  </a>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-    </DarkBand>
+
+      {/* tagline ticker */}
+      <div className="relative z-10 border-t-3 border-ink bg-acid py-3.5">
+        <Marquee>
+          {products.map((p) => (
+            <span key={p.slug} className="mx-6 flex items-center gap-6 whitespace-nowrap">
+              <Starburst size={14} fill="#121212" stroke="#121212" />
+              <span className="font-display text-sm uppercase tracking-wide text-ink">{p.name}</span>
+              <span className="font-mono text-xs uppercase tracking-wider text-ink">{p.tagline}</span>
+            </span>
+          ))}
+        </Marquee>
+      </div>
+    </section>
   );
 }

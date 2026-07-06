@@ -1,44 +1,44 @@
 /**
  * Magnetic — wraps an element so it drifts toward the cursor on hover.
  *
- * Pure transform + spring, so it composes with any child (buttons, links).
- * Falls back to no movement when the pointer leaves. Reduced-motion users get a
- * static element because the spring target returns to 0 instantly.
+ * GSAP quickTo springs the transform, so it composes with any child (buttons,
+ * links). Snaps back to rest when the pointer leaves; reduced-motion users get
+ * a static element.
  */
-import { useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { gsap, prefersReducedMotion } from '../lib/gsapClient';
 
 export default function Magnetic({ children, strength = 0.4, className = '' }) {
   const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 260, damping: 18, mass: 0.4 });
-  const sy = useSpring(y, { stiffness: 260, damping: 18, mass: 0.4 });
 
-  const onMove = (e) => {
+  useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const relX = e.clientX - (rect.left + rect.width / 2);
-    const relY = e.clientY - (rect.top + rect.height / 2);
-    x.set(relX * strength);
-    y.set(relY * strength);
-  };
+    if (!el || prefersReducedMotion()) return undefined;
 
-  const reset = () => {
-    x.set(0);
-    y.set(0);
-  };
+    const xTo = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'elastic.out(1, 0.45)' });
+    const yTo = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'elastic.out(1, 0.45)' });
+
+    const onMove = (e) => {
+      const rect = el.getBoundingClientRect();
+      xTo((e.clientX - (rect.left + rect.width / 2)) * strength);
+      yTo((e.clientY - (rect.top + rect.height / 2)) * strength);
+    };
+    const onLeave = () => {
+      xTo(0);
+      yTo(0);
+    };
+
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', onLeave);
+    return () => {
+      el.removeEventListener('mousemove', onMove);
+      el.removeEventListener('mouseleave', onLeave);
+    };
+  }, [strength]);
 
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={reset}
-      style={{ x: sx, y: sy }}
-      className={`inline-flex ${className}`}
-    >
+    <div ref={ref} className={`inline-flex ${className}`}>
       {children}
-    </motion.div>
+    </div>
   );
 }

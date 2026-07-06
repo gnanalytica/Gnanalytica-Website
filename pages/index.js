@@ -9,9 +9,10 @@ import ContactCTA from '../components/ContactCTA';
 import SiteFooter from '../components/SiteFooter';
 
 /**
- * Gnanalytica homepage. A warm editorial light base bookended by dark accent
- * bands (hero + contact), showcasing the four products and the consulting side
- * of the studio. Sections are composed from the components folder.
+ * Gnanalytica homepage. Neobrutalist cream-paper base with hard black borders
+ * between bands and an ink-black contact closer, showcasing the four products
+ * and the consulting side of the studio. Sections are composed from the
+ * components folder.
  */
 export default function Home() {
   return (
@@ -30,8 +31,8 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen bg-canvas text-ink">
-        <SiteNav heroOnDark />
+      <div className="min-h-screen bg-paper text-ink">
+        <SiteNav />
         <main>
           <Hero />
           <ProductsShowcase />

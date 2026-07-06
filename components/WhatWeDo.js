@@ -1,91 +1,83 @@
 /**
- * WhatWeDo — the consulting / AI-readiness side of Gnanalytica.
+ * WhatWeDo — the consulting / AI-readiness side, as four candy-coloured tiles.
  *
- * Four outcome pillars distilled from the services Gnanalytica offers, framed as
- * "we build products, and we help you build yours".
+ * Each pillar gets its own flat accent card with a bordered icon plate; cards
+ * lift on hover with the shared press physics and stagger in with GSAP.
  */
-import { motion } from 'framer-motion';
 import {
   ChartBarIcon,
   Cog6ToothIcon,
   ShieldCheckIcon,
   SparklesIcon,
 } from '@heroicons/react/24/outline';
+import Reveal from './ui/Reveal';
+import SplitText from './ui/SplitText';
 
 const pillars = [
   {
     icon: ChartBarIcon,
+    bg: '#FFC700',
     title: 'Revenue growth',
     description:
       'Lead scoring, propensity models and advanced analytics that point your team at the customers ready to buy.',
   },
   {
     icon: Cog6ToothIcon,
+    bg: '#FF90E8',
     title: 'Operational efficiency',
     description:
       'Intelligent automation and internal AI tools that take repetitive back-office work off your team’s plate.',
   },
   {
     icon: ShieldCheckIcon,
+    bg: '#B8F25D',
     title: 'Risk & compliance',
     description:
       'Data governance and model risk management so your AI stays fair, auditable and trustworthy.',
   },
   {
     icon: SparklesIcon,
+    bg: '#53B7FF',
     title: 'Custom AI products',
     description:
       'The same craft behind our own products, applied to yours — from first prototype to something in production.',
   },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.07, duration: 0.55, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
-
 export default function WhatWeDo() {
   return (
-    <section id="services" className="relative bg-canvas-soft py-20 sm:py-28">
+    <section id="services" className="dots-ink relative border-b-3 border-ink bg-paper-deep py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="mx-auto mb-14 max-w-2xl text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={fadeUp}
-        >
-          <p className="eyebrow mb-4 text-ink-muted">What we do</p>
-          <h2 className="font-display text-4xl tracking-tightish text-ink sm:text-5xl">
-            We build AI products — and help you become AI-ready
+        <div className="mx-auto mb-14 max-w-3xl text-center">
+          <Reveal>
+            <p className="neo-tag rotate-[-1deg] bg-paper-card">What we do</p>
+          </Reveal>
+          <h2 className="mt-6 font-display text-4xl uppercase leading-[1.05] tracking-tight text-ink sm:text-5xl">
+            <SplitText text="We build AI products — and help you become" onScroll as="span" />{' '}
+            <span className="marker inline-block">AI-ready</span>
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-            Enterprise-grade AI with the personal attention a big firm can’t give, at a fraction of
-            the traditional cost. Strategy, build and the unglamorous plumbing in between.
-          </p>
-        </motion.div>
+          <Reveal delay={0.2}>
+            <p className="mt-6 text-lg font-medium leading-relaxed text-ink-muted">
+              Enterprise-grade AI with the personal attention a big firm can’t give, at a fraction of the
+              traditional cost. Strategy, build and the unglamorous plumbing in between.
+            </p>
+          </Reveal>
+        </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map((pillar, i) => (
-            <motion.div
-              key={pillar.title}
-              className="group rounded-2xl border border-ink-line bg-canvas-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              custom={i}
-              variants={fadeUp}
-            >
-              <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand/10 text-brand transition-all duration-300 group-hover:scale-110 group-hover:bg-brand group-hover:text-white">
-                <pillar.icon className="h-6 w-6" />
-              </span>
-              <h3 className="mt-5 text-lg font-semibold tracking-tight text-ink">{pillar.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{pillar.description}</p>
-            </motion.div>
+            <Reveal key={pillar.title} delay={i * 0.08} className="h-full">
+              <div
+                className="neo-hover flex h-full flex-col border-3 border-ink p-6 shadow-neo"
+                style={{ background: pillar.bg }}
+              >
+                <span className="grid h-12 w-12 place-items-center border-2 border-ink bg-paper-card shadow-neo-xs">
+                  <pillar.icon className="h-6 w-6 stroke-[2] text-ink" />
+                </span>
+                <h3 className="mt-5 font-display text-lg uppercase leading-snug text-ink">{pillar.title}</h3>
+                <p className="mt-2.5 text-sm font-medium leading-relaxed text-ink/80">{pillar.description}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

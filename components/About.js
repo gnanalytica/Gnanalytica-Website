@@ -1,70 +1,81 @@
 /**
  * About — the wisdom-driven thesis behind Gnanalytica.
  *
- * "Gnana" is knowledge; the company's bet is that AI is most valuable when it
- * carries good judgement, not just raw capability.
+ * Left: the manifesto with marker-highlighted key phrases. Right: three
+ * principle cards stacked like slightly-rotated stickers, each popping in with
+ * anime.js as it scrolls into view.
  */
-import { motion } from 'framer-motion';
+import Reveal from './ui/Reveal';
+import SplitText from './ui/SplitText';
+import PopIn from './ui/PopIn';
+import Starburst from './ui/Starburst';
 
 const principles = [
-  { k: 'Human in the loop', v: 'AI proposes, people decide. Every product keeps judgement with the expert.' },
-  { k: 'Ship real tools', v: 'Working software in production, not pilots and slideware.' },
-  { k: 'Built for trust', v: 'Data residency, audit trails and explainability are features, not afterthoughts.' },
+  {
+    k: 'Human in the loop',
+    v: 'AI proposes, people decide. Every product keeps judgement with the expert.',
+    bg: '#FFC700',
+    rotate: -1.5,
+  },
+  {
+    k: 'Ship real tools',
+    v: 'Working software in production, not pilots and slideware.',
+    bg: '#FF90E8',
+    rotate: 1.5,
+  },
+  {
+    k: 'Built for trust',
+    v: 'Data residency, audit trails and explainability are features, not afterthoughts.',
+    bg: '#B8F25D',
+    rotate: -1,
+  },
 ];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.55, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
 
 export default function About() {
   return (
-    <section id="about" className="relative bg-canvas-soft py-20 sm:py-28">
+    <section id="about" className="dots-ink relative border-b-3 border-ink bg-paper-deep py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.4 }}
-            custom={0}
-            variants={fadeUp}
-          >
-            <p className="eyebrow mb-4 text-ink-muted">About Gnanalytica</p>
-            <h2 className="font-display text-4xl leading-tight tracking-tightish text-ink sm:text-5xl">
-              Gnana means wisdom. We build AI that carries it.
+          <div>
+            <Reveal>
+              <p className="neo-tag rotate-[-1deg] bg-paper-card">About Gnanalytica</p>
+            </Reveal>
+            <h2 className="mt-6 font-display text-4xl uppercase leading-[1.05] tracking-tight text-ink sm:text-5xl">
+              <SplitText text="Gnana means wisdom." onScroll as="span" className="block" />
+              <SplitText text="We build AI that carries it." onScroll delay={0.15} as="span" className="block" />
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-ink-muted">
-              Capability is cheap now; judgement isn’t. Gnanalytica builds AI products that pair
-              real intelligence with the context, compliance and care a serious decision deserves —
-              from a valuer signing a report to a clinician reading a trend.
-            </p>
-            <p className="mt-4 text-lg leading-relaxed text-ink-muted">
-              Small team, high standards, and the same craft whether the product is ours or yours.
-            </p>
-          </motion.div>
+            <Reveal delay={0.2}>
+              <p className="mt-7 text-lg font-medium leading-relaxed text-ink-muted">
+                Capability is cheap now; <span className="marker font-bold text-ink">judgement isn’t</span>.
+                Gnanalytica builds AI products that pair real intelligence with the context, compliance and
+                care a serious decision deserves — from a valuer signing a report to a clinician reading a
+                trend.
+              </p>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <p className="mt-4 text-lg font-medium leading-relaxed text-ink-muted">
+                Small team, <span className="marker font-bold text-ink">high standards</span>, and the same
+                craft whether the product is ours or yours.
+              </p>
+            </Reveal>
+          </div>
 
-          <motion.div
-            className="space-y-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            custom={1}
-            variants={fadeUp}
-          >
-            {principles.map((p) => (
-              <div
-                key={p.k}
-                className="rounded-2xl border border-ink-line bg-canvas-card p-6 shadow-soft"
-              >
-                <h3 className="text-base font-semibold tracking-tight text-ink">{p.k}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">{p.v}</p>
-              </div>
+          <div className="relative space-y-5 lg:pt-4">
+            <span className="absolute -top-8 right-4 hidden lg:block" aria-hidden="true">
+              <Starburst size={72} fill="#53B7FF" spin />
+            </span>
+            {principles.map((p, i) => (
+              <PopIn key={p.k} rotate={p.rotate} delay={i * 130}>
+                <div
+                  className="neo-hover border-3 border-ink p-6 shadow-neo"
+                  style={{ background: p.bg }}
+                >
+                  <h3 className="font-display text-lg uppercase text-ink">{p.k}</h3>
+                  <p className="mt-2 text-sm font-medium leading-relaxed text-ink/80">{p.v}</p>
+                </div>
+              </PopIn>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

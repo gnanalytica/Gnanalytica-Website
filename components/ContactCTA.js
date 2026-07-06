@@ -1,44 +1,54 @@
 /**
- * ContactCTA — closing dark band with the Google Calendar booking embed.
+ * ContactCTA — closing ink-black band with the Google Calendar booking embed.
  *
- * Reuses EmbeddedGoogleCalendar, placed inside a light card so the booking UI
- * stays legible against the dark accent band.
+ * A Paper Shaders Warp field marbles the darkness behind a cream bordered card
+ * that carries the booking UI. Headline pops against the black in paper +
+ * acid; the card wears the inverted (light) hard shadow.
  */
-import { motion } from 'framer-motion';
-import DarkBand from './DarkBand';
+import dynamic from 'next/dynamic';
+import Reveal from './ui/Reveal';
+import SplitText from './ui/SplitText';
 import EmbeddedGoogleCalendar from './EmbeddedGoogleCalendar';
+
+const WarpBackdrop = dynamic(() => import('./effects/WarpBackdrop'), { ssr: false });
 
 export default function ContactCTA() {
   return (
-    <DarkBand id="contact" className="py-20 sm:py-28">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="mx-auto mb-12 max-w-2xl text-center"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <p className="eyebrow mb-4 text-night-muted">Book a call</p>
-          <h2 className="font-display text-4xl tracking-tightish text-night-ink sm:text-5xl">
-            Let’s figure out what AI can actually do for you
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-night-muted">
-            A complimentary 30-minute strategy session — no commitment, no jargon. Pick a time that
-            works for you.
-          </p>
-        </motion.div>
+    <section id="contact" className="relative overflow-hidden bg-night py-20 text-night-ink sm:py-28">
+      <WarpBackdrop className="opacity-60" />
+      <div className="dots-paper pointer-events-none absolute inset-0 opacity-30" aria-hidden="true" />
 
-        <motion.div
-          className="overflow-hidden rounded-2xl border border-ink-line bg-canvas-card p-4 shadow-liftlg sm:p-6"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <EmbeddedGoogleCalendar />
-        </motion.div>
+      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <Reveal>
+            <p className="neo-tag rotate-[1deg] border-paper bg-night text-night-ink shadow-neo-light">
+              Book a call
+            </p>
+          </Reveal>
+          <h2 className="mt-6 font-display text-4xl uppercase leading-[1.05] tracking-tight sm:text-5xl">
+            <SplitText text="Let’s figure out what" onScroll as="span" className="block" />
+            <span className="block">
+              <SplitText text="AI can" onScroll delay={0.15} as="span" className="inline" />{' '}
+              <span className="inline-block -rotate-1 border-3 border-paper bg-acid px-3 pb-1 pt-1.5 text-ink shadow-neo-light">
+                actually do
+              </span>{' '}
+              <SplitText text="for you" onScroll delay={0.3} as="span" className="inline" />
+            </span>
+          </h2>
+          <Reveal delay={0.25}>
+            <p className="mt-6 text-lg font-medium leading-relaxed text-night-muted">
+              A complimentary 30-minute strategy session — no commitment, no jargon. Pick a time that
+              works for you.
+            </p>
+          </Reveal>
+        </div>
+
+        <Reveal delay={0.15}>
+          <div className="border-3 border-paper bg-paper-card p-4 shadow-neo-light-lg sm:p-6">
+            <EmbeddedGoogleCalendar />
+          </div>
+        </Reveal>
       </div>
-    </DarkBand>
+    </section>
   );
 }
