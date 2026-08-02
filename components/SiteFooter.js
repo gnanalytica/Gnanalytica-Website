@@ -89,8 +89,8 @@ export default function SiteFooter() {
               </div>
               <div className="flex items-start gap-3">
                 <PhoneIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-light" />
-                <a href="tel:+919980856880" className="transition-colors hover:text-night-ink">
-                  +91 99808 56880
+                <a href="tel:+31687018349" className="transition-colors hover:text-night-ink">
+                  +31 6 87018349
                 </a>
               </div>
               <div className="flex items-start gap-3">
