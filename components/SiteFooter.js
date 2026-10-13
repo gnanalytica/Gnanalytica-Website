@@ -2,7 +2,7 @@
  * SiteFooter — dark editorial footer shared across the site.
  *
  * Brand mark + products, quick links and the company's real contact and
- * registration details (Eindhoven, NL).
+ * registration details (Eindhoven, NL and Bengaluru, India).
  */
 import Link from 'next/link';
 import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
@@ -99,6 +99,20 @@ export default function SiteFooter() {
               </div>
               <div className="border-t border-white/10 pt-4 text-xs leading-relaxed">
                 <p>KVK 98649035 · BTW NL005345555B41</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <MapPinIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-light" />
+                <address className="not-italic">
+                  Gnanalytica Technologies LLP
+                  <br />
+                  B-1-205 Shraddha White Cliff Apt
+                  <br />
+                  Seegehalli
+                  <br />
+                  Bengaluru 560067
+                  <br />
+                  India
+                </address>
               </div>
             </div>
           </div>
