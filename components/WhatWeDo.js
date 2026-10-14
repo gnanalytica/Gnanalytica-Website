@@ -17,19 +17,19 @@ const pillars = [
     icon: ChartBarIcon,
     title: 'Revenue growth',
     description:
-      'Lead scoring, propensity models and advanced analytics that point your team at the customers ready to buy.',
+      'Point your team at the customers who are ready to buy — with scoring and analytics that actually explain why.',
   },
   {
     icon: Cog6ToothIcon,
     title: 'Operational efficiency',
     description:
-      'Intelligent automation and internal AI tools that take repetitive back-office work off your team’s plate.',
+      'Take repetitive back-office work off your team’s plate with intelligent automation and internal AI tools.',
   },
   {
     icon: ShieldCheckIcon,
     title: 'Risk & compliance',
     description:
-      'Data governance and model risk management so your AI stays fair, auditable and trustworthy.',
+      'Governance and oversight that keep your AI fair, auditable and trustworthy — for regulators and customers alike.',
   },
   {
     icon: SparklesIcon,
@@ -65,7 +65,7 @@ export default function WhatWeDo() {
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-ink-muted">
             Enterprise-grade AI with the personal attention a big firm can’t give, at a fraction of
-            the traditional cost. Strategy, build and the unglamorous plumbing in between.
+            the traditional cost.
           </p>
         </motion.div>
 

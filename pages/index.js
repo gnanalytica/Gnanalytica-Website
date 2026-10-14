@@ -10,8 +10,8 @@ import SiteFooter from '../components/SiteFooter';
 
 /**
  * Gnanalytica homepage. A warm editorial light base bookended by dark accent
- * bands (hero + contact), showcasing the four products and the consulting side
- * of the studio. Sections are composed from the components folder.
+ * bands (hero + contact), showcasing the three live products (plus one in
+ * stealth) and the consulting side of the studio. Sections are composed from the components folder.
  */
 export default function Home() {
   return (
@@ -20,13 +20,13 @@ export default function Home() {
         <title>Gnanalytica — Wisdom-Driven AI Products &amp; Consulting</title>
         <meta
           name="description"
-          content="Gnanalytica builds wisdom-driven AI products — Valytica for valuation, Standup for meetings, Learn for AI workshops and Healthytica for health — and helps businesses become AI-ready."
+          content="Gnanalytica builds focused AI products — Valytica for valuation, Standup for meetings and Learn for AI skills — and helps businesses become genuinely AI-ready."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
         <meta property="og:title" content="Gnanalytica — Wisdom-Driven AI Products & Consulting" />
         <meta
           property="og:description"
-          content="Focused AI products for valuation, meetings, learning and health — plus consulting to make your business AI-ready."
+          content="AI that carries wisdom: focused products for valuation, meetings and learning — plus consulting to make your business AI-ready."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -34,10 +34,10 @@ export default function Home() {
         <SiteNav heroOnDark />
         <main>
           <Hero />
+          <About />
           <ProductsShowcase />
           <WhatWeDo />
           <ProcessSteps />
-          <About />
           <ContactCTA />
         </main>
         <SiteFooter />

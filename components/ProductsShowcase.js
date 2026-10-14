@@ -1,5 +1,7 @@
 /**
- * ProductsShowcase — the four Gnanalytica products, each in its own accent.
+ * ProductsShowcase — the three live Gnanalytica products, each in its own
+ * accent, plus a muted card for the one in stealth and the trust promise that
+ * spans all of them.
  *
  * Responsive grid (1 → 2 → 4 across). Cards link to the dedicated product page;
  * the accent CTA opens the live product. Driven entirely by lib/products.js.
@@ -7,7 +9,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowUpRightIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
-import { products } from '../lib/products';
+import { products, stealthProduct } from '../lib/products';
 import TiltCard from './TiltCard';
 
 const fadeUp = {
@@ -81,6 +83,46 @@ function ProductCard({ product, index }) {
   );
 }
 
+function StealthCard({ index }) {
+  return (
+    <motion.div
+      className="h-full"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      custom={index}
+      variants={fadeUp}
+    >
+      <div className="flex h-full flex-col rounded-2xl border border-dashed border-ink-line bg-canvas-soft p-6">
+        <div className="mb-5 flex items-center gap-3">
+          <span className="grid h-11 w-11 place-items-center rounded-xl border border-dashed border-ink-muted/40 text-base font-semibold text-ink-muted">
+            ?
+          </span>
+          <div>
+            <h3 className="text-lg font-semibold leading-tight tracking-tight text-ink" style={{ fontFamily: 'Inter, sans-serif' }}>
+              {stealthProduct.name}
+            </h3>
+            <p className="eyebrow mt-1 text-ink-muted">{stealthProduct.chip}</p>
+          </div>
+        </div>
+
+        <p className="font-display text-xl leading-snug text-ink">{stealthProduct.tagline}</p>
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">{stealthProduct.summary}</p>
+
+        <div className="mt-6 border-t border-ink-line pt-4">
+          <a
+            href={stealthProduct.cta.href}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors hover:text-brand"
+          >
+            {stealthProduct.cta.label}
+            <ArrowRightIcon className="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function ProductsShowcase() {
   return (
     <section id="products" className="relative py-20 sm:py-28">
@@ -94,11 +136,11 @@ export default function ProductsShowcase() {
         >
           <p className="eyebrow mb-4 text-ink-muted">Our products</p>
           <h2 className="font-display text-4xl tracking-tightish text-ink sm:text-5xl">
-            Four products, one philosophy
+            Three products, one philosophy — and a fourth in stealth
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-ink-muted">
             Each tool replaces a tangle of spreadsheets and busywork with one focused flow — and
-            keeps a human in control of every decision.
+            keeps a human in control of every decision. Open one to see what it does.
           </p>
         </motion.div>
 
@@ -106,7 +148,25 @@ export default function ProductsShowcase() {
           {products.map((product, i) => (
             <ProductCard key={product.slug} product={product} index={i} />
           ))}
+          <StealthCard index={products.length} />
         </div>
+
+        <motion.div
+          className="mx-auto mt-14 max-w-3xl rounded-2xl border border-ink-line bg-canvas-card p-8 text-center shadow-soft"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.4 }}
+          variants={fadeUp}
+        >
+          <p className="font-display text-2xl leading-snug text-ink sm:text-3xl">
+            Everything we ship is quality you can audit, compliant by design, and personalised to the
+            way you actually work.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-ink-muted">
+            Data residency, audit trails and explainability are features from day one. AI proposes; you
+            decide. That holds for every product above — and for everything we build for you.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

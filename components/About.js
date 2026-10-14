@@ -2,14 +2,14 @@
  * About — the wisdom-driven thesis behind Gnanalytica.
  *
  * "Gnana" is knowledge; the company's bet is that AI is most valuable when it
- * carries good judgement, not just raw capability.
+ * carries good judgement, not just raw capability. Vision, mission and the
+ * ज्ञान etymology sit as cards beside the thesis.
  */
 import { motion } from 'framer-motion';
 
 const principles = [
-  { k: 'Human in the loop', v: 'AI proposes, people decide. Every product keeps judgement with the expert.' },
-  { k: 'Ship real tools', v: 'Working software in production, not pilots and slideware.' },
-  { k: 'Built for trust', v: 'Data residency, audit trails and explainability are features, not afterthoughts.' },
+  { k: 'Our vision', v: 'To create clarity, confidence, and transparency in decisions that matter.' },
+  { k: 'Our mission', v: 'Build AI-enabled systems for industries where decisions carry real risk.' },
 ];
 
 const fadeUp = {
@@ -38,12 +38,9 @@ export default function About() {
               Gnana means wisdom. We build AI that carries it.
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-ink-muted">
-              Capability is cheap now; judgement isn’t. Gnanalytica builds AI products that pair
-              real intelligence with the context, compliance and care a serious decision deserves —
-              from a valuer signing a report to a clinician reading a trend.
-            </p>
-            <p className="mt-4 text-lg leading-relaxed text-ink-muted">
-              Small team, high standards, and the same craft whether the product is ours or yours.
+              We turn research, evidence, workflows, and compliance into structured systems where{' '}
+              <strong className="font-semibold text-ink">human judgment comes first</strong> and AI makes it
+              stronger.
             </p>
           </motion.div>
 
@@ -60,10 +57,19 @@ export default function About() {
                 key={p.k}
                 className="rounded-2xl border border-ink-line bg-canvas-card p-6 shadow-soft"
               >
-                <h3 className="text-base font-semibold tracking-tight text-ink">{p.k}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">{p.v}</p>
+                <h3 className="eyebrow text-ink-muted">{p.k}</h3>
+                <p className="mt-2 text-lg leading-snug text-ink">{p.v}</p>
               </div>
             ))}
+            <div className="rounded-2xl border border-ink-line bg-canvas-card p-6 shadow-soft">
+              <p lang="sa" className="text-4xl font-semibold leading-none text-brand">
+                ज्ञान
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                <em>jñāna</em> — Sanskrit for knowledge earned through understanding. It’s in our name and in
+                every product we ship.
+              </p>
+            </div>
           </motion.div>
         </div>
       </div>

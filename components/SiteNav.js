@@ -14,10 +14,11 @@ import { Bars3Icon, XMarkIcon, ChevronDownIcon, ArrowRightIcon } from '@heroicon
 import { products } from '../lib/products';
 import Magnetic from './Magnetic';
 
+const aboutLink = { name: 'About', href: '/#about' };
+
 const sectionLinks = [
   { name: 'Services', href: '/#services' },
   { name: 'Process', href: '/#process' },
-  { name: 'About', href: '/#about' },
 ];
 
 function BrandMark({ light }) {
@@ -86,6 +87,9 @@ export default function SiteNav({ heroOnDark = false }) {
         <BrandMark light={light} />
 
         <div className="hidden items-center gap-8 lg:flex">
+          <NavLink href={aboutLink.href} light={light}>
+            {aboutLink.name}
+          </NavLink>
           <div
             className="relative"
             onMouseEnter={() => setProductsOpen(true)}
@@ -198,7 +202,7 @@ export default function SiteNav({ heroOnDark = false }) {
               ))}
             </div>
             <div className="space-y-1 py-6">
-              {sectionLinks.map((item) => (
+              {[aboutLink, ...sectionLinks].map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
