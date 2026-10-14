@@ -1,7 +1,12 @@
 /**
  * ProcessSteps — how Gnanalytica works with clients, as an editorial 4-step rail.
+ *
+ * A thin line runs through the steps and fills with the brand gradient as the
+ * rail scrolls through the viewport — across the cards on desktop, down their
+ * left edge on smaller screens.
  */
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 const steps = [
   {
@@ -32,6 +37,10 @@ const fadeUp = {
 };
 
 export default function ProcessSteps() {
+  const railRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: railRef, offset: ['start 80%', 'end 50%'] });
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
+
   return (
     <section id="process" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -46,9 +55,26 @@ export default function ProcessSteps() {
           <h2 className="font-display text-4xl tracking-tightish text-ink sm:text-5xl">
             From idea to something in production
           </h2>
+          <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+            The line fills in as you scroll — the same way a project moves: one deliberate step at a time.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div ref={railRef} className="relative grid grid-cols-1 gap-6 pl-6 sm:grid-cols-2 lg:grid-cols-4 lg:pl-0">
+          {/* progress line: horizontal behind the cards on desktop, vertical on the left below */}
+          <div className="absolute inset-x-0 top-1/2 hidden h-0.5 -translate-y-1/2 rounded-full bg-ink-line lg:block" aria-hidden="true">
+            <motion.div
+              className="h-full origin-left rounded-full"
+              style={{ scaleX: progress, backgroundImage: 'linear-gradient(90deg, #6366f1, #a855f7)' }}
+            />
+          </div>
+          <div className="absolute inset-y-0 left-1 w-0.5 rounded-full bg-ink-line lg:hidden" aria-hidden="true">
+            <motion.div
+              className="h-full w-full origin-top rounded-full"
+              style={{ scaleY: progress, backgroundImage: 'linear-gradient(180deg, #6366f1, #a855f7)' }}
+            />
+          </div>
+
           {steps.map((step, i) => (
             <motion.div
               key={step.title}

@@ -6,15 +6,14 @@
  */
 import Link from 'next/link';
 import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
-import { products } from '../lib/products';
+import { products, stealthProduct } from '../lib/products';
 
 const quickLinks = [
   { name: 'Services', href: '/#services' },
   { name: 'Process', href: '/#process' },
   { name: 'About', href: '/#about' },
-  { name: 'Book a call', href: '/#contact' },
-  { name: 'Privacy Policy', href: '/privacy-policy' },
-  { name: 'Terms & Conditions', href: '/terms-and-conditions' },
+  { name: 'Privacy policy', href: '/privacy-policy' },
+  { name: 'Terms & conditions', href: '/terms-and-conditions' },
 ];
 
 export default function SiteFooter() {
@@ -41,8 +40,8 @@ export default function SiteFooter() {
               <span className="text-[17px] font-semibold tracking-tight text-night-ink">Gnanalytica</span>
             </div>
             <p className="mt-5 max-w-md text-sm leading-relaxed">
-              Wisdom-driven AI products and consulting. We build focused tools for valuation,
-              meetings, learning and health — and help businesses become genuinely AI-ready.
+              Wisdom-driven AI products and consulting. Focused tools for valuation, meetings and
+              learning — and help becoming genuinely AI-ready.
             </p>
             <a
               href="/#contact"
@@ -62,6 +61,9 @@ export default function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              <li className="text-sm">
+                {stealthProduct.name} — {stealthProduct.chip}
+              </li>
             </ul>
           </div>
 
