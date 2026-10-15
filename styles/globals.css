@@ -6,7 +6,7 @@
  * Inter, and eyebrow/kicker labels are JetBrains Mono. Per-product accent colours
  * live in lib/products.js and are applied via inline styles.
  */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -112,4 +112,120 @@ img {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ============================================================
+ * Gnanalytica brand theme — navy + red drawn from the logo.
+ *
+ * Light values live on :root so the masked logo renders correctly
+ * everywhere (nav, footer, product pages). The dark palette applies
+ * only inside .gn-home, driven by the OS preference by default and
+ * overridable via data-theme="light|dark" on <html> (ThemeToggle).
+ * ============================================================ */
+:root {
+  --gn-bg: #faf8f2;
+  --gn-bg2: #f2efe6;
+  --gn-surface: #ffffff;
+  --gn-ink: #16304f;
+  --gn-muted: #5a6b80;
+  --gn-line: #dce0e0;
+  --gn-accent: #c8322b;
+  --gn-accent-ink: #fff6f0;
+  --gn-sec: #1c4e82;
+  --gn-logo-ink: #1c3a5e;
+  --gn-logo-red: #d42a2a;
+  --gn-glow: rgba(200, 50, 43, 0.14);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .gn-home {
+    --gn-bg: #0a1322;
+    --gn-bg2: #0d1829;
+    --gn-surface: #111f35;
+    --gn-ink: #f2efe6;
+    --gn-muted: #8da0b8;
+    --gn-line: #1c2c44;
+    --gn-accent: #e8554e;
+    --gn-accent-ink: #fff6f0;
+    --gn-sec: #7fb2e5;
+    --gn-logo-ink: #f2efe6;
+    --gn-logo-red: #e8554e;
+    --gn-glow: rgba(232, 85, 78, 0.14);
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] .gn-home {
+  --gn-bg: #0a1322;
+  --gn-bg2: #0d1829;
+  --gn-surface: #111f35;
+  --gn-ink: #f2efe6;
+  --gn-muted: #8da0b8;
+  --gn-line: #1c2c44;
+  --gn-accent: #e8554e;
+  --gn-accent-ink: #fff6f0;
+  --gn-sec: #7fb2e5;
+  --gn-logo-ink: #f2efe6;
+  --gn-logo-red: #e8554e;
+  --gn-glow: rgba(232, 85, 78, 0.14);
+  color-scheme: dark;
+}
+
+.gn-home {
+  background-color: var(--gn-bg);
+  color: var(--gn-ink);
+  font-family: 'Instrument Sans', 'Inter', system-ui, sans-serif;
+}
+.gn-home h1,
+.gn-home h2,
+.gn-home h3,
+.gn-home h4 {
+  font-family: 'Bricolage Grotesque', 'Inter', 'Arial Black', sans-serif;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+/* Section kicker — replaces the mono eyebrow inside the brand theme */
+.gn-kicker {
+  color: var(--gn-accent);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Two-layer masked logo mark; each layer recolors from the theme */
+.gn-logo {
+  position: relative;
+  display: inline-block;
+  aspect-ratio: 480 / 260;
+}
+.gn-logo i {
+  position: absolute;
+  inset: 0;
+  display: block;
+  -webkit-mask: var(--m) center / contain no-repeat;
+  mask: var(--m) center / contain no-repeat;
+}
+.gn-logo .gn-logo-ink {
+  --m: url('/images/logos/logo-mark-ink.png');
+  background: var(--gn-logo-ink);
+}
+.gn-logo .gn-logo-red {
+  --m: url('/images/logos/logo-mark-red.png');
+  background: var(--gn-logo-red);
+}
+
+/* Highlighted phrases in the trust promise */
+.gn-hl {
+  position: relative;
+  white-space: nowrap;
+}
+.gn-hl::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: 0.06em;
+  height: 0.34em;
+  background: var(--gn-accent);
+  opacity: 0.26;
+  border-radius: 2px;
+  z-index: -1;
 }

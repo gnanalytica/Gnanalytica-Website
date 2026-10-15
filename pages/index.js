@@ -9,9 +9,12 @@ import ContactCTA from '../components/ContactCTA';
 import SiteFooter from '../components/SiteFooter';
 
 /**
- * Gnanalytica homepage. A warm editorial light base bookended by dark accent
- * bands (hero + contact), showcasing the three live products (plus one in
- * stealth) and the consulting side of the studio. Sections are composed from the components folder.
+ * Gnanalytica homepage — brand-refresh theme drawn from the logo's navy + red.
+ *
+ * The .gn-home wrapper scopes the theme tokens: light by default, dark via
+ * the OS preference or the nav's ThemeToggle (data-theme on <html>). The
+ * inline script below applies a saved theme choice before first paint so
+ * there is no flash. Sections are composed from the components folder.
  */
 export default function Home() {
   return (
@@ -29,9 +32,16 @@ export default function Home() {
           content="AI that carries wisdom: focused products for valuation, meetings and learning — plus consulting to make your business AI-ready."
         />
         <link rel="icon" href="/favicon.ico" />
+        <script
+          // Apply the saved theme before paint so the page never flashes the wrong theme.
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('gna-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}",
+          }}
+        />
       </Head>
-      <div className="min-h-screen bg-canvas text-ink">
-        <SiteNav heroOnDark />
+      <div className="gn-home min-h-screen">
+        <SiteNav themed />
         <main>
           <Hero />
           <About />
