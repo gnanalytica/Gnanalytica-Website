@@ -1,14 +1,15 @@
 /**
- * Hero — homepage hero rendered inside a dark accent band.
+ * Hero — theme-aware opener with the ambient halo canvas.
  *
- * Instrument Serif headline with an animated gradient highlight, mono eyebrow,
- * magnetic dual CTAs, a teaser grid of the products (plus the one in stealth), and a slow marquee of
- * product taglines. Content parallaxes gently as the band scrolls away.
+ * One-line Bricolage Grotesque headline, centered lede and CTAs, a teaser
+ * grid of the products (plus the one in stealth), and the slow tagline
+ * marquee. The particle field behind everything drifts toward the pointer
+ * and recolors with the theme. Content parallaxes gently as it scrolls away.
  */
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import DarkBand from './DarkBand';
+import HaloCanvas from './HaloCanvas';
 import Magnetic from './Magnetic';
 import { products, stealthProduct } from '../lib/products';
 
@@ -28,65 +29,70 @@ export default function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const tickerItems = [
-    ...products.map((p) => ({ key: p.slug, name: p.name, line: p.chip, gradient: p.theme.gradient })),
-    { key: 'stealth', name: stealthProduct.name, line: stealthProduct.chip, gradient: 'linear-gradient(135deg, #64748b, #334155)' },
+    ...products.map((p) => ({ key: p.slug, name: p.name, line: p.chip })),
+    { key: 'stealth', name: stealthProduct.name, line: stealthProduct.chip },
   ];
   const marqueeItems = tickerItems.concat(tickerItems);
 
   return (
-    <DarkBand className="pt-32 pb-16 sm:pt-40 sm:pb-20" >
-      <div ref={ref}>
+    <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-20" style={{ backgroundColor: 'var(--gn-bg)' }}>
+      <HaloCanvas />
+      <div ref={ref} className="relative">
         <motion.div style={{ y: contentY, opacity: contentOpacity }} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <motion.p className="eyebrow mb-6 text-night-muted" initial="hidden" animate="visible" custom={0} variants={fadeUp}>
+          <div className="mx-auto max-w-4xl text-center">
+            <motion.p className="gn-kicker mb-6" initial="hidden" animate="visible" custom={0} variants={fadeUp}>
               Three products · One in stealth
             </motion.p>
 
             <motion.h1
-              className="font-display text-5xl leading-[1.05] tracking-tightish text-night-ink sm:text-6xl lg:text-7xl"
+              className="whitespace-nowrap text-[clamp(26px,6.5vw,80px)] leading-tight"
+              style={{ color: 'var(--gn-ink)' }}
               initial="hidden"
               animate="visible"
               custom={1}
               variants={fadeUp}
             >
-              AI that carries{' '}
-              <span
-                className="gradient-text"
-                style={{ backgroundImage: 'linear-gradient(120deg, #818cf8 0%, #c084fc 35%, #22d3ee 70%, #818cf8 100%)' }}
-              >
-                wisdom.
-              </span>
+              AI that carries <span style={{ color: 'var(--gn-accent)' }}>wisdom.</span>
             </motion.h1>
 
-            <motion.p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-night-muted sm:text-xl" initial="hidden" animate="visible" custom={2} variants={fadeUp}>
+            <motion.p
+              className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed sm:text-xl"
+              style={{ color: 'var(--gn-muted)' }}
+              initial="hidden"
+              animate="visible"
+              custom={2}
+              variants={fadeUp}
+            >
               Gnanalytica builds focused AI products for valuation, meetings and learning — and helps
               businesses become genuinely AI-ready.{' '}
-              <strong className="font-semibold text-night-ink">Real tools in production:</strong> quality you
-              can audit, compliance built in, and everything shaped to how you work.
+              <strong className="font-semibold" style={{ color: 'var(--gn-ink)' }}>
+                Real tools in production:
+              </strong>{' '}
+              quality you can audit, compliance built in, and everything shaped to how you work.
             </motion.p>
 
             <motion.div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" initial="hidden" animate="visible" custom={3} variants={fadeUp}>
               <Magnetic strength={0.45}>
                 <a
                   href="#products"
-                  className="sheen-host group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-night shadow-liftlg"
+                  className="group relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold shadow-liftlg transition-transform hover:-translate-y-0.5"
+                  style={{ backgroundColor: 'var(--gn-accent)', color: 'var(--gn-accent-ink)' }}
                 >
-                  <span className="relative z-10 inline-flex items-center gap-2">
-                    Explore the products
-                    <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </span>
+                  Explore the products
+                  <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </a>
               </Magnetic>
               <Magnetic strength={0.35}>
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-night-ink backdrop-blur transition-colors hover:bg-white/10"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border px-7 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:border-[color:var(--gn-accent)]"
+                  style={{ borderColor: 'var(--gn-line)', color: 'var(--gn-ink)' }}
                 >
                   Book a call
                 </a>
               </Magnetic>
             </motion.div>
-            <motion.p className="mt-4 text-xs text-night-muted" initial="hidden" animate="visible" custom={3} variants={fadeUp}>
+            <motion.p className="mt-4 text-xs" style={{ color: 'var(--gn-muted)' }} initial="hidden" animate="visible" custom={3} variants={fadeUp}>
               Free 30-minute session, no jargon
             </motion.p>
           </div>
@@ -103,44 +109,60 @@ export default function Hero() {
               <a
                 key={p.slug}
                 href={`/${p.slug}`}
-                className="group flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/10"
+                className="group flex items-center gap-2.5 rounded-xl border px-4 py-3 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-[color:var(--gn-accent)]"
+                style={{ borderColor: 'var(--gn-line)', backgroundColor: 'color-mix(in srgb, var(--gn-surface) 55%, transparent)' }}
               >
-                <span className="h-2.5 w-2.5 flex-shrink-0 rounded-full transition-transform duration-300 group-hover:scale-125" style={{ backgroundImage: p.theme.gradient }} />
+                <span
+                  className="h-2.5 w-2.5 flex-shrink-0 rounded-full transition-transform duration-300 group-hover:scale-125"
+                  style={{ backgroundColor: 'var(--gn-accent)' }}
+                />
                 <span className="min-w-0">
-                  <span className="block truncate text-sm font-semibold text-night-ink">{p.name}</span>
-                  <span className="block truncate text-[11px] text-night-muted">{p.chip}</span>
+                  <span className="block truncate text-sm font-semibold" style={{ color: 'var(--gn-ink)' }}>
+                    {p.name}
+                  </span>
+                  <span className="block truncate text-[11px]" style={{ color: 'var(--gn-muted)' }}>
+                    {p.chip}
+                  </span>
                 </span>
               </a>
             ))}
             <a
               href={stealthProduct.cta.href}
-              className="group flex items-center gap-2.5 rounded-xl border border-dashed border-white/20 bg-white/[0.02] px-4 py-3 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-white/35"
+              className="group flex items-center gap-2.5 rounded-xl border border-dashed px-4 py-3 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-[color:var(--gn-sec)]"
+              style={{ borderColor: 'var(--gn-line)' }}
             >
-              <span className="h-2.5 w-2.5 flex-shrink-0 rounded-full border border-white/40" />
+              <span className="h-2.5 w-2.5 flex-shrink-0 rounded-full border" style={{ borderColor: 'var(--gn-muted)' }} />
               <span className="min-w-0">
-                <span className="block truncate text-sm font-semibold text-night-ink">{stealthProduct.name}</span>
-                <span className="block truncate text-[11px] text-night-muted">{stealthProduct.chip}</span>
+                <span className="block truncate text-sm font-semibold" style={{ color: 'var(--gn-ink)' }}>
+                  {stealthProduct.name}
+                </span>
+                <span className="block truncate text-[11px]" style={{ color: 'var(--gn-muted)' }}>
+                  {stealthProduct.chip}
+                </span>
               </span>
             </a>
           </motion.div>
         </motion.div>
 
         {/* tagline marquee */}
-        <div className="relative mt-16 flex overflow-hidden border-y border-white/10 py-4">
+        <div className="relative mt-16 flex overflow-hidden border-y py-4" style={{ borderColor: 'var(--gn-line)', backgroundColor: 'var(--gn-bg2)' }}>
           <div className="flex shrink-0 animate-marquee items-center gap-10 pr-10 no-scrollbar">
             {marqueeItems.map((p, i) => (
-              <span key={`${p.key}-${i}`} className="flex items-center gap-3 whitespace-nowrap text-sm text-night-muted">
-                <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundImage: p.gradient }} />
-                <span className="font-medium text-night-ink/90">✦ {p.name}</span>
-                <span className="italic text-night-muted">{p.line}</span>
+              <span key={`${p.key}-${i}`} className="flex items-center gap-3 whitespace-nowrap text-sm" style={{ color: 'var(--gn-muted)' }}>
+                <span className="text-xs" style={{ color: 'var(--gn-accent)' }}>
+                  ✦
+                </span>
+                <span className="font-brico text-base font-semibold" style={{ color: 'var(--gn-ink)' }}>
+                  {p.name}
+                </span>
+                <span className="italic">{p.line}</span>
               </span>
             ))}
           </div>
-          {/* edge fades */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-night to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-night to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-24" style={{ background: 'linear-gradient(to right, var(--gn-bg2), transparent)' }} />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-24" style={{ background: 'linear-gradient(to left, var(--gn-bg2), transparent)' }} />
         </div>
       </div>
-    </DarkBand>
+    </section>
   );
 }

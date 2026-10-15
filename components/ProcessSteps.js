@@ -1,12 +1,12 @@
 /**
- * ProcessSteps — how Gnanalytica works with clients, as an editorial 4-step rail.
+ * ProcessSteps — how Gnanalytica works with clients, as a vertical rail.
  *
- * A thin line runs through the steps and fills with the brand gradient as the
- * rail scrolls through the viewport — across the cards on desktop, down their
- * left edge on smaller screens.
+ * A thin line runs down the four steps and fills with a red-to-blue gradient
+ * as the rail scrolls through the viewport; each node lights up as the fill
+ * passes it.
  */
 import { useRef } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 const steps = [
   {
@@ -36,60 +36,74 @@ const fadeUp = {
   }),
 };
 
+function StepNode({ index, progress }) {
+  // Each node lights once the fill reaches its share of the rail.
+  const threshold = index / steps.length + 0.08;
+  const lit = useTransform(progress, (v) => (v >= threshold ? 1 : 0));
+  const background = useTransform(lit, (v) => (v ? 'var(--gn-accent)' : 'var(--gn-bg)'));
+  const borderColor = useTransform(lit, (v) => (v ? 'var(--gn-accent)' : 'var(--gn-line)'));
+  const boxShadow = useTransform(lit, (v) => (v ? '0 0 12px var(--gn-glow)' : 'none'));
+  return (
+    <motion.span
+      aria-hidden="true"
+      className="absolute -left-[37px] top-2 h-4 w-4 rounded-full border-2 transition-colors duration-300"
+      style={{ background, borderColor, boxShadow }}
+    />
+  );
+}
+
 export default function ProcessSteps() {
   const railRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: railRef, offset: ['start 80%', 'end 50%'] });
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
   return (
-    <section id="process" className="relative py-20 sm:py-28">
+    <section id="process" className="relative py-20 sm:py-28" style={{ backgroundColor: 'var(--gn-bg)' }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="mx-auto mb-14 max-w-2xl text-center"
+          className="mb-14 max-w-2xl"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
           variants={fadeUp}
         >
-          <p className="eyebrow mb-4 text-ink-muted">How we work</p>
-          <h2 className="font-display text-4xl tracking-tightish text-ink sm:text-5xl">
+          <p className="gn-kicker mb-4">How we work</p>
+          <h2 className="text-4xl leading-tight sm:text-5xl" style={{ color: 'var(--gn-ink)' }}>
             From idea to something in production
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+          <p className="mt-5 text-lg leading-relaxed" style={{ color: 'var(--gn-muted)' }}>
             The line fills in as you scroll — the same way a project moves: one deliberate step at a time.
           </p>
         </motion.div>
 
-        <div ref={railRef} className="relative grid grid-cols-1 gap-6 pl-6 sm:grid-cols-2 lg:grid-cols-4 lg:pl-0">
-          {/* progress line: horizontal behind the cards on desktop, vertical on the left below */}
-          <div className="absolute inset-x-0 top-1/2 hidden h-0.5 -translate-y-1/2 rounded-full bg-ink-line lg:block" aria-hidden="true">
-            <motion.div
-              className="h-full origin-left rounded-full"
-              style={{ scaleX: progress, backgroundImage: 'linear-gradient(90deg, #6366f1, #a855f7)' }}
-            />
-          </div>
-          <div className="absolute inset-y-0 left-1 w-0.5 rounded-full bg-ink-line lg:hidden" aria-hidden="true">
+        <div ref={railRef} className="relative grid max-w-3xl gap-12 pl-10 sm:gap-14">
+          <div className="absolute bottom-1 left-2 top-1 w-0.5 rounded-full" style={{ backgroundColor: 'var(--gn-line)' }} aria-hidden="true">
             <motion.div
               className="h-full w-full origin-top rounded-full"
-              style={{ scaleY: progress, backgroundImage: 'linear-gradient(180deg, #6366f1, #a855f7)' }}
+              style={{ scaleY: progress, backgroundImage: 'linear-gradient(180deg, var(--gn-accent), var(--gn-sec))' }}
             />
           </div>
 
           {steps.map((step, i) => (
             <motion.div
               key={step.title}
-              className="relative rounded-2xl border border-ink-line bg-canvas-card p-6 shadow-soft"
+              className="relative"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               custom={i}
               variants={fadeUp}
             >
-              <span className="font-display text-5xl leading-none text-ink-line">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <h3 className="mt-4 text-lg font-semibold tracking-tight text-ink">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{step.description}</p>
+              <StepNode index={i} progress={progress} />
+              <h3 className="flex items-baseline gap-4 font-brico text-2xl font-semibold" style={{ color: 'var(--gn-ink)' }}>
+                <span className="text-base font-medium tabular-nums" style={{ color: 'var(--gn-muted)' }}>
+                  {i + 1}
+                </span>
+                {step.title}
+              </h3>
+              <p className="mt-2 max-w-xl leading-relaxed" style={{ color: 'var(--gn-muted)' }}>
+                {step.description}
+              </p>
             </motion.div>
           ))}
         </div>

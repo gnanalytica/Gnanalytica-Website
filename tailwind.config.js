@@ -24,6 +24,9 @@ module.exports = {
         display: ['Instrument Serif', 'Georgia', 'serif'],
         serif: ['Instrument Serif', 'Georgia', 'serif'],
         mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
+        // Brand theme (homepage): display + body pairing
+        brico: ['Bricolage Grotesque', 'Inter', 'Arial Black', 'sans-serif'],
+        instr: ['Instrument Sans', 'Inter', ...defaultTheme.fontFamily.sans],
       },
       letterSpacing: {
         tightish: '-0.015em',

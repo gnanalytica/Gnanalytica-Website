@@ -1,10 +1,12 @@
 /**
- * SiteFooter — dark editorial footer shared across the site.
+ * SiteFooter — dark navy footer shared across the site.
  *
- * Brand mark + products, quick links and the company's real contact and
- * registration details (Eindhoven, NL and Bengaluru, India).
+ * Masked brand logo + products, quick links and the company's real contact
+ * and registration details (Eindhoven, NL and Bengaluru, India). Stays on
+ * the dark navy surface in both themes.
  */
 import Link from 'next/link';
+import BrandLogo from './BrandLogo';
 import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { products, stealthProduct } from '../lib/products';
 
@@ -19,25 +21,20 @@ const quickLinks = [
 export default function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative overflow-hidden bg-night text-night-muted">
+    <footer className="relative overflow-hidden text-[#8da0b8]" style={{ backgroundColor: '#0a1322' }}>
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(50% 60% at 12% 0%, rgba(99,102,241,0.14) 0%, transparent 60%), radial-gradient(45% 50% at 90% 10%, rgba(168,85,247,0.10) 0%, transparent 60%)',
+            'radial-gradient(50% 60% at 12% 0%, rgba(232,85,78,0.12) 0%, transparent 60%), radial-gradient(45% 50% at 90% 10%, rgba(127,178,229,0.10) 0%, transparent 60%)',
         }}
       />
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5">
-              <span
-                className="grid h-8 w-8 place-items-center rounded-md text-white"
-                style={{ backgroundImage: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 60%, #a855f7 100%)' }}
-              >
-                <span className="font-display text-[18px] leading-none">G</span>
-              </span>
-              <span className="text-[17px] font-semibold tracking-tight text-night-ink">Gnanalytica</span>
+              <BrandLogo className="h-8 w-[59px]" onDark />
+              <span className="font-brico text-[17px] font-bold tracking-tight text-[#f2efe6]">Gnanalytica</span>
             </div>
             <p className="mt-5 max-w-md text-sm leading-relaxed">
               Wisdom-driven AI products and consulting. Focused tools for valuation, meetings and
@@ -45,18 +42,18 @@ export default function SiteFooter() {
             </p>
             <a
               href="/#contact"
-              className="mt-6 inline-flex items-center rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-night shadow-soft transition-transform hover:-translate-y-0.5"
+              className="mt-6 inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold text-[#fff6f0] shadow-soft transition-transform hover:-translate-y-0.5" style={{ backgroundColor: '#e8554e' }}
             >
               Schedule a discovery call
             </a>
           </div>
 
           <div>
-            <h3 className="eyebrow mb-4 text-night-ink">Products</h3>
+            <h3 className="eyebrow mb-4 text-[#f2efe6]">Products</h3>
             <ul className="space-y-3">
               {products.map((product) => (
                 <li key={product.slug}>
-                  <Link href={`/${product.slug}`} className="text-sm transition-colors hover:text-night-ink">
+                  <Link href={`/${product.slug}`} className="text-sm transition-colors hover:text-[#f2efe6]">
                     {product.name}
                   </Link>
                 </li>
@@ -68,11 +65,11 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h3 className="eyebrow mb-4 text-night-ink">Company</h3>
+            <h3 className="eyebrow mb-4 text-[#f2efe6]">Company</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-sm transition-colors hover:text-night-ink">
+                  <a href={link.href} className="text-sm transition-colors hover:text-[#f2efe6]">
                     {link.name}
                   </a>
                 </li>
@@ -81,29 +78,29 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h3 className="eyebrow mb-4 text-night-ink">Get in touch</h3>
+            <h3 className="eyebrow mb-4 text-[#f2efe6]">Get in touch</h3>
             <div className="space-y-4 text-sm">
               <div className="flex items-start gap-3">
-                <EnvelopeIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-light" />
-                <a href="mailto:contact@gnanalytica.com" className="break-all transition-colors hover:text-night-ink">
+                <EnvelopeIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#e8554e]" />
+                <a href="mailto:contact@gnanalytica.com" className="break-all transition-colors hover:text-[#f2efe6]">
                   contact@gnanalytica.com
                 </a>
               </div>
               <div className="flex items-start gap-3">
-                <PhoneIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-light" />
-                <a href="tel:+31687018349" className="transition-colors hover:text-night-ink">
+                <PhoneIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#e8554e]" />
+                <a href="tel:+31687018349" className="transition-colors hover:text-[#f2efe6]">
                   +31 6 87018349
                 </a>
               </div>
               <div className="flex items-start gap-3">
-                <MapPinIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-light" />
+                <MapPinIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#e8554e]" />
                 <span>Eindhoven, Netherlands</span>
               </div>
               <div className="border-t border-white/10 pt-4 text-xs leading-relaxed">
                 <p>KVK 98649035 · BTW NL005345555B41</p>
               </div>
               <div className="flex items-start gap-3">
-                <MapPinIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-light" />
+                <MapPinIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#e8554e]" />
                 <address className="not-italic">
                   Gnanalytica Technologies LLP
                   <br />
