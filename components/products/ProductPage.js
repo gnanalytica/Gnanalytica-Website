@@ -73,8 +73,7 @@ export default function ProductPage({ product }) {
                 <Magnetic strength={0.45}>
                   <a
                     href={hero.ctaPrimary.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...(hero.ctaPrimary.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     className="sheen-host group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-7 py-3.5 text-sm font-semibold text-white shadow-lift"
                     style={{ backgroundImage: theme.gradient }}
                   >
@@ -227,8 +226,7 @@ export default function ProductPage({ product }) {
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/90">{product.closing.subtitle}</p>
             <a
               href={product.closing.cta.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(product.closing.cta.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               className="mt-9 inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-semibold shadow-liftlg transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
               style={{ color: theme.primary }}
             >

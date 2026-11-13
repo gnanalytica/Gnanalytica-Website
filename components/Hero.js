@@ -63,7 +63,7 @@ export default function Hero() {
               custom={2}
               variants={fadeUp}
             >
-              Gnanalytica builds focused AI products for valuation, meetings and learning — and helps
+              Gnanalytica builds focused AI products for valuation, meetings, learning and site visits — and helps
               businesses become genuinely AI-ready.{' '}
               <strong className="font-semibold" style={{ color: 'var(--gn-ink)' }}>
                 Real tools in production:
