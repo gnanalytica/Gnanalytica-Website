@@ -41,7 +41,7 @@ export default function Hero() {
         <motion.div style={{ y: contentY, opacity: contentOpacity }} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <motion.p className="gn-kicker mb-6" initial="hidden" animate="visible" custom={0} variants={fadeUp}>
-              Three products · One in stealth
+              Four products · One in stealth
             </motion.p>
 
             <motion.h1
@@ -63,7 +63,7 @@ export default function Hero() {
               custom={2}
               variants={fadeUp}
             >
-              Gnanalytica builds focused AI products for valuation, meetings and learning — and helps
+              Gnanalytica builds focused AI products for valuation, meetings, learning and site visits — and helps
               businesses become genuinely AI-ready.{' '}
               <strong className="font-semibold" style={{ color: 'var(--gn-ink)' }}>
                 Real tools in production:
@@ -99,7 +99,7 @@ export default function Hero() {
 
           {/* product teaser row */}
           <motion.div
-            className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4"
+            className="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
             initial="hidden"
             animate="visible"
             custom={4}

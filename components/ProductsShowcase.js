@@ -7,7 +7,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { products, stealthProduct } from '../lib/products';
+import { products, stealthProduct, isExternal } from '../lib/products';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -37,7 +37,7 @@ function Pill({ href, external = false, primary = false, children }) {
   );
 }
 
-function LedgerRow({ ix, name, category, tagline, summary, open, onToggle, panelId, children }) {
+function LedgerRow({ ix, name, category, status, tagline, summary, open, onToggle, panelId, children }) {
   return (
     <div className="border-b" style={{ borderColor: 'var(--gn-line)' }}>
       <button
@@ -50,8 +50,18 @@ function LedgerRow({ ix, name, category, tagline, summary, open, onToggle, panel
         <span className="font-brico text-2xl font-bold sm:text-3xl" style={{ color: open ? 'var(--gn-accent)' : 'var(--gn-muted)' }} aria-hidden="true">
           {ix}
         </span>
-        <span className="font-brico text-2xl font-semibold tracking-tight sm:text-4xl" style={{ color: 'var(--gn-ink)' }}>
-          {name}
+        <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className="font-brico text-2xl font-semibold tracking-tight sm:text-4xl" style={{ color: 'var(--gn-ink)' }}>
+            {name}
+          </span>
+          {status && (
+            <span
+              className="rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider"
+              style={{ borderColor: 'var(--gn-accent)', color: 'var(--gn-accent)' }}
+            >
+              {status}
+            </span>
+          )}
         </span>
         <span className="hidden whitespace-nowrap text-sm sm:block" style={{ color: 'var(--gn-muted)' }}>
           {category}
@@ -104,7 +114,7 @@ export default function ProductsShowcase() {
         >
           <p className="gn-kicker mb-4">Our products</p>
           <h2 className="text-4xl leading-tight sm:text-5xl" style={{ color: 'var(--gn-ink)' }}>
-            Three products, one philosophy — and a fourth in stealth
+            Four products, one philosophy — and a fifth in stealth
           </h2>
           <p className="mt-5 text-lg leading-relaxed" style={{ color: 'var(--gn-muted)' }}>
             Each tool replaces a tangle of spreadsheets and busywork with one focused flow — and
@@ -126,13 +136,14 @@ export default function ProductsShowcase() {
               ix={product.name.charAt(0)}
               name={product.name}
               category={product.category}
+              status={product.status}
               tagline={product.tagline}
               summary={product.summary}
               open={openSlug === product.slug}
               onToggle={() => toggle(product.slug)}
               panelId={`product-${product.slug}`}
             >
-              <Pill href={product.url} external primary>
+              <Pill href={product.url} external={isExternal(product.url)} primary>
                 {product.cta}
               </Pill>
               <Pill href={`/${product.slug}`}>Learn more</Pill>

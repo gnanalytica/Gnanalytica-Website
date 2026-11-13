@@ -23,13 +23,13 @@ export default function Home() {
         <title>Gnanalytica — Wisdom-Driven AI Products &amp; Consulting</title>
         <meta
           name="description"
-          content="Gnanalytica builds focused AI products — Valytica for valuation, Standup for meetings and Learn for AI skills — and helps businesses become genuinely AI-ready."
+          content="Gnanalytica builds focused AI products — Valytica for valuation, Standup for meetings, Learn for AI skills and Field Companion for site visits — and helps businesses become genuinely AI-ready."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
         <meta property="og:title" content="Gnanalytica — Wisdom-Driven AI Products & Consulting" />
         <meta
           property="og:description"
-          content="AI that carries wisdom: focused products for valuation, meetings and learning — plus consulting to make your business AI-ready."
+          content="AI that carries wisdom: focused products for valuation, meetings, learning and site visits — plus consulting to make your business AI-ready."
         />
         <link rel="icon" href="/favicon.ico" />
         <script
