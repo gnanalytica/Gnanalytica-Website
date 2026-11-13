@@ -29,7 +29,7 @@ export default function Home() {
         <meta property="og:title" content="Gnanalytica — Wisdom-Driven AI Products & Consulting" />
         <meta
           property="og:description"
-          content="AI that carries wisdom: focused products for valuation, meetings and learning — plus consulting to make your business AI-ready."
+          content="AI that carries wisdom: focused products for valuation, meetings, learning and site visits — plus consulting to make your business AI-ready."
         />
         <link rel="icon" href="/favicon.ico" />
         <script

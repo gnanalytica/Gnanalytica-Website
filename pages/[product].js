@@ -3,7 +3,7 @@ import ProductPage from '../components/products/ProductPage';
 import { products, getProduct, productSlugs } from '../lib/products';
 
 /**
- * Dynamic product landing pages served at /valytica, /standup and /learn.
+ * Dynamic product landing pages served at /valytica, /standup, /learn and /field-companion.
  * Statically generated from the catalogue in lib/products.js; unknown slugs 404.
  */
 export default function Product({ product }) {

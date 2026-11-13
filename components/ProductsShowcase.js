@@ -132,7 +132,7 @@ export default function ProductsShowcase() {
               onToggle={() => toggle(product.slug)}
               panelId={`product-${product.slug}`}
             >
-              <Pill href={product.url} external primary>
+              <Pill href={product.url} external={product.url.startsWith('http')} primary>
                 {product.cta}
               </Pill>
               <Pill href={`/${product.slug}`}>Learn more</Pill>
