@@ -37,8 +37,8 @@ export default function SiteFooter() {
               <span className="font-brico text-[17px] font-bold tracking-tight text-[#f2efe6]">Gnanalytica</span>
             </div>
             <p className="mt-5 max-w-md text-sm leading-relaxed">
-              Wisdom-driven AI products and consulting. Focused tools for valuation, meetings and
-              learning — and help becoming genuinely AI-ready.
+              Wisdom-driven AI products and consulting. Focused tools for valuation, meetings,
+              learning and site visits — and help becoming genuinely AI-ready.
             </p>
             <a
               href="/#contact"
