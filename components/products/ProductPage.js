@@ -7,7 +7,8 @@
  * via inline styles so a single template serves every product.
  *
  * Optional product fields add sections only where defined: `chat` (hero chat
- * preview), `problem`, `audiences`, `trust` and `roadmap`. A product that is
+ * preview), `video` (demo under the hero), `problem`, `audiences`, `trust`,
+ * `roadmap` and `provider` (small line above the footer). A product that is
  * not live yet sets `status` and points its CTAs at an internal anchor.
  */
 import { motion } from 'framer-motion';
@@ -17,6 +18,7 @@ import SiteFooter from '../SiteFooter';
 import Magnetic from '../Magnetic';
 import CountUp from '../CountUp';
 import { getIcon } from './icons';
+import ProductVideo from './ProductVideo';
 import { isExternal } from '../../lib/products';
 
 const fadeUp = {
@@ -219,6 +221,9 @@ export default function ProductPage({ product }) {
             </motion.div>
           </div>
         </section>
+
+        {/* ───────────────────────── Demo video (optional) ───────────────────────── */}
+        {product.video && <ProductVideo video={product.video} />}
 
         {/* ───────────────────────── Stats ───────────────────────── */}
         <section className="border-y border-ink-line bg-canvas-soft py-12">
@@ -433,6 +438,11 @@ export default function ProductPage({ product }) {
             </CtaLink>
           </motion.div>
         </section>
+
+        {/* ───────────────────────── Provider line (optional) ───────────────────────── */}
+        {product.provider && (
+          <p className="mx-auto max-w-7xl px-4 py-6 text-center text-xs text-ink-muted sm:px-6 lg:px-8">{product.provider}</p>
+        )}
       </main>
 
       <SiteFooter />
