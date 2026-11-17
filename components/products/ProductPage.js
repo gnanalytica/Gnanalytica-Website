@@ -7,8 +7,10 @@
  * via inline styles so a single template serves every product.
  *
  * Optional product fields add sections only where defined: `chat` (hero chat
- * preview), `video` (demo under the hero), `problem`, `audiences`, `trust`,
- * `roadmap` and `provider` (small line above the footer). A product that is
+ * preview), `video` (demo under the hero, with an optional `brochure`
+ * download), `problem`, `audiences`, `trust`, `legal` (links to the product's
+ * own privacy notice, terms and so on, under the trust section), `roadmap` and
+ * `provider` (small line above the footer). A product that is
  * not live yet sets `status` and points its CTAs at an internal anchor.
  */
 import { motion } from 'framer-motion';
@@ -223,7 +225,7 @@ export default function ProductPage({ product }) {
         </section>
 
         {/* ───────────────────────── Demo video (optional) ───────────────────────── */}
-        {product.video && <ProductVideo video={product.video} />}
+        {product.video && <ProductVideo video={product.video} brochure={product.brochure} theme={theme} />}
 
         {/* ───────────────────────── Stats ───────────────────────── */}
         <section className="border-y border-ink-line bg-canvas-soft py-12">
@@ -370,6 +372,21 @@ export default function ProductPage({ product }) {
               </div>
               {product.trust.note && (
                 <p className="mx-auto mt-10 max-w-2xl text-center text-sm leading-relaxed text-ink-muted">{product.trust.note}</p>
+              )}
+              {product.legal && (
+                <nav aria-label={`${product.name} legal texts`} className="mt-8 flex flex-wrap justify-center gap-3">
+                  {product.legal.map((item) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-ink-line bg-canvas-card px-4 py-2 text-sm font-medium shadow-soft transition-all hover:shadow-lift"
+                      style={{ color: theme.primary }}
+                    >
+                      {item.label}
+                      <ArrowRightIcon className="h-3.5 w-3.5" />
+                    </a>
+                  ))}
+                </nav>
               )}
             </div>
           </section>
