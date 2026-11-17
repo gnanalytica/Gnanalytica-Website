@@ -3,11 +3,11 @@
  *
  * Unified product-family theme: a warm editorial light base with dark accent
  * bands. Display type is Instrument Serif (matching Valytica & Standup), body is
- * Inter, and eyebrow/kicker labels are JetBrains Mono. Per-product accent colours
- * live in lib/products.js and are applied via inline styles.
+ * Inter, and eyebrow/kicker labels are JetBrains Mono. The fonts are self-hosted
+ * with next/font (pages/_app.js), which sets the --font-* variables used here.
+ * Per-product accent colours live in lib/products.js and are applied via inline
+ * styles.
  */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,7 +30,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   font-weight: 400;
   color: hsl(var(--ink));
   background-color: hsl(var(--canvas));
@@ -43,7 +43,7 @@ body {
 
 @layer base {
   h1, h2, h3, h4 {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--font-instrument-serif), Georgia, serif;
     font-weight: 400;
     letter-spacing: -0.015em;
   }
@@ -52,7 +52,7 @@ body {
 @layer components {
   /* JetBrains Mono uppercase eyebrow — the shared family label treatment */
   .eyebrow {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
     font-size: 11px;
     line-height: 1;
     text-transform: uppercase;
@@ -172,13 +172,13 @@ img {
 .gn-home {
   background-color: var(--gn-bg);
   color: var(--gn-ink);
-  font-family: 'Instrument Sans', 'Inter', system-ui, sans-serif;
+  font-family: var(--font-instrument-sans), var(--font-inter), system-ui, sans-serif;
 }
 .gn-home h1,
 .gn-home h2,
 .gn-home h3,
 .gn-home h4 {
-  font-family: 'Bricolage Grotesque', 'Inter', 'Arial Black', sans-serif;
+  font-family: var(--font-bricolage), var(--font-inter), 'Arial Black', sans-serif;
   font-weight: 650;
   letter-spacing: -0.02em;
 }
@@ -228,4 +228,177 @@ img {
   opacity: 0.26;
   border-radius: 2px;
   z-index: -1;
+}
+
+/*
+ * Field Companion legal texts (components/legal/LegalDocument.js).
+ * Tables are a normal grid from 640px up (1280px for tables with five or
+ * more columns, which also stack in print); below that each row becomes a
+ * card and every cell shows its column name above the value. A wide table
+ * shown as a grid scrolls sideways if it does not fit, so no column is cut off.
+ */
+.legal-table-wrap {
+  border: 1px solid #ddd5c9;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fdfbf7;
+}
+.legal-wide {
+  overflow-x: auto;
+}
+.legal-table th {
+  background: #f1ece2;
+  color: #211f1b;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  vertical-align: bottom;
+}
+.legal-table td {
+  border-top: 1px solid #ddd5c9;
+  color: rgb(33 31 27 / 0.85);
+  line-height: 1.6;
+  padding: 0.85rem 1rem;
+  vertical-align: top;
+}
+.legal-table td:first-child {
+  color: #211f1b;
+}
+@media (max-width: 639px) {
+  .legal-table-wrap {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+  .legal-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .legal-table,
+  .legal-table tbody,
+  .legal-table tr,
+  .legal-table td {
+    display: block;
+    width: 100%;
+  }
+  .legal-table tr {
+    margin-bottom: 0.75rem;
+    border: 1px solid #ddd5c9;
+    border-radius: 1rem;
+    background: #fdfbf7;
+    overflow: hidden;
+  }
+  .legal-table td {
+    border-top: 0;
+    padding: 0.6rem 1rem;
+  }
+  .legal-table td + td {
+    border-top: 1px solid #ece6db;
+  }
+  .legal-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.15rem;
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #726c63;
+  }
+  .legal-table td[data-label='']::before {
+    display: none;
+  }
+}
+/* Tables with five or more columns stack up to 1279px, and in print. */
+@media (max-width: 1279px), print {
+  .legal-wide {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+  .legal-wide .legal-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .legal-wide .legal-table,
+  .legal-wide .legal-table tbody,
+  .legal-wide .legal-table tr,
+  .legal-wide .legal-table td {
+    display: block;
+    width: 100%;
+  }
+  .legal-wide .legal-table tr {
+    margin-bottom: 0.75rem;
+    border: 1px solid #ddd5c9;
+    border-radius: 1rem;
+    background: #fdfbf7;
+    overflow: hidden;
+  }
+  .legal-wide .legal-table td {
+    border-top: 0;
+    padding: 0.6rem 1rem;
+  }
+  .legal-wide .legal-table td + td {
+    border-top: 1px solid #ece6db;
+  }
+  .legal-wide .legal-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.15rem;
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #726c63;
+  }
+  .legal-wide .legal-table td[data-label='']::before {
+    display: none;
+  }
+}
+
+.legal-doc {
+  overflow-wrap: break-word;
+}
+.legal-doc code {
+  overflow-wrap: anywhere;
+}
+.legal-doc .legal-heading:first-child {
+  margin-top: 0;
+}
+
+@media print {
+  @page {
+    margin: 18mm 16mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  .legal-doc {
+    max-width: none;
+    font-size: 11pt;
+    color: #000;
+  }
+  .legal-doc .legal-heading {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  .legal-table tr,
+  .legal-pairs > div,
+  .legal-quote {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .legal-table-wrap,
+  .legal-pairs {
+    border-color: #bbb;
+    overflow: visible;
+  }
 }

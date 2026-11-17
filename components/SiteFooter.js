@@ -1,9 +1,9 @@
 /**
  * SiteFooter — dark navy footer shared across the site.
  *
- * Masked brand logo + products, quick links and the company's real contact
- * and registration details (Eindhoven, NL and Bengaluru, India). Stays on
- * the dark navy surface in both themes.
+ * Masked brand logo + products, quick links, the Field Companion legal texts
+ * and the company's real contact and registration details (Eindhoven, NL and
+ * Bengaluru, India). Stays on the dark navy surface in both themes.
  */
 import Link from 'next/link';
 import BrandLogo from './BrandLogo';
@@ -16,6 +16,13 @@ const quickLinks = [
   { name: 'About', href: '/#about' },
   { name: 'Privacy policy', href: '/privacy-policy' },
   { name: 'Terms & conditions', href: '/terms-and-conditions' },
+];
+
+// Field Companion is provided by the Dutch business and has its own texts.
+const fieldCompanionLinks = [
+  { name: 'Privacy notice', href: '/field-companion/privacy' },
+  { name: 'Terms of service', href: '/field-companion/terms' },
+  { name: 'Subprocessors', href: '/field-companion/subprocessors' },
 ];
 
 export default function SiteFooter() {
@@ -75,6 +82,16 @@ export default function SiteFooter() {
                 </li>
               ))}
             </ul>
+            <h3 className="eyebrow mb-4 mt-8 text-[#f2efe6]">Field Companion</h3>
+            <ul className="space-y-3">
+              {fieldCompanionLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm transition-colors hover:text-[#f2efe6]">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>
@@ -88,9 +105,12 @@ export default function SiteFooter() {
               </div>
               <div className="flex items-start gap-3">
                 <PhoneIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#e8554e]" />
-                <a href="tel:+31687018349" className="transition-colors hover:text-[#f2efe6]">
-                  +31 6 87018349
-                </a>
+                <span>
+                  <a href="tel:+31687018349" className="transition-colors hover:text-[#f2efe6]">
+                    +31 6 87018349
+                  </a>
+                  <span className="ml-2 text-xs">(WhatsApp from launch)</span>
+                </span>
               </div>
               <div className="flex items-start gap-3">
                 <MapPinIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#e8554e]" />

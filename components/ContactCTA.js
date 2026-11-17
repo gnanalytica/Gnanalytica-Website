@@ -1,5 +1,6 @@
 /**
- * ContactCTA — closing panel with the Google Calendar booking embed.
+ * ContactCTA — closing panel with the Google Calendar booking embed, which
+ * loads only after the visitor clicks to open it.
  *
  * A bordered surface panel with a soft red glow in the corner; the booking
  * embed keeps its own light card so the calendar UI stays legible in both
@@ -14,7 +15,7 @@ const BOOKING_URL =
 
 const contacts = [
   { label: 'Email', value: 'contact@gnanalytica.com', href: 'mailto:contact@gnanalytica.com' },
-  { label: 'Phone', value: '+31 6 87018349', href: 'tel:+31687018349' },
+  { label: 'Phone', value: '+31 6 87018349', href: 'tel:+31687018349', note: 'WhatsApp from launch' },
   { label: 'Office', value: 'Eindhoven, Netherlands' },
 ];
 
@@ -70,6 +71,11 @@ export default function ContactCTA() {
                       </a>
                     ) : (
                       c.value
+                    )}
+                    {c.note && (
+                      <span className="ml-2 text-xs font-normal" style={{ color: 'var(--gn-muted)' }}>
+                        ({c.note})
+                      </span>
                     )}
                   </dd>
                 </div>

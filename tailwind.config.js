@@ -2,7 +2,8 @@
  * Tailwind CSS configuration — Gnanalytica product-family theme.
  *
  * A warm editorial light base with dark accent bands. Display = Instrument Serif,
- * body = Inter, eyebrow labels = JetBrains Mono. Per-product accent colours are
+ * body = Inter, eyebrow labels = JetBrains Mono (self-hosted with next/font in
+ * pages/_app.js, exposed as --font-* variables). Per-product accent colours are
  * defined in lib/products.js and applied via inline styles (kept out of Tailwind
  * so the JIT purge never strips dynamic product gradients).
  */
@@ -20,13 +21,13 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
-        display: ['Instrument Serif', 'Georgia', 'serif'],
-        serif: ['Instrument Serif', 'Georgia', 'serif'],
-        mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
+        display: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
+        serif: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
+        mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
         // Brand theme (homepage): display + body pairing
-        brico: ['Bricolage Grotesque', 'Inter', 'Arial Black', 'sans-serif'],
-        instr: ['Instrument Sans', 'Inter', ...defaultTheme.fontFamily.sans],
+        brico: ['var(--font-bricolage)', 'var(--font-inter)', 'Arial Black', 'sans-serif'],
+        instr: ['var(--font-instrument-sans)', 'var(--font-inter)', ...defaultTheme.fontFamily.sans],
       },
       letterSpacing: {
         tightish: '-0.015em',

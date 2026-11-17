@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
+import FieldCompanionLegalNote from '../components/legal/FieldCompanionLegalNote';
 
 export default function PrivacyPolicy() {
   const containerVariants = {
@@ -94,6 +95,8 @@ export default function PrivacyPolicy() {
                 Effective Date: 15 February 2026 | Last Updated: 15 February 2026
               </p>
             </motion.div>
+
+            <FieldCompanionLegalNote className="mt-8 max-w-3xl" />
           </motion.section>
 
           {/* Table of Contents */}
