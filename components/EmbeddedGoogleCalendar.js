@@ -54,7 +54,7 @@ export default function EmbeddedGoogleCalendar({
               </button>
               <p className="max-w-sm text-xs text-editorial-muted">
                 The calendar is loaded from Google only when you click. Google then receives your IP address and may set
-                cookies. You can also email contact@gnanalytica.com to book a call.
+                cookies. You can also book a call by email at sandeep@gnanalytica.com.
               </p>
             </div>
           ) : (
