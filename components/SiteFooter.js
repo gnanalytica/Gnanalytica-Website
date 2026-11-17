@@ -1,9 +1,9 @@
 /**
  * SiteFooter — dark navy footer shared across the site.
  *
- * Masked brand logo + products, quick links and the company's real contact
- * and registration details (Eindhoven, NL and Bengaluru, India). Stays on
- * the dark navy surface in both themes.
+ * Masked brand logo + products, quick links, the Field Companion legal texts
+ * and the company's real contact and registration details (Eindhoven, NL and
+ * Bengaluru, India). Stays on the dark navy surface in both themes.
  */
 import Link from 'next/link';
 import BrandLogo from './BrandLogo';
@@ -16,6 +16,13 @@ const quickLinks = [
   { name: 'About', href: '/#about' },
   { name: 'Privacy policy', href: '/privacy-policy' },
   { name: 'Terms & conditions', href: '/terms-and-conditions' },
+];
+
+// Field Companion is provided by the Dutch business and has its own texts.
+const fieldCompanionLinks = [
+  { name: 'Privacy notice', href: '/field-companion/privacy' },
+  { name: 'Terms of service', href: '/field-companion/terms' },
+  { name: 'Subprocessors', href: '/field-companion/subprocessors' },
 ];
 
 export default function SiteFooter() {
@@ -72,6 +79,16 @@ export default function SiteFooter() {
                   <a href={link.href} className="text-sm transition-colors hover:text-[#f2efe6]">
                     {link.name}
                   </a>
+                </li>
+              ))}
+            </ul>
+            <h3 className="eyebrow mb-4 mt-8 text-[#f2efe6]">Field Companion</h3>
+            <ul className="space-y-3">
+              {fieldCompanionLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm transition-colors hover:text-[#f2efe6]">
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
