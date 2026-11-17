@@ -3,11 +3,11 @@
  *
  * Unified product-family theme: a warm editorial light base with dark accent
  * bands. Display type is Instrument Serif (matching Valytica & Standup), body is
- * Inter, and eyebrow/kicker labels are JetBrains Mono. Per-product accent colours
- * live in lib/products.js and are applied via inline styles.
+ * Inter, and eyebrow/kicker labels are JetBrains Mono. The fonts are self-hosted
+ * with next/font (pages/_app.js), which sets the --font-* variables used here.
+ * Per-product accent colours live in lib/products.js and are applied via inline
+ * styles.
  */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,7 +30,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   font-weight: 400;
   color: hsl(var(--ink));
   background-color: hsl(var(--canvas));
@@ -43,7 +43,7 @@ body {
 
 @layer base {
   h1, h2, h3, h4 {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--font-instrument-serif), Georgia, serif;
     font-weight: 400;
     letter-spacing: -0.015em;
   }
@@ -52,7 +52,7 @@ body {
 @layer components {
   /* JetBrains Mono uppercase eyebrow — the shared family label treatment */
   .eyebrow {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
     font-size: 11px;
     line-height: 1;
     text-transform: uppercase;
@@ -172,13 +172,13 @@ img {
 .gn-home {
   background-color: var(--gn-bg);
   color: var(--gn-ink);
-  font-family: 'Instrument Sans', 'Inter', system-ui, sans-serif;
+  font-family: var(--font-instrument-sans), var(--font-inter), system-ui, sans-serif;
 }
 .gn-home h1,
 .gn-home h2,
 .gn-home h3,
 .gn-home h4 {
-  font-family: 'Bricolage Grotesque', 'Inter', 'Arial Black', sans-serif;
+  font-family: var(--font-bricolage), var(--font-inter), 'Arial Black', sans-serif;
   font-weight: 650;
   letter-spacing: -0.02em;
 }
@@ -302,7 +302,7 @@ img {
     content: attr(data-label);
     display: block;
     margin-bottom: 0.15rem;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
     font-size: 10.5px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -352,7 +352,7 @@ img {
     content: attr(data-label);
     display: block;
     margin-bottom: 0.15rem;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
     font-size: 10.5px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
