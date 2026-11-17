@@ -6,10 +6,8 @@
  * from the ## headings (a sticky sidebar on large screens), and the text
  * itself. Headings carry ids that match the links in the text and show a #
  * anchor on hover. Tables turn into stacked label/value cards on small
- * screens. Drafting markers are highlighted, and while any are left a short
- * draft banner is shown (it prints too). Nav, footer, contents and the links
- * between texts are hidden in print, and the body is not animated so it
- * always prints in full.
+ * screens. Nav, footer, contents and the links between texts are hidden in
+ * print, and the body is not animated so it always prints in full.
  */
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -49,12 +47,6 @@ function Inline({ nodes }) {
           <a key={i} href={n.href} className="legal-link font-medium underline decoration-1 underline-offset-2" style={{ color: ACCENT }}>
             <Inline nodes={n.c} />
           </a>
-        );
-      case 'marker':
-        return (
-          <mark key={i} className="legal-marker rounded bg-amber-100 px-1 text-[0.92em] text-amber-900 ring-1 ring-amber-300">
-            <Inline nodes={n.c} />
-          </mark>
         );
       default:
         return null;
@@ -251,13 +243,6 @@ export default function LegalDocument({ doc, path }) {
               })}
             </nav>
           </motion.div>
-
-          {doc.markers > 0 && (
-            <div role="note" className="mt-8 rounded-2xl border border-amber-300 bg-amber-50 px-5 py-4 text-sm leading-relaxed text-amber-900">
-              <strong className="font-semibold">Draft, not yet in force.</strong> This text is still being reviewed. Highlighted
-              items in square brackets are open points that will be settled before it takes effect.
-            </div>
-          )}
         </header>
 
         <div className="mx-auto mt-10 max-w-6xl px-4 sm:px-6 lg:grid lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-14 lg:px-8">

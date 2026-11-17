@@ -232,15 +232,19 @@ img {
 
 /*
  * Field Companion legal texts (components/legal/LegalDocument.js).
- * Tables are a normal grid from 640px up (1024px for tables with five or
+ * Tables are a normal grid from 640px up (1280px for tables with five or
  * more columns, which also stack in print); below that each row becomes a
- * card and every cell shows its column name above the value.
+ * card and every cell shows its column name above the value. A wide table
+ * shown as a grid scrolls sideways if it does not fit, so no column is cut off.
  */
 .legal-table-wrap {
   border: 1px solid #ddd5c9;
   border-radius: 1rem;
   overflow: hidden;
   background: #fdfbf7;
+}
+.legal-wide {
+  overflow-x: auto;
 }
 .legal-table th {
   background: #f1ece2;
@@ -308,8 +312,8 @@ img {
     display: none;
   }
 }
-/* Tables with five or more columns stack up to 1023px, and in print. */
-@media (max-width: 1023px), print {
+/* Tables with five or more columns stack up to 1279px, and in print. */
+@media (max-width: 1279px), print {
   .legal-wide {
     border: 0;
     border-radius: 0;
@@ -396,9 +400,5 @@ img {
   .legal-pairs {
     border-color: #bbb;
     overflow: visible;
-  }
-  .legal-marker {
-    background: none !important;
-    outline: 1px dashed #999;
   }
 }

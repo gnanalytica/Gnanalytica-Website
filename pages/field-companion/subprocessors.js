@@ -12,7 +12,6 @@ export default function FieldCompanionSubprocessors({ doc }) {
         title={doc.title}
         description="The companies Gnanalytica uses to run Field Companion, what data they handle, where, and how we tell customers about changes."
         path={PATH}
-        draft={doc.markers > 0}
       />
       <LegalDocument doc={doc} path={PATH} />
     </>

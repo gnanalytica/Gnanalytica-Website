@@ -12,7 +12,6 @@ export default function FieldCompanionTerms({ doc }) {
         title={doc.title}
         description="The terms of service for Field Companion, the AI assistant for site visits provided by Gnanalytica in the Netherlands (KvK 98649035)."
         path={PATH}
-        draft={doc.markers > 0}
       />
       <LegalDocument doc={doc} path={PATH} />
     </>

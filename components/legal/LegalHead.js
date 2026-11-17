@@ -1,13 +1,12 @@
 /**
  * LegalHead — <Head> tags for a Field Companion legal page: title,
- * description, canonical URL and Open Graph tags. While the text still holds
- * drafting markers the page asks search engines not to index it.
+ * description, canonical URL and Open Graph tags. The pages are indexable.
  */
 import Head from 'next/head';
 
 const SITE = 'https://gnanalytica.com';
 
-export default function LegalHead({ title, description, path, draft }) {
+export default function LegalHead({ title, description, path }) {
   const url = `${SITE}${path}`;
   return (
     <Head>
@@ -20,7 +19,6 @@ export default function LegalHead({ title, description, path, draft }) {
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={url} />
-      {draft && <meta name="robots" content="noindex" />}
     </Head>
   );
 }

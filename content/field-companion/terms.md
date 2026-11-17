@@ -46,11 +46,11 @@ In these terms:
 
 **3.2 What these terms cover.** These terms apply to every use of the Service by your organisation and its members. They also apply to the Pilot.
 
-**3.3 How you accept.** Your organisation accepts these terms when a person creates an organisation and taps **Accept** in WhatsApp, or confirms acceptance on the web where we offer this. Before you accept, we send you a link to these terms, which you can save and print as a PDF. These terms include the data processing terms in section 8. The short summary in the creation message does not replace these terms. If the summary and these terms differ, these terms apply. [OPEN: in code the link is optional (`ORG_TERMS_URL`). The server must not show Accept unless the link is set and points to a stable version that can be downloaded as a PDF. The Accept message must also mention the data processing terms; see the proposed text in `review-log.md`.]
+**3.3 How you accept.** When a person creates an organisation, we send them a personal link in WhatsApp. The link opens a web page that shows these terms. Your organisation accepts these terms when that person ticks the **Accept** box on that page and confirms. These terms include the data processing terms in section 8. If your organisation was created before this web page was available, the person who created it accepted by tapping **Accept** in WhatsApp. A short summary in WhatsApp or on the page does not replace these terms. If the summary and these terms differ, these terms apply.
 
-**3.4 Authority.** The person who accepts confirms that they may act for the organisation and bind it to these terms. If that person does not have this authority, they may be personally responsible for the loss this causes (Article 3:70 Dutch Civil Code). We keep a record of each acceptance: the terms version, a protected code that identifies the member, the statement of authority and the message reference.
+**3.4 Authority.** The person who accepts confirms that they may act for the organisation and bind it to these terms. If that person does not have this authority, they may be personally responsible for the loss this causes (Article 3:70 Dutch Civil Code). We keep a record of each acceptance: the terms version, a protected code that identifies the member, the statement of authority and a reference to the acceptance.
 
-**3.5 Your copy of these terms.** We give you these terms before you accept, through the link in the creation message, in a form you can save and print. On request, we email you a PDF copy free of charge.
+**3.5 Your copy of these terms.** We give you these terms before you accept, on the acceptance page, in a form you can save and print. These terms are also published at `/field-companion/terms` on the website where our privacy notice is published. On request, we email you a PDF copy free of charge.
 
 **3.6 Your own terms do not apply.** We do not accept your general terms or purchasing terms. They do not apply, even if you refer to them, unless we agree to them in writing and sign that agreement.
 
@@ -60,13 +60,13 @@ In these terms:
 
 **4.1 What the Pilot is.** During the Pilot, only organisations that we invite can use the Service. The Pilot has two stages. In the **sample-data stage**, you may use only sample data. In the **real-data stage**, you may also use real data, after we confirm this in writing under section 4.3. In the Service or our other texts, the Pilot may be called a "demo service". That means the Pilot.
 
-**4.2 Where the Pilot runs.** The Pilot runs only on our live set-up. Before any organisation joins the Pilot, we have in place:
+**4.2 Where the Pilot runs.** The Pilot runs only on our live set-up. Before any organisation joins the Pilot, and so before any real customer data is processed, we will have in place:
 
 - a data processing agreement with each subprocessor, and a safeguard for every transfer of personal data outside the EEA;
 - AI language models called through an EU endpoint with zero data retention on every request;
 - backups, with an encrypted second copy at a separate provider in Germany, and central logs.
 
-[OPEN: none of these is in place today. They are owner steps before the switch to the live set-up (`docs/10-go-live.md` Phase 1 and 2).]
+Our privacy notice calls the start of the Pilot "launch".
 
 **4.3 Sample data only, until we tell you otherwise.** During the Pilot, use only sample data until we confirm in writing that your organisation may use real data. This includes the content of messages, notes and photos. We will only confirm this after:
 
@@ -88,7 +88,7 @@ Until then, do not record real occupants, owners, tenants, claimants or other pe
 
 **4.8 Free of charge.** The Pilot is free of charge, unless we agree otherwise in writing.
 
-**4.9 EEA only.** During the Pilot, only organisations established in the EEA can take part, and members may only use the Service with a phone number from a country in the EEA. WhatsApp's rules for AI assistants require the phone number limit. [OPEN: nothing in the code enforces the phone number limit; decide whether to enforce it in code.]
+**4.9 EEA only.** During the Pilot, only organisations established in the EEA can take part.
 
 ## 5. Accounts, organisations and roles
 
@@ -174,7 +174,7 @@ If you use the Service for a high-risk purpose despite this ban, you may become 
 
 **8.1 You own your data.** Customer Data belongs to you, or to the people you got it from. We do not get any ownership of it.
 
-**8.2 Roles.** For the personal data in Customer Data, you are the controller and we are your processor. For some data we are the controller ourselves, for example: contract contacts, the record that you accepted these terms, invoices, security and audit logs, messages from numbers that belong to no organisation, and usage figures without content. Our Field Companion privacy notice explains this. It is published at `/field-companion/privacy` on the website where these terms are published. [OPEN: confirm the path.]
+**8.2 Roles.** For the personal data in Customer Data, you are the controller and we are your processor. For some data we are the controller ourselves, for example: contract contacts, the record that you accepted these terms, invoices, security and audit logs, messages from numbers that belong to no organisation, and usage figures without content. Our Field Companion privacy notice explains this. It is published at `/field-companion/privacy` on the website where these terms are published.
 
 **8.3 No use for our own purposes.** We use Customer Data only to provide the Service to you. We do not sell it. We do not use it to train or fine-tune AI models. We do not use it for our own purposes. We may use usage figures that contain no content and identify no member to run, cost, improve and price the Service.
 
@@ -184,8 +184,8 @@ If you use the Service for a high-risk purpose despite this ban, you may become 
 - **Instructions.** We process personal data only on your documented instructions. Your instructions are these terms, the documented functions of the Service, and the settings and use of the Service by your admins and members. You may give further instructions in writing. We tell you if we think an instruction breaks the law. This also applies to transfers outside the EEA, unless the law requires otherwise. In that case we tell you first, unless the law forbids this.
 - **Confidentiality.** Only people who need access to provide the Service can access personal data. They are bound by confidentiality.
 - **Security.** We take appropriate technical and organisational measures to protect personal data, as required by Article 32 GDPR. We describe them in the DPA. We may improve them, but we will not lower the overall level of protection.
-- **Subprocessors.** You give us general permission to use subprocessors. Our current subprocessors and where they process data are listed at `/field-companion/subprocessors` on the website where these terms are published, or on request by email. We give you at least 30 days' notice before we add or replace a subprocessor, by email to your organisation's privacy contact (or, if we have no email address, in WhatsApp to your admins) and on that list. You may object on reasonable data protection grounds. If we cannot solve your objection, you may end the affected part of the Service without penalty. We remain responsible to you for the work of our subprocessors. We have a contract with each subprocessor that puts the same data protection duties on it (section 4.2). [OPEN: not true today; no subprocessor agreement is signed. Do not publish until it is.]
-- **Transfers.** Every transfer of personal data outside the EEA is covered by a safeguard under Chapter V of the GDPR, for example the EU standard contractual clauses or an adequacy decision. The subprocessor list states the safeguard for each transfer (section 4.2). [OPEN: not true today; no safeguard is confirmed. Do not publish until it is.]
+- **Subprocessors.** You give us general permission to use subprocessors. Our current subprocessors and where they process data are listed at `/field-companion/subprocessors` on the website where these terms are published, or on request by email. We give you at least 30 days' notice before we add or replace a subprocessor, by email to your organisation's privacy contact (or, if we have no email address, in WhatsApp to your admins) and on that list. You may object on reasonable data protection grounds. If we cannot solve your objection, you may end the affected part of the Service without penalty. We remain responsible to you for the work of our subprocessors. Before any real customer data is processed, we put in place a contract with each subprocessor that puts the same data protection duties on it (section 4.2).
+- **Transfers.** Where a provider is outside the EEA or owned by a US company, we use the EU Standard Contractual Clauses or the EU-US Data Privacy Framework, as the provider's data processing agreement provides. These agreements are put in place before any real customer data is processed (section 4.2). The subprocessor list shows the status of each provider's agreement.
 - **Assistance.** We help you, as far as is reasonable, to answer requests from data subjects, to secure the data, to report breaches, and with data protection impact assessments and prior consultation. If we receive a request from one of your data subjects, we forward it to you within 2 working days.
 - **Breaches.** We tell you without undue delay after we become aware of a personal data breach that affects your Customer Data. We give you the information you need to meet your own duties, in steps if needed, and we keep you updated.
 - **Deletion or return.** At the end of the agreement we delete or return your personal data, at your choice, as set out in section 9, unless the law requires us to keep it.
@@ -194,9 +194,9 @@ If you use the Service for a high-risk purpose despite this ban, you may become 
 
 **8.5 Full DPA before real data.** Section 8.4 is our data processing agreement with you under Article 28 GDPR. Before any real personal data other than member details is used (section 4.3), you and we sign a full DPA with annexes on the processing, the security measures and the subprocessors. Once signed, the DPA replaces section 8.4. On data protection matters, the DPA takes priority over these terms.
 
-**8.6 Where data is processed.** We store Customer Data in the EEA. Some subprocessors may process it, or reach it, from outside the EEA, for example for support or because of how WhatsApp works. The subprocessor list shows where each one processes data and which safeguard applies.
+**8.6 Where data is processed.** We store Customer Data in the EEA. Some subprocessors may process it, or reach it, from outside the EEA, for example for support or because of how WhatsApp works. The subprocessor list shows where each one processes data and the status of its agreement.
 
-**8.7 Retention.** Customer Data is kept for the period your organisation chooses: 730 days by default, and between 30 and 3,650 days. We set the period at your admin's request. Open findings and open follow-ups, and the visits they belong to, are kept while they are open, but no longer than [OWNER: limit, for example the retention period plus 365 days]. Your admin can close them at any time. Some data is kept for shorter periods, as described in our privacy notice.
+**8.7 Retention.** Customer Data is kept for the period your organisation chooses: 730 days by default, and between 30 and 3,650 days. We set the period at your admin's request. Open findings and open follow-ups, and the visits they belong to, are kept as long as they are open, even if that is longer than your period. Once they are closed, they are deleted under your organisation's period, like the rest of the visit. Your admin can close them at any time. Some data is kept for shorter periods, as described in our privacy notice.
 
 ## 9. Export and deletion
 
@@ -262,7 +262,7 @@ If you use the Service for a high-risk purpose despite this ban, you may become 
 
 ## 15. Liability
 
-**15.1 Cap.** If we are liable to you, under these terms or in any other way connected to the Service, our liability is limited to the higher of: (a) the fees you paid us for the Service in the 12 months before the event that caused the damage; or (b) EUR 1,000. This is the most we pay for all claims together in any calendar year. A series of connected events counts as one event. During the free Pilot, the maximum is EUR 1,000.
+**15.1 Cap.** If we are liable to you, under these terms or in any other way connected to the Service, our liability is limited to the higher of: (a) the fees you paid us for the Service in the 12 months before the claim; or (b) EUR 1,000. This is the most we pay for all claims together in any calendar year. A series of connected events counts as one event. During the free Pilot, the maximum is EUR 1,000.
 
 **15.2 Only direct loss.** We are only liable for direct loss. Direct loss means only: (a) reasonable costs to make our performance meet these terms; (b) reasonable costs to find out the cause and size of the loss, as far as they relate to direct loss; (c) reasonable costs to prevent or limit loss, as far as you show they limited direct loss; and (d) reasonable costs to restore Customer Data from the latest copy we hold. We are not liable for any other loss, such as loss of profit, revenue, savings, goodwill or business opportunities, business interruption, or claims from your customers. We are also not liable for loss caused by:
 
@@ -272,7 +272,7 @@ If you use the Service for a high-risk purpose despite this ban, you may become 
 
 **15.3 Data.** In the sample-data stage of the Pilot, we are not liable for loss or corruption of sample data. At other times, our liability for loss or corruption of Customer Data is limited to the reasonable cost of restoring it from the latest copy we hold, within the cap in section 15.1. Keep your own copies of final reports.
 
-**15.4 When the limits do not apply.** The limits in this section 15 do not apply to loss caused by intent or deliberate recklessness (opzet of bewuste roekeloosheid) of Gnanalytica's owner or management. They also do not apply where the law does not allow liability to be limited. For death or bodily injury caused by our attributable failure, the cap in section 15.1 does not apply. Instead, our liability is limited to [OWNER: amount matching our liability insurance].
+**15.4 When the limits do not apply.** The limits in this section 15 do not apply to loss caused by intent or deliberate recklessness (opzet of bewuste roekeloosheid) of Gnanalytica's owner or management. They also do not apply where the law does not allow liability to be limited.
 
 **15.5 Data protection.** Nothing in these terms limits the rights of data subjects under the GDPR. Between you and us, each party bears the part of any damage that it caused, as set out in Article 82(5) GDPR, within the limits of this section 15.
 

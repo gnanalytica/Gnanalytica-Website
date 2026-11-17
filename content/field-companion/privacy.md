@@ -118,7 +118,7 @@ Where this notice says **"from launch"**, it means from the start of the closed 
 
 ## 5. Data we process for organisations (we are processor)
 
-This section describes customer content. **Your organisation is the controller** and decides the legal basis. It must tell you which one it relies on. For staff and contractors this is usually the organisation's legitimate interest in recording inspections accurately and efficiently. For people at sites it is usually the organisation's legitimate interest, and sometimes a legal duty. **[OPEN 9]**
+This section describes customer content. **Your organisation is the controller** and decides the legal basis. It must tell you which one it relies on. For staff and contractors this is usually the organisation's legitimate interest in recording inspections accurately and efficiently. For people at sites it is usually the organisation's legitimate interest, and sometimes a legal duty.
 
 | Data | What it is used for |
 | --- | --- |
@@ -145,18 +145,18 @@ This section describes customer content. **Your organisation is the controller**
 
 | Data | Purpose | Legal basis | Kept |
 | --- | --- | --- | --- |
-| **Testers** (people we invite to test Field Companion in our own test organisations): name, WhatsApp number and profile name; your messages, voice notes, what you say during a walkthrough (as text) and your photos; the sample visits and reports you create | To test Field Companion and fix faults before customers use it | Our legitimate interest (Art. 6(1)(f)) in testing the service safely before launch **[OPEN 22]** | Deleted when the test ends, at the latest [OWNER: number] days after your last use. Records of AI requests: see section 8 |
+| **Testers** (people we invite to test Field Companion in our own test organisations): name, WhatsApp number and profile name; your messages, voice notes, what you say during a walkthrough (as text) and your photos; the sample visits and reports you create | To test Field Companion and fix faults before customers use it | Our legitimate interest (Art. 6(1)(f)) in testing the service safely before launch | Deleted when the test phase ends. Records of AI requests: see section 8 |
 | **Uninvited senders:** your WhatsApp number, the profile name WhatsApp sends with each message, and your message | To reply, at most once a day, that Field Companion is available by invitation only. We do not act on the message in any other way | Legitimate interest (Art. 6(1)(f)): answering people who write to us and protecting the service | 30 days |
-| **Security records:** sign-ins, use of links, actions taken, with IDs and times but no content | To protect accounts and data, investigate misuse and keep a reliable record of who did what | Our legitimate interest (Art. 6(1)(f)) in keeping the service and its data secure. Keeping data secure is also our duty under Art. 32 GDPR | Audit record (IDs and actions, no content): up to 7 years, to show who did what for as long as claims or checks about the service are possible; deleted when the organisation is deleted, except a final record that it was deleted **[OPEN 23]**. Application logs: up to 400 days (from launch, in our log store in Germany). Error reports: 90 days |
+| **Security records:** sign-ins, use of links, actions taken, with IDs and times but no content | To protect accounts and data, investigate misuse and keep a reliable record of who did what | Our legitimate interest (Art. 6(1)(f)) in keeping the service and its data secure. Keeping data secure is also our duty under Art. 32 GDPR | Audit record (IDs and actions, no content): up to 7 years, to show who did what for as long as claims or checks about the service are possible; deleted when the organisation is deleted, except a final record that it was deleted. Application logs: up to 400 days (from launch, in our log store in Germany). Error reports: 90 days |
 | **Abuse limits:** coded (one-way hashed) keys for rate limits, for invitations sent to people outside an organisation, and for fixed replies already sent | To stop misuse and spam | Our legitimate interest (Art. 6(1)(f)) in protecting the service | Rate limits: 7 days after last use. Invitations: 30 days. Reply marks: 1 day |
 | **"Do not invite" list:** a coded (hashed) number after someone replies STOP, blocks the number or declines | To respect that person's wish and not invite them again | Legitimate interest (Art. 6(1)(f)) in respecting that wish | Until the person sends START or unblocks |
 | **Usage metering:** what the service used and cost (AI requests, speech, messages), with the ID of an organisation, a visit or a single request, never your name, your chat or your words. For 7 days, a usage record can be linked to the chat message it answered; after that, the link is removed. Also a weekly quality summary with organisation counts only | To control costs and set prices | Legitimate interest (Art. 6(1)(f)) in running the service at a sustainable cost | 25 months |
 | **Contracts and accounts:** names, roles, emails and numbers of the people who sign up or act for a customer; from launch, the coded list of numbers allowed to create an organisation, and requests to create one | To enter into and manage contracts with organisations | Steps before a contract, and the contract (Art. 6(1)(b)); where the contract is with your employer, our legitimate interest (Art. 6(1)(f)) in managing the business relationship | Contract period plus 7 years. Correspondence: 2 years after the relationship ends. From launch: a request to create an organisation, 1 hour; an organisation not yet accepted, 7 days |
-| **Proof that terms were accepted** (from launch): terms version, a coded ID of the person who accepted, their statement that they may act for the organisation, and the WhatsApp message ID | To prove what was agreed and by whom | Legitimate interest (Art. 6(1)(f)) in being able to prove the agreement | 6 years after the organisation is deleted |
+| **Proof that terms were accepted** (from launch): terms version, a coded ID of the person who accepted, their statement that they may act for the organisation, and a reference to the acceptance (the WhatsApp message, or the acceptance on the web page) | To prove what was agreed and by whom | Legitimate interest (Art. 6(1)(f)) in being able to prove the agreement | 6 years after the organisation is deleted |
 | **Invoices and accounting** | To meet tax and accounting duties | Legal duty (Art. 6(1)(c); Dutch tax law, Art. 52 AWR, and Art. 2:10 Civil Code) | 7 years |
 | **Privacy requests, complaints and breach records** | To handle your requests and show that we did | Legal duty (Art. 6(1)(c); Arts. 12 to 22, 33 and 34 GDPR) | Request log: 2 years after the request is closed. Breach register: 5 years. Request records in the system: 13 months. List of erased IDs, used to re-apply deletions after restoring a backup (from launch): 40 days |
-| **Business contacts and pilot enquiries:** name, organisation, email, phone number and what you tell us | To answer you, arrange a call or a pilot, and keep in touch about it | Steps you asked for before a contract (Art. 6(1)(b)); otherwise our legitimate interest (Art. 6(1)(f)) in answering business enquiries | 2 years after our last contact, unless a contract follows **[OPEN 12]** |
-| **Website visitors:** IP address, browser details, pages requested and time | To deliver the Field Companion pages and protect them against attacks | Legitimate interest (Art. 6(1)(f)) in a working and secure website | [OWNER: Vercel and Cloudflare log periods, for example "up to 30 days"]. See [section 16](#16-our-website) **[OPEN 11]** |
+| **Business contacts and pilot enquiries:** name, organisation, email, phone number and what you tell us | To answer you, arrange a call or a pilot, and keep in touch about it | Steps you asked for before a contract (Art. 6(1)(b)); otherwise our legitimate interest (Art. 6(1)(f)) in answering business enquiries | 2 years after our last contact, unless a contract follows |
+| **Website visitors:** IP address, browser details, pages requested and time | To deliver the Field Companion pages and protect them against attacks | Legitimate interest (Art. 6(1)(f)) in a working and secure website | Kept by Vercel and Cloudflare for a short period under their own terms. See [section 16](#16-our-website) |
 
 **Product analytics.** We do not use product analytics in Field Companion. Nothing about how you use it is sent to an analytics service. If we start, we will update this notice first and you will be able to object.
 
@@ -179,7 +179,7 @@ People at sites usually do not know Field Companion. The organisation must infor
 
 **What it does.** Field Companion uses AI models to understand what you say and write, turn speech into text and text into speech, file notes under the right area, match photos to the checklist, describe photos, answer questions, and draft the report.
 
-**It tells you it is an AI.** Field Companion says it is an AI assistant, not a person: in the first message after you join, in its one reply to an uninvited number, in the first message after you agree to help a colleague, and at the start of every walkthrough (spoken and on screen). Every visit report states that it was drafted by AI and reviewed by a named person, and the PDF file carries a marker that it was drafted by AI. **[OPEN 10]**
+**It tells you it is an AI.** Field Companion says it is an AI assistant, not a person: in the first message after you join, in its one reply to an uninvited number, in the first message after you agree to help a colleague, and at the start of every walkthrough (spoken and on screen). Every visit report states that it was drafted by AI and reviewed by a named person, and the PDF file carries a marker that it was drafted by AI.
 
 **It can be wrong.** It may mishear, file a note under the wrong area, match the wrong photo, or add a detail that is not true. That is why uncertain matches are shown as suggestions, and why **a person reviews and submits every visit report** and is responsible for its content. Check the report before you submit it.
 
@@ -189,16 +189,16 @@ People at sites usually do not know Field Companion. The organisation must infor
 
 **No training on customer content.** We do not use customer content to train or fine-tune AI models. From launch, the AI language models are called through an EU endpoint with **zero data retention** on every request, so the model providers do not keep the content of requests or learn from it. The speech service is told on every request not to use audio to improve its models.
 
-**During the test phase**, only sample data and the testers' own messages, voice, transcripts and photos are sent to the models. These requests go through OpenRouter's global endpoint, under its standard settings, and the language models are Anthropic's, used through our own Anthropic account (United States). [OWNER: state each provider's own retention, for example how long Anthropic keeps API requests, only after checking its current terms.]
+**During the test phase**, only sample data and the testers' own messages, voice, transcripts and photos are sent to the models. These requests go through OpenRouter's global endpoint, under its standard settings, and the language models are Anthropic's, used through our own Anthropic account (United States). Each provider keeps request data under its own terms.
 
-**Records of AI requests.** To find faults, we keep records of requests to the AI language models, with an EU company (Langfuse, Germany). These records can include messages, what was said and photo descriptions. Today they hold testers' data and sample data only. [OWNER: state the period actually in force, for example "We delete them after 30 days", once it is set up.] Before the closed pilot, we will either set these records to be deleted after 30 days or stop keeping them. **[OPEN 4]**
+**Records of AI requests.** To find faults, we keep records of requests to the AI language models, with an EU company (Langfuse, Germany). These records can include messages, what was said and photo descriptions. Today they hold testers' data and sample data only. We use these records only in the test phase. They are not deleted automatically today; we delete them when the test phase ends. From launch, we do not keep these records. If we ever start keeping them again, we will first set them to be deleted after 30 days and update this notice and our subprocessor list.
 
 ## 9. WhatsApp and Meta
 
 Field Companion works through WhatsApp, which is run by Meta.
 
 - **For WhatsApp itself**, such as your WhatsApp account and the app on your phone, **Meta is a separate controller** under its own terms and privacy policy. We do not control that.
-- **For the messages between you and Field Companion**, Meta is our service provider (processor) under the WhatsApp Business terms and Meta's data processing terms. **[OPEN 2]** Meta may process these messages in its data centres outside the EU, including in the United States (see [section 11](#11-international-transfers)). Meta also uses some information about these messages for its own purposes, for example to keep WhatsApp secure, as a separate controller under its own privacy policy. [OWNER: if Meta's local storage in an EU country is switched on, add: "Meta stores the messages at rest in {country}."]
+- **For the messages between you and Field Companion**, Meta is our service provider (processor) under its WhatsApp Business terms. Meta may process these messages in its data centres outside the EU, including in the United States (see [section 11](#11-international-transfers)). Meta also uses some information about these messages for its own purposes, for example to keep WhatsApp secure, as a separate controller under its own privacy policy.
 - Messages also stay on your phone and on the phones of the people you write to.
 
 The WhatsApp business account belongs to Gnanalytica in the Netherlands.
@@ -213,25 +213,25 @@ The WhatsApp business account belongs to Gnanalytica in the Netherlands.
 - our service providers (subprocessors), only to run Field Companion and only as we instruct them. Before the closed pilot starts, each is bound by a data processing agreement with us;
 - authorities, only if the law requires it. If that happens, we tell the organisation unless the law forbids it, and we challenge requests that are not lawful.
 
-**Our service providers for Field Companion** (current list, with any changes, at [`/field-companion/subprocessors`](/field-companion/subprocessors)) **[OPEN 13]**:
+**Our service providers for Field Companion** (current list, with any changes, at [`/field-companion/subprocessors`](/field-companion/subprocessors)):
 
 | Provider | What it does | Where |
 | --- | --- | --- |
 | Supabase | Database and file storage | Frankfurt, Germany |
 | Fly.io | Servers that run Field Companion | Frankfurt, Germany |
-| LiveKit | Live audio during a walkthrough (not recorded) | EU (Frankfurt); routing being confirmed, see section 11 **[OPEN 7]** |
+| LiveKit | Live audio during a walkthrough (not recorded) | EU (Frankfurt). Live audio may pass through LiveKit servers outside the EU while it is carried; see section 11 |
 | Deepgram | Speech to text and text to speech | EU endpoint |
 | OpenRouter | Passes requests to the AI language and vision models | Test phase: global endpoint, may be outside the EU. From launch: EU endpoint, zero data retention |
-| AI model providers | Run the AI models | Test phase: Anthropic (language and vision models, through our own Anthropic account) and OpenAI (a search model, through OpenRouter), United States. From launch: [OWNER: list each provider and region] |
+| AI model providers | Run the AI models | Test phase: Anthropic (language and vision models, through our own Anthropic account) and OpenAI (a search model, through OpenRouter), United States. From launch: named on our subprocessor list before the closed pilot starts, and reached only through OpenRouter's EU endpoint with zero data retention |
 | Meta (WhatsApp) | Delivering WhatsApp messages | See sections 9 and 11 |
-| Langfuse | Records of AI requests, for fault-finding | EU (Germany). Test phase only; use after launch not yet decided (see section 8) |
-| Sentry | Error reports, set up to contain no content | EU (Germany) **[OPEN 21]** |
+| Langfuse | Records of AI requests, for fault-finding | EU (Germany). Test phase only; not used from launch (see section 8) |
+| Sentry | Error reports, set up to contain no content | EU (Germany) |
 
 From launch, we add **Better Stack** (log storage and alerts, Germany) and **Hetzner** (encrypted second copy of the data, Germany). PostHog is set up but not used, and receives nothing.
 
 We give customers **30 days' notice** before we add or replace a provider that handles customer content, and they can object.
 
-**For our own data**, the providers in the table above also handle it for us, as our processors (for example Meta for messages from uninvited numbers, Supabase and Sentry for security records, and all of them for testers' data). Other recipients are our email provider, our accountant and tax adviser, the Dutch tax authority where the law requires it, and the website providers named in [section 16](#16-our-website). **[OPEN 12]**
+**For our own data**, the providers in the table above also handle it for us, as our processors (for example Meta for messages from uninvited numbers, Supabase and Sentry for security records, and all of them for testers' data). Other recipients are our email provider, our accountant and tax adviser, the Dutch tax authority where the law requires it, and the website providers named in [section 16](#16-our-website).
 
 We do not sell personal data. We do not share it for advertising.
 
@@ -244,20 +244,20 @@ Several of our providers are US companies or have US parent companies (Supabase,
 - **Support access.** Staff of a provider's group outside the EU may reach data hosted in the EU, for support, operations or security.
 - **OpenRouter account data.** Account and billing details, usage counts, model names and request IDs go to OpenRouter in the US. From launch, this does not include the content of requests.
 - **Test phase.** During the test phase, AI requests use OpenRouter's global endpoint and Anthropic's and OpenAI's services in the US. Only sample data and testers' data are sent.
-- **WhatsApp.** Meta may process messages and media outside the EU, including in the United States. We are confirming where Meta stores WhatsApp Business messages for EU businesses, and will use EU storage if Meta offers it. **[OPEN 7]**
-- **Live audio.** We are confirming that LiveKit keeps live audio routing inside the EU. **[OPEN 7]**
+- **WhatsApp.** Meta may process messages and media outside the EU, including in the United States.
+- **Live audio.** We use LiveKit's EU region, but live audio may pass through LiveKit servers outside the EU while it is carried. It is not recorded.
 - **Website.** Vercel and Cloudflare (US companies) deliver our website; see [section 16](#16-our-website).
 
-**Safeguards.** Where personal data leaves the EEA, or can be reached from outside it, we use one of two safeguards: the **EU-US Data Privacy Framework**, where the US company is certified under it (an adequacy decision of the European Commission), or the **EU Standard Contractual Clauses** in the provider's data processing terms. We add extra measures: EU hosting, no content in error reports, short retention, and encryption in transit and at rest. You can ask for a copy of the safeguards at sandeep@gnanalytica.com.
+**Safeguards.** Where a provider is outside the EEA or owned by a US company, we use the **EU Standard Contractual Clauses** or the **EU-US Data Privacy Framework**, as the provider's data processing agreement provides. During the test phase, these agreements are not yet signed. They are put in place before the closed pilot starts, and so before any real customer data is processed (see [section 2](#2-status-today-test-phase-then-a-closed-pilot)). We add extra measures: EU hosting, no content in error reports, short retention, and encryption in transit and at rest. You can ask for a copy of the safeguards at sandeep@gnanalytica.com.
 
 | Provider | Country | Safeguard |
 | --- | --- | --- |
-| Supabase, Fly.io, LiveKit, Deepgram, OpenRouter, Sentry | United States (support access, account data) | [OWNER: DPF or SCCs, from each signed or accepted agreement] |
-| Anthropic, OpenAI (test phase only) | United States | [OWNER: from each provider's commercial terms] |
-| Meta (WhatsApp) | United States and other countries | [OWNER: from the accepted WhatsApp Business data processing terms] |
-| Vercel, Cloudflare (website) | United States | [OWNER: confirm] |
+| Supabase, Fly.io, LiveKit, Deepgram, OpenRouter, Sentry | United States (support access, account data) | Standard Contractual Clauses or Data Privacy Framework, as each provider's data processing agreement provides. Put in place before the closed pilot starts |
+| Anthropic, OpenAI (test phase only) | United States | The provider's own terms. Used only in the test phase, with sample data and testers' data |
+| Meta (WhatsApp) | United States and other countries | Standard Contractual Clauses or Data Privacy Framework, as Meta's data processing terms provide. Put in place before the closed pilot starts |
+| Vercel, Cloudflare (website) | United States | The provider's own data processing terms |
 
-These agreements have not been signed yet. **The closed pilot does not start until they are** (section 2). **[OPEN 2]**
+**The closed pilot does not start until these agreements are in place** (section 2).
 
 ## 12. How long we keep data
 
@@ -268,16 +268,16 @@ These agreements have not been signed yet. **The closed pilot does not start unt
 | Messages, documents, images, voice notes and transcripts | The organisation's period, counted from when they were sent |
 | Visits | The organisation's period, counted from when the visit was submitted. A visit still in progress is kept |
 | Walkthrough text, notes, photos and photo descriptions | The organisation's period |
-| Walkthrough audio | **Not stored** by Field Companion. The speech service processes it under its own terms **[OPEN 6]** |
+| Walkthrough audio | **Not stored** by Field Companion. The speech service processes it under its own terms |
 | "Look" pictures | 24 hours |
-| Findings, follow-ups and reports | The organisation's period. **Findings and follow-ups that are still open, and the visits they belong to, are kept until they are closed**, even if that is longer **[OPEN 8]** |
+| Findings, follow-ups and reports | The organisation's period. **A finding or follow-up that is still open is kept as long as it is open**, even if that is longer, and a visit with an open follow-up is kept with it. Once closed, it is deleted when the organisation's period has passed |
 | Sites and their areas (names, addresses) | While the organisation exists |
 | Checklists, templates and word list | While the organisation exists |
 | A member's name and WhatsApp number | While the member is active; removed 30 days after the member is deactivated |
 | What you asked the assistant to remember | Until you or the assistant forget it; at most 12 months after you last confirmed it; never longer than the organisation's period. An offer you did not answer: 24 hours |
 | Site notes | Saved notes: the organisation's period. A suggested note you did not save: 24 hours |
 | Saved contacts | At most 12 months after you last sent them work; never longer than the organisation's period |
-| Your choice to receive or stop messages | The latest choice is kept until you ask for deletion or the organisation is deleted. Earlier, withdrawn choices are deleted after the organisation's period **[OPEN 5]** |
+| Your choice to receive or stop messages | The latest choice is kept until you ask for deletion or the organisation is deleted. Earlier, withdrawn choices are deleted after the organisation's period |
 | Sign-in and walkthrough links | Sign-in link: valid 15 minutes. Walkthrough link: valid 72 hours unless the organisation sets otherwise, at most 7 days. Records deleted 30 days after the link expires |
 | Content you delete | Kept 30 days so you can undo it, then deleted |
 | Copies you or your organisation export | 7 days |
@@ -285,8 +285,8 @@ These agreements have not been signed yet. **The closed pilot does not start unt
 | On your phone: the visit you opened | Until 24 hours after you submit it; at once when your session ends; never longer than 7 days |
 | On your phone: photos and changes waiting to be sent | Until the server confirms it received them; deleted 30 days after the session ended |
 | Backups | From launch: backup copies expire after 35 days. If a backup is ever restored, deletions are applied again |
-| Records of AI requests (Langfuse) | [OWNER: 30 days once set; see section 8] **[OPEN 4]** |
-| Website logs (Vercel, Cloudflare) | [OWNER: period] **[OPEN 11]** |
+| Records of AI requests (Langfuse) | Test phase only: deleted when the test phase ends. Not kept from launch. See section 8 |
+| Website logs (Vercel, Cloudflare) | Kept by them for a short period under their own terms |
 
 **Our own data:** see the "Kept" column in [section 6](#6-data-we-decide-about-ourselves-we-are-controller).
 
@@ -294,7 +294,7 @@ These agreements have not been signed yet. **The closed pilot does not start unt
 
 What is in place today:
 
-- Connections to Field Companion are encrypted (TLS 1.2 or higher). Live audio is encrypted in transit. **[OPEN 21]**
+- Connections to Field Companion are encrypted (TLS 1.2 or higher). Live audio is encrypted in transit.
 - The database, files and storage are encrypted at rest by the hosting provider.
 - Each organisation's data is kept apart by database rules (row-level security) on every table. The organisation is always taken from the verified sign-in, never from a request or from the AI.
 - Sign-in access tokens are valid for 15 minutes. Files are private. Links to download them work for 5 to 10 minutes, and links to upload them for up to 2 hours, after access is checked. Walkthrough links work once, on one phone, expire and can be withdrawn.
@@ -347,14 +347,14 @@ You have the right to:
 
 ## 16. Our website
 
-This section covers the Field Companion pages of gnanalytica.com: [OWNER: list paths, for example `/field-companion` and the pages of this notice, the terms and the subprocessor list]. The rest of gnanalytica.com belongs to Gnanalytica Technologies LLP and is covered by its own privacy policy. **[OPEN 11]**
+This section covers the Field Companion pages of gnanalytica.com: `/field-companion`, `/field-companion/privacy`, `/field-companion/terms` and `/field-companion/subprocessors`. The rest of gnanalytica.com belongs to Gnanalytica Technologies LLP and is covered by its own privacy policy.
 
-- **Hosting and protection.** Vercel Inc. hosts the website and Cloudflare, Inc. delivers and protects it. Both are US companies. When you visit, they process your IP address, browser details, the pages you request and the time, to deliver the site and stop attacks. Legal basis: our legitimate interest (Art. 6(1)(f)) in a working and secure website. They keep these logs for [OWNER: period]. Safeguard for the United States: see [section 11](#11-international-transfers).
-- **Storage on your device.** The website sets no cookies of its own. If you choose light or dark mode, your browser remembers that choice in its local storage (`gna-theme`). It stays on your device, is not sent to us, and you can remove it by clearing your browser's site data. The law allows this without consent because it only does what you asked for (Article 11.7a(3)(b) Telecommunicatiewet). **[OPEN 17]**
-- **Fonts.** The pages load their fonts from Google Fonts, so your browser sends your IP address to Google. **[OPEN 11: must change before publishing; see drafting note 11(b)]**
-- **Booking a call.** The home page shows a Google Calendar booking page for calls. It loads when you scroll to it, and Google may then set its own cookies. You can also book a call by email at sandeep@gnanalytica.com. **[OPEN 11: must change before publishing; see drafting note 11(b)]**
-- **Analytics.** We do not use analytics or advertising tools on the website. **[OPEN 11]**
-- **Field Companion web page.** The page members open on their phone sets no cookies and loads no third-party scripts or fonts. It stores only what the service needs on your phone: your sign-in session, your voice and feedback settings, the visit you are working on, and photos or changes waiting to be sent. A service worker keeps a copy of the app. The visit copy is deleted 24 hours after you submit, or when your session ends. Waiting items are deleted 30 days after the session ended. The law allows this storage without consent because it is strictly necessary for the service you asked for (Article 11.7a(3)(b) Telecommunicatiewet). **[OPEN 17]**
+- **Hosting and protection.** Vercel hosts the website and Cloudflare delivers and protects it. Both are US companies. When you visit, they process your IP address, browser details, the pages you request and the time, to deliver the site and stop attacks. Legal basis: our legitimate interest (Art. 6(1)(f)) in a working and secure website. They keep these logs for a short period under their own terms. Safeguard for the United States: see [section 11](#11-international-transfers).
+- **Storage on your device.** The website sets no cookies of its own. If you choose light or dark mode, your browser remembers that choice in its local storage (`gna-theme`). It stays on your device, is not sent to us, and you can remove it by clearing your browser's site data. The law allows this without consent because it only does what you asked for (Article 11.7a(3)(b) Telecommunicatiewet).
+- **Fonts and other content.** The fonts come from our own website, so no data goes to Google for them. These pages load no content from other companies.
+- **Booking a call.** The home page offers a Google Calendar booking page for calls. It loads only if you click to open the booking calendar. If you do, Google receives your IP address and may store cookies on your device. Legal basis: your consent (Art. 6(1)(a) GDPR and Article 11.7a Telecommunicatiewet), which you give by clicking. Google then uses the data under its own privacy policy. You can also book a call by email at sandeep@gnanalytica.com.
+- **Analytics.** We do not use analytics or advertising tools on the website.
+- **Field Companion web page.** The page members open on their phone sets no cookies and loads no third-party scripts or fonts. It stores only what the service needs on your phone: your sign-in session, your voice and feedback settings, the visit you are working on, and photos or changes waiting to be sent. A service worker keeps a copy of the app. The visit copy is deleted 24 hours after you submit, or when your session ends. Waiting items are deleted 30 days after the session ended. The law allows this storage without consent because it is strictly necessary for the service you asked for (Article 11.7a(3)(b) Telecommunicatiewet).
 
 ## 17. Children
 

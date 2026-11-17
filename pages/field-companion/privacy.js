@@ -12,7 +12,6 @@ export default function FieldCompanionPrivacy({ doc }) {
         title={doc.title}
         description="How Gnanalytica in the Netherlands handles personal data in Field Companion, the AI assistant for site visits: roles, data, AI, retention, transfers and your rights."
         path={PATH}
-        draft={doc.markers > 0}
       />
       <LegalDocument doc={doc} path={PATH} />
     </>
