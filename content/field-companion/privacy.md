@@ -1,6 +1,6 @@
 # Field Companion privacy notice
 
-Version 1.0 · 17 November 2026 · English (Dutch and Spanish versions to follow; if they differ, the English text applies)
+Version 1.1 · 17 November 2026 · English (Dutch and Spanish versions to follow; if they differ, the English text applies)
 
 ---
 
@@ -63,7 +63,7 @@ In this notice, "we" and "us" mean Gnanalytica.
 
 Field Companion is not yet available to customers.
 
-**Today: test phase.** Only people we invite can test Field Companion, in test organisations that we run ourselves. It runs on a test set-up, with a WhatsApp test number that works with a small number of registered phones. Testers must use **sample data**: made-up sites, visits, photos and reports. They must not record real occupants, owners, tenants, claimants, real addresses or real cases.
+**Today: test phase.** Only people we invite can test Field Companion, in test organisations that we run ourselves. It runs on a test set-up. Testers chat with Field Companion on our business WhatsApp number; anyone else who writes to it gets only a short reply that Field Companion is available by invitation (see section 6). Testers must use **sample data**: made-up sites, visits, photos and reports. They must not record real occupants, owners, tenants, claimants, real addresses or real cases.
 
 **Real personal data in the test phase.** Some data is real even now:
 
@@ -367,6 +367,7 @@ We update this notice when Field Companion or the law changes. If a change matte
 | Version | Date | Change |
 | --- | --- | --- |
 | 1.0 | 17 November 2026 | First published version |
+| 1.1 | 17 November 2026 | The test phase now uses our business WhatsApp number instead of a WhatsApp test number |
 
 ---
 
