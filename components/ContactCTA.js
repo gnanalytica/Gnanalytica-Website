@@ -1,5 +1,6 @@
 /**
- * ContactCTA — closing panel with the Google Calendar booking embed.
+ * ContactCTA — closing panel with the Google Calendar booking embed, which
+ * loads only after the visitor clicks to open it.
  *
  * A bordered surface panel with a soft red glow in the corner; the booking
  * embed keeps its own light card so the calendar UI stays legible in both

@@ -1,7 +1,17 @@
+/**
+ * EmbeddedGoogleCalendar — the Google Calendar booking page, behind a click.
+ *
+ * Nothing is loaded from Google until the visitor clicks "Open the booking
+ * calendar". Only then is the iframe rendered, so Google receives no request
+ * (and sets no cookies) from visitors who do not choose to book this way.
+ */
+import { useState } from 'react';
+
 export default function EmbeddedGoogleCalendar({
   calendarEmbedUrl = "https://calendar.google.com/appointments/schedules/AcZssZ20kzIhtACNpQCMPvERahaZmkUOfe47XP2Oz72YUXE4Uj21gSvyKju1bKWtj7mjr14xA-jqzt1-",
   timezone = null // Optional: pass a specific timezone like 'America/New_York'
 }) {
+  const [open, setOpen] = useState(false);
   // Build the final URL with timezone if provided
   const finalCalendarUrl = timezone
     ? `${calendarEmbedUrl}&timezone=${encodeURIComponent(timezone)}`
@@ -30,10 +40,25 @@ export default function EmbeddedGoogleCalendar({
         <div className="bg-editorial-white border-2 border-editorial-border overflow-hidden">
           {/* Accessibility notice for screen readers */}
           <div className="sr-only">
-            <p>This is a Google Calendar booking form. You can use the form below to schedule an appointment. All form fields are properly labeled for accessibility.</p>
+            <p>This is a Google Calendar booking form. It loads from Google only after you press the button to open it. You can then use it to schedule an appointment.</p>
           </div>
 
-          {/* Mobile-optimized container */}
+          {!open ? (
+            <div className="flex flex-col items-center gap-3 px-4 py-10 text-center sm:py-14">
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                className="inline-flex items-center justify-center rounded-full border-2 border-editorial-border px-6 py-3 text-sm font-semibold text-editorial-ink transition-colors hover:bg-editorial-paper"
+              >
+                Open the booking calendar (loads Google Calendar)
+              </button>
+              <p className="max-w-sm text-xs text-editorial-muted">
+                The calendar is loaded from Google only when you click. Google then receives your IP address and may set
+                cookies. You can also email contact@gnanalytica.com to book a call.
+              </p>
+            </div>
+          ) : (
+          /* Mobile-optimized container */
           <div className="iframe-container relative overflow-x-auto">
             <div className="min-w-full">
 
@@ -59,6 +84,7 @@ export default function EmbeddedGoogleCalendar({
               />
             </div>
           </div>
+          )}
 
           {/* Fallback link for accessibility */}
           <div className="sr-only">
