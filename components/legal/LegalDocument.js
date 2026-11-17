@@ -7,8 +7,9 @@
  * itself. Headings carry ids that match the links in the text and show a #
  * anchor on hover. Tables turn into stacked label/value cards on small
  * screens. Drafting markers are highlighted, and while any are left a short
- * draft banner is shown. Nav, footer, contents and banner are hidden in print,
- * and the body is not animated so it always prints in full.
+ * draft banner is shown (it prints too). Nav, footer, contents and the links
+ * between texts are hidden in print, and the body is not animated so it
+ * always prints in full.
  */
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -131,7 +132,7 @@ function Table({ block }) {
     );
   }
   return (
-    <div className="legal-table-wrap mt-6">
+    <div className={`legal-table-wrap mt-6 ${labels.length >= 5 ? 'legal-wide' : ''}`}>
       <table className="legal-table w-full border-collapse text-left text-sm">
         <thead>
           <tr>
@@ -208,7 +209,7 @@ function Contents({ sections }) {
 
 export default function LegalDocument({ doc, path }) {
   return (
-    <div className="min-h-screen bg-canvas text-ink">
+    <div className="min-h-screen bg-canvas text-ink print:bg-white">
       <div className="print:hidden">
         <SiteNav />
       </div>

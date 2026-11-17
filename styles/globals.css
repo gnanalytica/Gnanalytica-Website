@@ -232,7 +232,8 @@ img {
 
 /*
  * Field Companion legal texts (components/legal/LegalDocument.js).
- * Tables are a normal grid from 640px up; below that each row becomes a
+ * Tables are a normal grid from 640px up (1024px for tables with five or
+ * more columns, which also stack in print); below that each row becomes a
  * card and every cell shows its column name above the value.
  */
 .legal-table-wrap {
@@ -307,8 +308,61 @@ img {
     display: none;
   }
 }
+/* Tables with five or more columns stack up to 1023px, and in print. */
+@media (max-width: 1023px), print {
+  .legal-wide {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+  .legal-wide .legal-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .legal-wide .legal-table,
+  .legal-wide .legal-table tbody,
+  .legal-wide .legal-table tr,
+  .legal-wide .legal-table td {
+    display: block;
+    width: 100%;
+  }
+  .legal-wide .legal-table tr {
+    margin-bottom: 0.75rem;
+    border: 1px solid #ddd5c9;
+    border-radius: 1rem;
+    background: #fdfbf7;
+    overflow: hidden;
+  }
+  .legal-wide .legal-table td {
+    border-top: 0;
+    padding: 0.6rem 1rem;
+  }
+  .legal-wide .legal-table td + td {
+    border-top: 1px solid #ece6db;
+  }
+  .legal-wide .legal-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.15rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #726c63;
+  }
+  .legal-wide .legal-table td[data-label='']::before {
+    display: none;
+  }
+}
 
 .legal-doc {
+  overflow-wrap: break-word;
+}
+.legal-doc code {
   overflow-wrap: anywhere;
 }
 .legal-doc .legal-heading:first-child {
@@ -341,6 +395,7 @@ img {
   .legal-table-wrap,
   .legal-pairs {
     border-color: #bbb;
+    overflow: visible;
   }
   .legal-marker {
     background: none !important;
