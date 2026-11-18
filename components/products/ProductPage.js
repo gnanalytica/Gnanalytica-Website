@@ -9,8 +9,9 @@
  * Optional product fields add sections only where defined: `chat` (hero chat
  * preview), `video` (demo under the hero, with an optional `brochure`
  * download), `problem`, `audiences`, `trust`, `legal` (links to the product's
- * own privacy notice, terms and so on, under the trust section), `roadmap` and
- * `provider` (small line above the footer). A product that is
+ * own privacy notice, terms and so on, under the trust section), `roadmap`,
+ * `waitlist` (a request-access form with the id `waitlist`, before the closing
+ * band) and `provider` (small line above the footer). A product that is
  * not live yet sets `status` and points its CTAs at an internal anchor.
  */
 import { motion } from 'framer-motion';
@@ -21,6 +22,7 @@ import Magnetic from '../Magnetic';
 import CountUp from '../CountUp';
 import { getIcon } from './icons';
 import ProductVideo from './ProductVideo';
+import WaitlistForm from './WaitlistForm';
 import { isExternal } from '../../lib/products';
 
 const fadeUp = {
@@ -431,6 +433,9 @@ export default function ProductPage({ product }) {
             </div>
           </section>
         )}
+
+        {/* ───────────────────────── Waitlist form (optional) ───────────────────────── */}
+        {product.waitlist && <WaitlistForm product={product} />}
 
         {/* ───────────────────────── Closing CTA ───────────────────────── */}
         <section className="relative overflow-hidden py-24">
