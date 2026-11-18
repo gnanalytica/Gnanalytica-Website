@@ -1,6 +1,6 @@
 # Field Companion privacy notice
 
-Version 1.2 · [date of publication] · English (Dutch and Spanish versions to follow; if they differ, the English text applies)
+Version 1.2 · 18 November 2026 · English (Dutch and Spanish versions to follow; if they differ, the English text applies)
 
 ---
 
@@ -377,7 +377,7 @@ We update this notice when Field Companion or the law changes. If a change matte
 | --- | --- | --- |
 | 1.0 | 17 November 2026 | First published version |
 | 1.1 | 17 November 2026 | The test phase now uses our business WhatsApp number instead of a WhatsApp test number |
-| 1.2 | [date of publication] | A waitlist on the Field Companion page; approved applicants, and people we send an invitation code, may set up a test organisation of their own (In short, sections 2, 3, 4, 6, 15 and 16) |
+| 1.2 | 18 November 2026 | A waitlist on the Field Companion page; approved applicants, and people we send an invitation code, may set up a test organisation of their own (In short, sections 2, 3, 4, 6, 15 and 16) |
 
 ---
 

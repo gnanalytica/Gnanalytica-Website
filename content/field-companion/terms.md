@@ -1,6 +1,6 @@
 # Field Companion Terms of Service
 
-Version 1.1 · [date of publication]
+Version 1.1 · 18 November 2026
 
 These terms apply to Field Companion only. They are an agreement between Gnanalytica and the business that uses Field Companion. Please read them before you accept. You can save or print this page. We will email you a PDF copy on request, free of charge.
 
@@ -372,4 +372,4 @@ Email: sandeep@gnanalytica.com (for questions, notices, privacy, security and su
 
 We send notices to you by email to your organisation's privacy contact, or in the WhatsApp chat of your admins. Your privacy contact is the email address you gave us when you joined, unless you name another. If we have no email address for you, we send notices in WhatsApp to your admins.
 
-Version 1.1 · [date of publication]
+Version 1.1 · 18 November 2026
