@@ -1,6 +1,6 @@
 # Field Companion privacy notice
 
-Version 1.1 · 17 November 2026 · English (Dutch and Spanish versions to follow; if they differ, the English text applies)
+Version 1.2 · [date of publication] · English (Dutch and Spanish versions to follow; if they differ, the English text applies)
 
 ---
 
@@ -8,10 +8,10 @@ Version 1.1 · 17 November 2026 · English (Dutch and Spanish versions to follow
 
 | | |
 | --- | --- |
-| **What this covers** | Field Companion, an AI assistant for people who inspect sites, used through WhatsApp and a web page on the phone. It also covers people who test Field Companion for us, the Field Companion pages of our website, and people who contact us about Field Companion. |
+| **What this covers** | Field Companion, an AI assistant for people who inspect sites, used through WhatsApp and a web page on the phone. It also covers people who test Field Companion for us, people who apply on our website to try it, the Field Companion pages of our website, and people who contact us about Field Companion. |
 | **Who we are** | Gnanalytica, a sole proprietorship (eenmanszaak) in Eindhoven, the Netherlands. KvK 98649035. Contact: sandeep@gnanalytica.com. |
-| **Status today** | Field Companion is **not yet available to customers**. Today it is in a **test phase**: only people we invite test it, in test organisations that we run ourselves, with **sample data**. Next comes a **closed pilot** for organisations we invite. Some data is real even now, for example the names, numbers, messages and voices of the people who test it. Protections that start with the closed pilot are marked "from launch". See [section 2](#2-status-today-test-phase-then-a-closed-pilot). |
-| **Two roles** | When an organisation uses Field Companion, **that organisation decides** how its people's data and its site data are used (it is the "controller"). We only process that data for it (we are its "processor"). We decide ourselves (we are "controller") only for a small set of data: the data of people who test Field Companion for us, messages from numbers that are not invited, security records, cost and usage records, contracts and billing, and our website and business contacts. |
+| **Status today** | Field Companion is **not yet available to customers**. Today it is in a **test phase**: only people we invite test it, with **sample data**: in test organisations that we run ourselves or, after we approve a request on our website's waitlist or send an invitation code, in a test organisation of their own. Next comes a **closed pilot** for organisations we invite. Some data is real even now, for example the names, numbers, messages and voices of the people who test it. Protections that start with the closed pilot are marked "from launch". See [section 2](#2-status-today-test-phase-then-a-closed-pilot). |
+| **Two roles** | When an organisation uses Field Companion, **that organisation decides** how its people's data and its site data are used (it is the "controller"). We only process that data for it (we are its "processor"). We decide ourselves (we are "controller") only for a small set of data: the data of people who test Field Companion for us, requests to try it sent through our website, messages from numbers that are not invited, security records, cost and usage records, contracts and billing, and our website and business contacts. |
 | **AI** | Field Companion is an AI. It can make mistakes. A person checks and submits every visit report. It does not make decisions about you. We do not train AI models on customer content. |
 | **Where** | Field Companion stores its data in the EU (Frankfurt, Germany). Some providers are US companies, and some data, such as WhatsApp messages handled by Meta, may be processed outside the EU. See [section 11](#11-international-transfers). |
 | **How long** | Customer content: the period the organisation chooses (2 years unless it asks for another period), then deleted automatically. Some items are kept longer, for example findings that are still open and the names of sites. Other periods are in [section 12](#12-how-long-we-keep-data). |
@@ -63,16 +63,19 @@ In this notice, "we" and "us" mean Gnanalytica.
 
 Field Companion is not yet available to customers.
 
-**Today: test phase.** Only people we invite can test Field Companion, in test organisations that we run ourselves. It runs on a test set-up. Testers chat with Field Companion on our business WhatsApp number; anyone else who writes to it gets only a short reply that Field Companion is available by invitation (see section 6). Testers must use **sample data**: made-up sites, visits, photos and reports. They must not record real occupants, owners, tenants, claimants, real addresses or real cases.
+**Today: test phase.** Only people we invite can test Field Companion: in test organisations that we run ourselves or, after we approve a request on our website's waitlist, in a test organisation of their own. We may also send a person an invitation code: a one-time code that they send to our business WhatsApp number to set up a test organisation of their own, without applying on the website. It runs on a test set-up. Testers chat with Field Companion on our business WhatsApp number; anyone else who writes to it gets only a short reply that Field Companion is available by invitation (see section 6). Testers must use **sample data**: made-up sites, visits, photos and reports. They must not record real occupants, owners, tenants, claimants, real addresses or real cases.
+
+In an organisation of its own, that organisation is the controller of what its members record, and we are its processor (section 3). The rest of this section applies to it in the same way: sample data only, and AI requests through a provider's global service, which may process them outside the EU and without zero data retention.
 
 **Real personal data in the test phase.** Some data is real even now:
 
 - the names, WhatsApp numbers and WhatsApp profile names of the people who test Field Companion;
 - their own messages, voice notes, what they say during a walkthrough, and the photos they take (their voice and words are real, even when the visit is made up);
 - messages from people who write to the Field Companion number, and from people who contact us;
+- requests to try Field Companion sent through the waitlist form on our website, and the names, numbers and messages of the people in the test organisations that approved applicants, or people we sent an invitation code, set up;
 - data about visitors to our website.
 
-For testers, we are the controller (see section 6). During the test phase, AI requests go through a provider's global service, which may process them outside the EU and without zero data retention. Sections 6, 8, 10 and 11 explain who receives this data today and where.
+For testers in our own test organisations, we are the controller (see section 6). During the test phase, AI requests go through a provider's global service, which may process them outside the EU and without zero data retention. Sections 6, 8, 10 and 11 explain who receives this data today and where.
 
 **Next: closed pilot.** After the test phase, organisations that we invite can use Field Companion in a **closed pilot**. The closed pilot runs only on our live set-up, and starts only when all of the following are in place:
 
@@ -91,11 +94,12 @@ Where this notice says **"from launch"**, it means from the start of the closed 
 
 **Your organisation is the controller for its content.** An organisation (for example, a valuation firm, an engineering firm or a facilities team) uses Field Companion for its site visits. It decides who may use it, what is recorded, and how long it is kept. It is responsible for the data its people and its visits put into Field Companion. It must tell its own people and the people at the sites it inspects about this. We call this data "customer content".
 
-**We are the processor for customer content.** We process customer content only on the organisation's documented instructions, under the data processing terms in our customer terms (Article 28 GDPR). Before real customer data, we and the organisation sign a full data processing agreement. We do not use customer content for our own purposes. If we ever wanted to, we would first need a legal basis and would tell you before we start.
+**We are the processor for customer content.** This includes test organisations that approved waitlist applicants, or people we sent an invitation code, set up in the test phase. We process customer content only on the organisation's documented instructions, under the data processing terms in our customer terms (Article 28 GDPR). Before real customer data, we and the organisation sign a full data processing agreement. We do not use customer content for our own purposes. If we ever wanted to, we would first need a legal basis and would tell you before we start.
 
 **We are the controller for a small set of our own data:**
 
 - data of people who test Field Companion for us in our own test organisations;
+- requests to try Field Companion sent through the waitlist on our website, and the invitation codes we send;
 - messages from WhatsApp numbers that belong to no organisation;
 - security and audit records;
 - records of what the service used and cost (usage metering);
@@ -111,6 +115,8 @@ Where this notice says **"from launch"**, it means from the start of the closed 
 | **Members** | People in an organisation who use Field Companion: inspectors, valuers, site engineers, loss adjusters, facilities staff, and the organisation's admins. This includes the person who creates an organisation in WhatsApp. |
 | **Invited colleagues** | People a member asks to help with part of a visit (a "hand-off"). They receive an invitation and take part only if they reply YES. |
 | **Testers** | People we invite to test Field Companion in our own test organisations. |
+| **Waitlist applicants** | People who ask on the Field Companion page of our website to try Field Companion. |
+| **People with an invitation code** | People we send a one-time code to set up a test organisation of their own. |
 | **Uninvited senders** | People who send a WhatsApp message to Field Companion from a number that belongs to no organisation. |
 | **People at inspected sites** | Occupants, owners, tenants, claimants, neighbours and others who are present at, or connected to, a site that is inspected. They do not use Field Companion themselves. |
 | **Website visitors** | People who visit the Field Companion pages of gnanalytica.com. |
@@ -147,12 +153,13 @@ This section describes customer content. **Your organisation is the controller**
 | --- | --- | --- | --- |
 | **Testers** (people we invite to test Field Companion in our own test organisations): name, WhatsApp number and profile name; your messages, voice notes, what you say during a walkthrough (as text) and your photos; the sample visits and reports you create | To test Field Companion and fix faults before customers use it | Our legitimate interest (Art. 6(1)(f)) in testing the service safely before launch | Deleted when the test phase ends. Records of AI requests: see section 8 |
 | **Uninvited senders:** your WhatsApp number, the profile name WhatsApp sends with each message, and your message | To reply, at most once a day, that Field Companion is available by invitation only. We do not act on the message in any other way | Legitimate interest (Art. 6(1)(f)): answering people who write to us and protecting the service | 30 days |
+| **Waitlist applicants:** your name, your organisation's name, your work email, your WhatsApp number, your preferred language and what you tell us, and when and with which wording you agreed to receive a WhatsApp message from us | To decide whether to invite you and, if we do, to send you one WhatsApp message from our business number (or, if that does not reach you, one email) with a way to set up your organisation. If you then create an organisation, these details become part of your account (see "Contracts and accounts") | Steps you asked for before a contract (Art. 6(1)(b)); where you apply for your employer, our legitimate interest (Art. 6(1)(f)) in answering requests to try Field Companion. The tick box records the opt-in that WhatsApp requires before we may message you; you can object at any time by replying STOP, tapping **Not me** or emailing us | Until we decide, at most 12 months. If we decline, 30 days. If we invite you and you do not set up an organisation, 90 days after the invitation. Once you set one up, a coded record of the request without your name, email or number, 30 days. If you tap **Not me**, we delete the request at once and keep only your number, coded, on our "Do not invite" list |
 | **Security records:** sign-ins, use of links, actions taken, with IDs and times but no content | To protect accounts and data, investigate misuse and keep a reliable record of who did what | Our legitimate interest (Art. 6(1)(f)) in keeping the service and its data secure. Keeping data secure is also our duty under Art. 32 GDPR | Audit record (IDs and actions, no content): up to 7 years, to show who did what for as long as claims or checks about the service are possible; deleted when the organisation is deleted, except a final record that it was deleted. Application logs: up to 400 days (from launch, in our log store in Germany). Error reports: 90 days |
 | **Abuse limits:** coded (one-way hashed) keys for rate limits, for invitations sent to people outside an organisation, and for fixed replies already sent | To stop misuse and spam | Our legitimate interest (Art. 6(1)(f)) in protecting the service | Rate limits: 7 days after last use. Invitations: 30 days. Reply marks: 1 day |
 | **"Do not invite" list:** a coded (hashed) number after someone replies STOP, blocks the number or declines | To respect that person's wish and not invite them again | Legitimate interest (Art. 6(1)(f)) in respecting that wish | Until the person sends START or unblocks |
 | **Usage metering:** what the service used and cost (AI requests, speech, messages), with the ID of an organisation, a visit or a single request, never your name, your chat or your words. For 7 days, a usage record can be linked to the chat message it answered; after that, the link is removed. Also a weekly quality summary with organisation counts only | To control costs and set prices | Legitimate interest (Art. 6(1)(f)) in running the service at a sustainable cost | 25 months |
-| **Contracts and accounts:** names, roles, emails and numbers of the people who sign up or act for a customer; from launch, the coded list of numbers allowed to create an organisation, and requests to create one | To enter into and manage contracts with organisations | Steps before a contract, and the contract (Art. 6(1)(b)); where the contract is with your employer, our legitimate interest (Art. 6(1)(f)) in managing the business relationship | Contract period plus 7 years. Correspondence: 2 years after the relationship ends. From launch: a request to create an organisation, 1 hour; an organisation not yet accepted, 7 days |
-| **Proof that terms were accepted** (from launch): terms version, a coded ID of the person who accepted, their statement that they may act for the organisation, and a reference to the acceptance (the WhatsApp message, or the acceptance on the web page) | To prove what was agreed and by whom | Legitimate interest (Art. 6(1)(f)) in being able to prove the agreement | 6 years after the organisation is deleted |
+| **Contracts and accounts:** names, roles, emails and numbers of the people who sign up or act for a customer; the coded list of numbers allowed to create an organisation (from the test phase for approved waitlist applicants and people who use an invitation code from us); invitation codes we send, kept only in coded form, with the language, the expiry date, a short note for our staff and, once used, the coded number that used it; and requests to create an organisation | To enter into and manage contracts with organisations | Steps before a contract, and the contract (Art. 6(1)(b)); where the contract is with your employer, our legitimate interest (Art. 6(1)(f)) in managing the business relationship | Contract period plus 7 years. Correspondence: 2 years after the relationship ends. A request to create an organisation: 1 hour; an organisation not yet accepted: 7 days. An invitation code: 90 days after it was used, withdrawn or expired |
+| **Proof that terms were accepted:** terms version, a coded ID of the person who accepted, their statement that they may act for the organisation, and a reference to the acceptance (the WhatsApp message, or the acceptance on the web page) | To prove what was agreed and by whom | Legitimate interest (Art. 6(1)(f)) in being able to prove the agreement | 6 years after the organisation is deleted |
 | **Invoices and accounting** | To meet tax and accounting duties | Legal duty (Art. 6(1)(c); Dutch tax law, Art. 52 AWR, and Art. 2:10 Civil Code) | 7 years |
 | **Privacy requests, complaints and breach records** | To handle your requests and show that we did | Legal duty (Art. 6(1)(c); Arts. 12 to 22, 33 and 34 GDPR) | Request log: 2 years after the request is closed. Breach register: 5 years. Request records in the system: 13 months. List of erased IDs, used to re-apply deletions after restoring a backup (from launch): 40 days |
 | **Business contacts and pilot enquiries:** name, organisation, email, phone number and what you tell us | To answer you, arrange a call or a pilot, and keep in touch about it | Steps you asked for before a contract (Art. 6(1)(b)); otherwise our legitimate interest (Art. 6(1)(f)) in answering business enquiries | 2 years after our last contact, unless a contract follows |
@@ -344,6 +351,7 @@ You have the right to:
 - **People at sites:** you do not give data to Field Companion directly. You can ask the inspector not to photograph you or your belongings.
 - **Customers:** contact and billing details are needed to make and run a contract. Invoice details are required by tax law.
 - **Website visitors and business contacts:** you do not have to give us any data. If you do not, we cannot answer you.
+- **Waitlist applicants:** applying is your choice. We need your name, organisation, email and WhatsApp number to consider your request.
 
 ## 16. Our website
 
@@ -353,6 +361,7 @@ This section covers the Field Companion pages of gnanalytica.com: `/field-compan
 - **Storage on your device.** The website sets no cookies of its own. If you choose light or dark mode, your browser remembers that choice in its local storage (`gna-theme`). It stays on your device, is not sent to us, and you can remove it by clearing your browser's site data. The law allows this without consent because it only does what you asked for (Article 11.7a(3)(b) Telecommunicatiewet).
 - **Fonts and other content.** The fonts come from our own website, so no data goes to Google for them. These pages load no content from other companies.
 - **Booking a call.** The home page offers a Google Calendar booking page for calls. It loads only if you click to open the booking calendar. If you do, Google receives your IP address and may store cookies on your device. Legal basis: your consent (Art. 6(1)(a) GDPR and Article 11.7a Telecommunicatiewet), which you give by clicking. Google then uses the data under its own privacy policy. You can also book a call by email at sandeep@gnanalytica.com.
+- **Waitlist form.** The form on `/field-companion` sends what you type directly from your browser to our Field Companion servers (Fly.io and Supabase, see section 10). The website host does not store it. The form sets no cookies.
 - **Analytics.** We do not use analytics or advertising tools on the website.
 - **Field Companion web page.** The page members open on their phone sets no cookies and loads no third-party scripts or fonts. It stores only what the service needs on your phone: your sign-in session, your voice and feedback settings, the visit you are working on, and photos or changes waiting to be sent. A service worker keeps a copy of the app. The visit copy is deleted 24 hours after you submit, or when your session ends. Waiting items are deleted 30 days after the session ended. The law allows this storage without consent because it is strictly necessary for the service you asked for (Article 11.7a(3)(b) Telecommunicatiewet).
 
@@ -368,6 +377,7 @@ We update this notice when Field Companion or the law changes. If a change matte
 | --- | --- | --- |
 | 1.0 | 17 November 2026 | First published version |
 | 1.1 | 17 November 2026 | The test phase now uses our business WhatsApp number instead of a WhatsApp test number |
+| 1.2 | [date of publication] | A waitlist on the Field Companion page; approved applicants, and people we send an invitation code, may set up a test organisation of their own (In short, sections 2, 3, 4, 6, 15 and 16) |
 
 ---
 
