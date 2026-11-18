@@ -1,6 +1,6 @@
 # Field Companion Terms of Service
 
-Version 1.1 · [date of publication]
+Version 1.0 · 17 November 2026
 
 These terms apply to Field Companion only. They are an agreement between Gnanalytica and the business that uses Field Companion. Please read them before you accept. You can save or print this page. We will email you a PDF copy on request, free of charge.
 
@@ -90,11 +90,9 @@ Until then, do not record real occupants, owners, tenants, claimants or other pe
 
 **4.9 EEA only.** During the Pilot, only organisations established in the EEA can take part.
 
-**4.10 Test phase.** Before the Pilot starts, we may invite an organisation to a test phase. Sections 4.3 to 4.9 apply to it, so use only sample data. In the test phase the measures in section 4.2 are not yet in place: AI requests may be processed by a provider's global service outside the EU and without zero data retention, not every subprocessor has signed a data processing agreement yet, and there is no second backup copy at a separate provider. We tell you in writing before your organisation moves from the test phase into the Pilot.
-
 ## 5. Accounts, organisations and roles
 
-**5.1 Creating an organisation.** During the test phase and the Pilot, only people whose number we have added to an invitation list can create an organisation. We may set limits. The current limits are: up to 10 members per organisation created this way, up to 3 new organisations per person in 30 days, and up to 5 active organisations per person. We may change these limits and tell you when we do.
+**5.1 Creating an organisation.** During the Pilot, only people whose number we have added to an invitation list can create an organisation. We may set limits. The current limits are: up to 10 members per organisation created this way, up to 3 new organisations per person in 30 days, and up to 5 active organisations per person. We may change these limits and tell you when we do.
 
 **5.2 Unfinished organisations.** If no one accepts these terms within 7 days after an organisation is started, we delete it. If you cancel, we delete it at once.
 
@@ -372,4 +370,4 @@ Email: sandeep@gnanalytica.com (for questions, notices, privacy, security and su
 
 We send notices to you by email to your organisation's privacy contact, or in the WhatsApp chat of your admins. Your privacy contact is the email address you gave us when you joined, unless you name another. If we have no email address for you, we send notices in WhatsApp to your admins.
 
-Version 1.1 · [date of publication]
+Version 1.0 · 17 November 2026
