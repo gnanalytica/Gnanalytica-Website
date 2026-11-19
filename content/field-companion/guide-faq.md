@@ -10,11 +10,11 @@ No. You use WhatsApp for the chat and a browser link on your phone for the walk.
 
 ## What can I send in the chat?
 
-Text, voice notes, photos (JPEG, PNG or WebP), PDF and Word files, locations and contact cards, up to 15 MB each.
+Text, voice notes, photos (JPEG, PNG or WebP), PDF and Word (.docx) files, locations and contact cards, up to 15 MB each.
 
 ## Is the walk recorded?
 
-Audio is never recorded or stored. Your speech is turned into text, and that processing happens in the EU.
+The audio of a walkthrough is never recorded or stored. Your speech is turned into text, and that processing happens in the EU.
 
 ## Is it a person?
 
@@ -38,7 +38,7 @@ Field Companion speaks English, Dutch and Spanish. Send "help", then choose Chan
 
 ## How do I stop the tips?
 
-Send "no tips". Send "tips on" to turn them back on. Each tip is shown at most once.
+Send "no tips". Send "tips on" to turn them back on. Each tip is shown once (it can reappear after your organisation's message retention period has passed).
 
 ## How long is my data kept?
 
